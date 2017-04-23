@@ -364,9 +364,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'junegunn/vim-emoji'
-
-[[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 on_ft = 'help'
 
