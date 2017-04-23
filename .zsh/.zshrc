@@ -361,8 +361,9 @@ TRAPALRM() { redraw_tmout }
 case $OSTYPE in #uname http://en.wikipedia.org/wiki/Uname
     # linux
     linux*)
-
-        #[[ -z "$TMUX" && -z "$WINDOW" && ! -z "$PS1" ]] && tmux
+        if [ -f $HOME/.tmux.conf ]; then 
+            [[ -z "$TMUX" && -z "$WINDOW" && ! -z "$PS1" ]] && tmux
+        fi
         ;;
     # mac os
     darwin*)
