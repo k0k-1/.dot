@@ -3,3 +3,7 @@
 [user]
     email = kip-s@kip-s.net
     name = kip-s
+
+[url "github:"]
+    InsteadOf = https://github.com/
+    InsteadOf = git@git.com:
