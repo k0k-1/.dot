@@ -59,7 +59,7 @@ hook_add = '''
     let g:neocomplete#skip_auto_completion_time = '0.2'
     let g:neocomplete#force_omni_input_patterns = get(g:, 'neocomplete#force_omni_input_patterns', {})
     let g:neocomplete#sources#omni#input_patterns = get(g:, 'neocomplete#sources#omni#input_patterns', {})
-    let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
+    "let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
     let g:neocomplete#sources#omni#functions = get(g:, 'neocomplete#sources#omni#functions', {})
     let g:neocomplete#enable_auto_delimiter = 1
 '''
