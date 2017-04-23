@@ -4,6 +4,6 @@
     email = kip-s@kip-s.net
     name = kip-s
 
-[url "github"]
+[url "github:"]
   InsteadOf = https://github.com/
-  InsteadOf = git@github.com
+  InsteadOf = git@github.com:
