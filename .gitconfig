@@ -1,9 +1,5 @@
 [color]
-	ui = auto
+    ui = auto
 [user]
-	email = kip-s@kip-s.net
-	name = kip-s
-
-[url "github:"]
-    InsteadOf = https://github.com/
-    InsteadOf = git@github.com:
+    email = kip-s@kip-s.net
+    name = kip-s
