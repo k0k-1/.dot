@@ -498,8 +498,6 @@ se shortmess& shortmess+=I
 se hlsearch
 se lazyredraw
 
-se background=dark
-
 se statusline=[%n]
 se statusline& statusline+=%{matchstr(hostname(),'\\w\\+')}@
 se statusline& statusline+=%<%F
