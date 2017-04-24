@@ -53,18 +53,6 @@ se guioptions-=l
 se guioptions-=L
 se guioptions-=b
 
-se background=dark
-colorscheme hybrid
-
-" kaoriya-vimrc [[[[
-if filereadable(expand('$vim/plugins/kaoriya/encode_japan.vim'))
-    so $vim/plugins/kaoriya/encode_japan.vim
-elseif
-    " encode_japan.vim
-    " NeoBundle 'gist:koron/1436273'
-en
-" ]]]]
-
 se fileencoding=utf-8
 se fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 
@@ -113,7 +101,7 @@ elseif has("unix")
 " * >>  unix -------------------------------------------/
 " [[
 
-se guifont=Source\ Code\ Pro\ 10.5
+se guifont=Migu\ 1M 10.5
 
 " ]]
 " * << -------------------------------------------------/

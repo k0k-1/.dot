@@ -375,6 +375,13 @@ hook_add = '''
     au fau VimEnter * nested colorscheme hybrid
 '''
 
+#[[plugins]]
+#repo = 'altercation/vim-colors-solarized'
+#hook_add = '''
+#    set background=dark
+#    au fau VimEnter * nested colorscheme solarized
+#'''
+
 [[plugins]]
 repo = 'tomasr/molokai'
 
