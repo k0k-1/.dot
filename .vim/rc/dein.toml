@@ -367,19 +367,19 @@ hook_add = '''
 repo = 'vim-jp/vimdoc-ja'
 on_ft = 'help'
 
-# > colorscheme
-#[[plugins]]
-#repo = 'w0ng/vim-hybrid'
-#hook_add = '''
+ > colorscheme
+[[plugins]]
+repo = 'w0ng/vim-hybrid'
+hook_add = '''
 #    set background=dark
 #    au fau VimEnter * nested colorscheme hybrid
 #'''
 
-[[plugins]]
-repo = 'sickill/vim-monokai'
-hook_add = '''
-    au fau VimEnter * nested colorscheme monokai
-'''
+"[[plugins]]
+"repo = 'sickill/vim-monokai'
+"hook_add = '''
+"    au fau VimEnter * nested colorscheme monokai
+"'''
 
 #[[plugins]]
 #repo = 'altercation/vim-colors-solarized'
