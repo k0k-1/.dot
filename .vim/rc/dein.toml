@@ -388,9 +388,6 @@ hook_add = '''
 #    au fau VimEnter * nested colorscheme solarized
 #'''
 
-[[plugins]]
-repo = 'tomasr/molokai'
-
 # ]]]
 # * <<< --------------------------------/
 
