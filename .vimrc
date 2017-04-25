@@ -316,7 +316,7 @@ vm <leader>co <S-i># <ESC>
 vn <leader>p "0p
 nn <leader>w :<c-u>write!<cr>
 
-com! -nargs=? -complete=dir -bang CD  cal s:ChangeCurrentDir('<args>', '<bang>') 
+com! -nargs=? -complete=dir -bang CD cal s:ChangeCurrentDir('<args>', '<bang>')
 fu! s:ChangeCurrentDir(directory, bang)
     if a:directory == ''
         lcd %:p:h
