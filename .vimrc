@@ -124,7 +124,8 @@ se formatoptions=c
 se showmatch
 se smarttab
 
-se ts=4 sw=4 et
+se ts=4 sw=4 "hardtab
+"se ts=4 sw=4 et "space
 se softtabstop=0
 
 " ]]

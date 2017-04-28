@@ -64,8 +64,12 @@ hook_add = '''
     let g:neocomplete#enable_auto_delimiter = 1
 '''
 
+[[plugins]]
 repo = 'osyo-manga/shabadou.vim'
 depends = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
 
 # ]]]
 # * <<< --------------------------------/
@@ -75,6 +79,7 @@ depends = 'thinca/vim-quickrun'
 # * >>>  syntax check ------------------/
 # [[[
 
+[[plugins]]
 repo = 'osyo-manga/vim-watchdogs'
 depends = ['Shougo/vimproc',
            'thinca/vim-quickrun',
@@ -144,73 +149,85 @@ depends = 'context_filetype.vim'
 # [[[
 
 # ctrlp [[[[
+#[[plugins]]
+#repo = 'ctrlpvim/ctrlp.vim'
+#hook_add = '''
+#    let g:ctrlp_map                 = 'ff'
+#    let g:ctrlp_match_window        = 'order:ttb,min:1,max:20,results:100'
+#    let g:ctrlp_use_migemo          = 1
+#    let g:ctrlp_clear_cache_on_exit = 0
+#    let g:ctrlp_mruf_max            = 500
+#    let g:ctrlp_open_new_file       = 1
+#    let g:ctrlp_show_hidden         = 1
+#
+#    no <c-p> <nop>
+#    nn <silent> ff :<c-u>CtrlP<cr>
+#    nn <silent> fd :<c-u>CtrlPDir<cr>
+#    nn <silent> ft :<c-u>CtrlPTag<cr>
+#    nn <silent> fl :<c-u>CtrlPLine<cr>
+#    nn <silent> fb :<c-u>CtrlPBuffer<cr>
+#    nn <silent> fh :<c-u>CtrlPMRUFiles<cr>
+#    nn <silent> fq :<c-u>CtrlPQuickfix<cr>
+#'''
+#
+#[[plugins]]
+#repo = 'sgur/ctrlp-extensions.vim'
+#depends = ['ctrlpvim/ctrlp.vim',
+#           'suy/vim-ctrlp-commandline',
+#           'vim-scripts/ctrlp-funky',
+#           'mattn/ctlrp-filer']
+#hook_add = '''
+#    let g:ctrlp_extensions = [
+#    \ 'commandline',
+#    \ 'funky',
+#    \ 'lines',
+#    \ 'pluginmenus',
+#    \ ]
+#    nn <silent> fo :<c-u>CtrlPMenu<cr>
+#'''
+#
+#[[plugins]]
+#repo = 'suy/vim-ctrlp-commandline'
+#depends = 'ctrlpvim/ctrlp.vim'
+#hook_add = '''
+#    com! CtrlPCommandLine call ctrlp#init(ctrlp#commandline#id())
+#    nn <silent> fc :<c-u>CtrlPCmdline<cr>
+#'''
+#
+#[[plugins]]
+#repo = 'vim-scripts/ctrlp-funky'
+#depends = 'ctrlpvim/ctrlp.vim'
+#hook_add = '''
+#    let g:ctrlp_funky_matchtype = 'path'
+#    let g:ctrlp_funky_syntax_highlight = 1
+#    let g:ctrlp_funky_matchtype = 'path'
+#    nn <silent> fu :<c-u>CtrlPFunky<cr>
+#'''
+#
+#[[plugins]]
+#repo = 'mattn/ctrlp-filer'
+#depends = 'ctrlpvim/ctrlp.vim'
+#
+#[[plugins]]
+#repo = 'rking/ag.vim'
+#depends = 'ctrlpvim/ctrlp.vim'
+#if = '''executable('ag')'''
+#hook_add = '''
+#      let g:ctrlp_use_caching=0
+#      let g:ctrlp_user_command='ag %s -i --hidden -g ""'
+#'''
+# ]]]]
+
+# denite [[[[
 [[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
+repo = 'Shougo/denite.nvim'
 hook_add = '''
-    let g:ctrlp_map                 = 'ff'
-    let g:ctrlp_match_window        = 'order:ttb,min:1,max:20,results:100'
-    let g:ctrlp_use_migemo          = 1
-    let g:ctrlp_clear_cache_on_exit = 0
-    let g:ctrlp_mruf_max            = 500
-    let g:ctrlp_open_new_file       = 1
-    let g:ctrlp_show_hidden         = 1
-
-    no <c-p> <nop>
-    nn <silent> ff :<c-u>CtrlP<cr>
-    nn <silent> fd :<c-u>CtrlPDir<cr>
-    nn <silent> ft :<c-u>CtrlPTag<cr>
-    nn <silent> fl :<c-u>CtrlPLine<cr>
-    nn <silent> fb :<c-u>CtrlPBuffer<cr>
-    nn <silent> fh :<c-u>CtrlPMRUFiles<cr>
-    nn <silent> fq :<c-u>CtrlPQuickfix<cr>
+    nn <silent> ff :<c-u>Denite<cr>
+    nn <silent> fd :<c-u>Denite file_rec<cr>
+    nn <silent> fb :<c-u>Denite buffer<cr>
+    nn <silent> fh :<c-u>Denite <cr>
 '''
-
-[[plugins]]
-repo = 'sgur/ctrlp-extensions.vim'
-depends = ['ctrlpvim/ctrlp.vim',
-           'suy/vim-ctrlp-commandline',
-           'vim-scripts/ctrlp-funky',
-           'mattn/ctlrp-filer']
-hook_add = '''
-    let g:ctrlp_extensions = [
-    \ 'commandline',
-    \ 'funky',
-    \ 'lines',
-    \ 'pluginmenus',
-    \ ]
-    nn <silent> fo :<c-u>CtrlPMenu<cr>
-'''
-
-[[plugins]]
-repo = 'suy/vim-ctrlp-commandline'
-depends = 'ctrlpvim/ctrlp.vim'
-hook_add = '''
-    com! CtrlPCommandLine call ctrlp#init(ctrlp#commandline#id())
-    nn <silent> fc :<c-u>CtrlPCmdline<cr>
-'''
-
-[[plugins]]
-repo = 'vim-scripts/ctrlp-funky'
-depends = 'ctrlpvim/ctrlp.vim'
-hook_add = '''
-    let g:ctrlp_funky_matchtype = 'path'
-    let g:ctrlp_funky_syntax_highlight = 1
-    let g:ctrlp_funky_matchtype = 'path'
-    nn <silent> fu :<c-u>CtrlPFunky<cr>
-'''
-
-[[plugins]]
-repo = 'mattn/ctrlp-filer'
-depends = 'ctrlpvim/ctrlp.vim'
-
-[[plugins]]
-repo = 'rking/ag.vim'
-depends = 'ctrlpvim/ctrlp.vim'
-if = '''executable('ag')'''
-hook_add = '''
-      let g:ctrlp_use_caching=0
-      let g:ctrlp_user_command='ag %s -i --hidden -g ""'
-'''
+#]]]]
 
 # ]]]
 # * <<< --------------------------------/
