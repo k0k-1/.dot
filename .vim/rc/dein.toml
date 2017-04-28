@@ -222,7 +222,7 @@ depends = 'context_filetype.vim'
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 hook_add = '''
-    nn <silent> ff :<c-u>Denite
+    nn ff :<c-u>Denite
     nn <silent> fd :<c-u>Denite file_rec<cr>
     nn <silent> fb :<c-u>Denite buffer<cr>
     nn <silent> fh :<c-u>Denite <cr>
