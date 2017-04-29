@@ -28,13 +28,21 @@ key() {
     read -p "press [enter] to continue." KEY
 }
 
+cchk(){
+    if [ ! -e $HOME/$1 ]; then
+        ln -s $HDOT$1 $HOME/$1
+    else
+        msg $RED "| - ${HOME}/$1 is already exist."
+    fi
+}
+
 # ]]
 # * << -------------------------------------------------/
 
 case $OSTYPE in
     msys*)
-        msg $RED "your environment is ${OSTYPE}."
-        msg $RED "this script only run for linux."
+        msg $RED "| - your environment is ${OSTYPE}."
+        msg $RED "| - this script only run for linux."
         return 2>&- || exit
         ;;
     linux*)
@@ -56,9 +64,9 @@ F_ZSH=1
 # ]]
 # * << -------------------------------------------------/
 
-msg $GREEN "\nvim=${F_VIM}"
-msg $GREEN "git=${F_GIT}"
-msg $GREEN "zsh=${F_ZSH}"
+msg $GREEN "\n| - vim=${F_VIM}"
+msg $GREEN "| - git=${F_GIT}"
+msg $GREEN "| - zsh=${F_ZSH}"
 
 # * >>  var --------------------------------------------/
 # [[
@@ -67,7 +75,7 @@ CDIR=$(dirname $(readlink -f $0)) # ???/.dot
 
 if [ ! -d $CDIR ]; then
     cp -r $CDIR $HOME/.dot
-    msg $GREEN "copy ${CDIR} -> ${HOME}/.dot"
+    msg $GREEN "| - copy ${CDIR} -> ${HOME}/.dot"
 fi
 
 HDOT=$HOME/.dot/
@@ -98,7 +106,7 @@ fi
 # [
 
 cd $HOME/
-msg $GREEN "cd ${HOME}"
+msg $GREEN "| - cd ${HOME}"
 
 # * >>  make dir ---------------------------------------/
 # [[
@@ -107,16 +115,16 @@ msg $MAGENTA "\n* >> make directory"
 
 if [ ! -e $HOME/.vim ]; then
     mkdir -p .vim
-    msg $GREEN "make ${HOME}/.vim"
+    msg $GREEN "| - make ${HOME}/.vim"
 else
-    msg $RED "\n${HOME}/.vim is already exist."
+    msg $RED "| - ${HOME}/.vim is already exist."
 fi
 
 if [ ! -e $HOME/.zplug ]; then
     mkdir -p .zplug
     mkdir -p .cache/zsh
-    msg $GREEN "make ${HOME}/.zplug"
-    msg $GREEN "make ${HOME}/.cache/zsh"
+    msg $GREEN "| - make ${HOME}/.zplug"
+    msg $GREEN "| - make ${HOME}/.cache/zsh"
 
     #if [type git > /dev/null 2&1]; then
     #    msg $MAGENTA "\n* >> clone plugin manager"
@@ -128,15 +136,15 @@ if [ ! -e $HOME/.zplug ]; then
     #    msg $MAGENTA "\n* >> done!"
     #fi
 else
-    msg $RED "\n${HOME}/.zplug is already exist."
+    msg $RED "| - ${HOME}/.zplug is already exist."
 fi
 
 if [ ! -e $HOME/.ssh ]; then
     mkdir -p .ssh/.pub
-    msg $GREEN "make ${HOME}/.ssh"
-    msg $GREEN "make ${HOME}/.ssh/.pub"
+    msg $GREEN "| - make ${HOME}/.ssh"
+    msg $GREEN "| - make ${HOME}/.ssh/.pub"
 else
-    msg $RED "\n${HOME}/.ssh is already exist."
+    msg $RED "| - ${HOME}/.ssh is already exist."
 fi
 
 msg $MAGENTA "\n* >> done!"
@@ -151,39 +159,19 @@ msg $MAGENTA "\n* >> create symbolic link"
 
 # vim
 if [ ${F_VIM} == 1 ]; then
-    if [ ! -e $HOME/$VIM_C ]; then
-        ln -s $HDOT$VIM_C $HOME/$VIM_C
-    else
-        msg $RED "\n${HOME}/${VIM_C} is already exist."
-    fi
-    if [ ! -e $HOME/$VIM_P ]; then
-        ln -s $HDOT$VIM_P $HOME/$VIM_P
-    else
-        msg $RED "\n${HOME}/${VIM_P} is already exist."
-    fi
+    cchk $VIM_C
+    cchk $VIM_P
 fi
 
 # git
 if [ ${F_GIT} == 1 ]; then
-    if [ ! -e $HOME/$GIT_C ]; then
-        ln -s $HDOT$GIT_C $HOME/$GIT_C
-    else
-        msg $RED "\n${HOME}/${GIT_C} is already exist."
-    fi
+    cchk $GIT_C
 fi
 
 # zsh
 if [ ${F_ZSH} == 1 ]; then
-    if [ ! -e $HOME/$ZSH_E ]; then
-        ln -s $HDOT$ZSH_E $HOME/$ZSH_E
-    else
-        msg $RED "\n${HOME}/${ZSH_E} is already exist."
-    fi
-    if [ ! -e $HOME/$ZSH_C ]; then
-        ln -s $HDOT$ZSH_C $HOME/$ZSH_C
-    else
-        msg $RED "\n${HOME}/${ZSH_C} is already exist."
-    fi
+    cchk $ZSH_E
+    cchk $ZSH_C
 fi
 
 msg $MAGENTA "\n* >> done!"
