@@ -71,6 +71,9 @@ depends = 'thinca/vim-quickrun'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 
+[[plugins]]
+repo = 'dannyob/quickfixstatus'
+
 # ]]]
 # * <<< --------------------------------/
 
@@ -83,7 +86,8 @@ repo = 'tpope/vim-fugitive'
 repo = 'osyo-manga/vim-watchdogs'
 depends = ['Shougo/vimproc',
            'thinca/vim-quickrun',
-           'osyo-manga/shabadou.vim']
+           'osyo-manga/shabadou.vim',
+           'dannyob/quickfixstatus']
 hook_add = '''
     let s:config = {
     \   "watchdogs_checker/_" : {
@@ -130,7 +134,9 @@ hook_add = '''
     \}
     let g:watchdogs_check_BufWritePost_enable = 1
     unl s:config
-    "cal watchdogs#setup(g:quickrun_config)
+'''
+hook_post_source ='''
+    cal watchdogs#setup(g:quickrun_config)
 '''
 
 [[plugins]]
