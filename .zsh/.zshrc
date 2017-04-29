@@ -81,7 +81,6 @@ setopt correct
 setopt extended_glob
 unsetopt caseglob
 autoload predict-on
-fpath=($ZDOTDIR/rc/zsh-completions/src $fpath)
 fpath=($ZDOTDIR/rc/completion $fpath)
 
 
@@ -132,7 +131,11 @@ fi
 # * >>  plugin -----------------------------------------/
 # [[
 
-if [ -f $GOPATH/bin/peco ] ; then
+if [ -f $ZDOTDIR/.zplug ]; then
+    source $ZDOTDIR/.zplug
+fi
+
+if [ -f $GOPATH/bin/peco ]; then
     function peco-select-history() {
         local tac
         local tacv=${commands[tac]:-"tail -r"}

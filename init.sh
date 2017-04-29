@@ -109,6 +109,13 @@ if [ ! -d $HOME/.vim ]; then
     msg $GREEN "make ${HOME}/.vim"
 fi
 
+if [ ! -d $HOME/.zplug ]; then
+    mkdir -p .zplug
+    mkdir -p .cache/zsh
+    msg $GREEN "make ${HOME}/.zplug"
+    msg $GREEN "make ${HOME}/.cache/zsh"
+fi
+
 if [ ! -d $HOME/.ssh ]; then
     mkdir -p .ssh/.pub
     msg $GREEN "make ${HOME}/.ssh"
@@ -116,6 +123,17 @@ if [ ! -d $HOME/.ssh ]; then
 fi
 
 msg $MAGENTA "\n* >> done!"
+
+# ]]
+# * << -------------------------------------------------/
+
+# * >>  clone ------------------------------------------/
+# [[
+
+if [type git > /dev/null 2&1]; then
+    ZPLUG_HOME=$HOME/.zplug
+    git clone https://github.com/zplug/zplug $ZPLUG_HOME
+fi
 
 # ]]
 # * << -------------------------------------------------/

@@ -1,3 +1,9 @@
+export ZPLUG_HOME=$HOME/.zplug
+
+if [ -f $HOME/.zplug/init.zsh ]; then
+    source $HOME/.zplug/init.zsh
+fi
+
 # Make sure to use double quotes
 zplug "zsh-users/zsh-history-substring-search"
 
@@ -11,7 +17,6 @@ zplug "tcnksm/docker-alias", use:zshrc
 # Disable updates using the "frozen" tag
 zplug "k4rthik/git-cal", as:command, frozen:1
 
-# Grab binaries from GitHub Releases
 # and rename with the "rename-to:" tag
 zplug "junegunn/fzf-bin", \
     from:gh-r, \
@@ -19,22 +24,8 @@ zplug "junegunn/fzf-bin", \
     rename-to:fzf, \
     use:"*darwin*amd64*"
 
-# Supports oh-my-zsh plugins and the like
-zplug "plugins/git",   from:oh-my-zsh
-
 # Also prezto
 zplug "modules/prompt", from:prezto
-
-# Load if "if" tag returns true
-zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-
-# Run a command after a plugin is installed/updated
-# Provided, it requires to set the variable like the following:
-# ZPLUG_SUDO_PASSWORD="********"
-zplug "jhawthorn/fzy", \
-    as:command, \
-    rename-to:fzy, \
-    hook-build:"make && sudo make install"
 
 # Supports checking out a specific branch/tag/commit
 zplug "b4b4r07/enhancd", at:v1
@@ -76,10 +67,12 @@ zplug "b4b4r07/emoji-cli", \
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Can manage local plugins
-zplug "~/.zsh", from:local
+zplug "~/.cache/zsh", from:local
 
 # Load theme file
 zplug 'dracula/zsh', as:theme
+
+zplug "zsh-users/zsh-completions"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
