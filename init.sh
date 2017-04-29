@@ -21,6 +21,7 @@ WHITE=37
 
 msg() {
     printf "\033[$1m${@:2}\033[00m\n"
+    sleep 0.1
 }
 
 key() {
@@ -40,7 +41,7 @@ case $OSTYPE in
         ;;
 esac
 
-msg $BLUE "\n* > start init.sh\n-----------------------------"
+msg $BLUE "\n* > start init.sh!!\n-----------------------------"
 key
 
 # * >>  check ------------------------------------------/
@@ -104,36 +105,41 @@ msg $GREEN "cd ${HOME}"
 
 msg $MAGENTA "\n* >> make directory"
 
-if [ ! -d $HOME/.vim ]; then
+if [ ! -e $HOME/.vim ]; then
     mkdir -p .vim
     msg $GREEN "make ${HOME}/.vim"
+else
+    msg $RED "\n${HOME}/.vim is already exist."
 fi
 
-if [ ! -d $HOME/.zplug ]; then
+if [ ! -e $HOME/.zplug ]; then
     mkdir -p .zplug
     mkdir -p .cache/zsh
     msg $GREEN "make ${HOME}/.zplug"
     msg $GREEN "make ${HOME}/.cache/zsh"
+
+    #if [type git > /dev/null 2&1]; then
+    #    msg $MAGENTA "\n* >> clone plugin manager"
+    #    msg $GREEN "installing zplug..."
+    #
+    #    ZPLUG_HOME=$HOME/.zplug
+    #    git clone https://github.com/zplug/zplug $ZPLUG_HOME
+    #
+    #    msg $MAGENTA "\n* >> done!"
+    #fi
+else
+    msg $RED "\n${HOME}/.zplug is already exist."
 fi
 
-if [ ! -d $HOME/.ssh ]; then
+if [ ! -e $HOME/.ssh ]; then
     mkdir -p .ssh/.pub
     msg $GREEN "make ${HOME}/.ssh"
     msg $GREEN "make ${HOME}/.ssh/.pub"
+else
+    msg $RED "\n${HOME}/.ssh is already exist."
 fi
 
 msg $MAGENTA "\n* >> done!"
-
-# ]]
-# * << -------------------------------------------------/
-
-# * >>  clone ------------------------------------------/
-# [[
-
-if [type git > /dev/null 2&1]; then
-    ZPLUG_HOME=$HOME/.zplug
-    git clone https://github.com/zplug/zplug $ZPLUG_HOME
-fi
 
 # ]]
 # * << -------------------------------------------------/
@@ -145,19 +151,39 @@ msg $MAGENTA "\n* >> create symbolic link"
 
 # vim
 if [ ${F_VIM} == 1 ]; then
-    ln -s $HDOT$VIM_C $VIM_C
-    ln -s $HDOT$VIM_P $VIM_P
+    if [ ! -e $HOME/$VIM_C ]; then
+        ln -s $HDOT$VIM_C $HOME/$VIM_C
+    else
+        msg $RED "\n${HOME}/${VIM_C} is already exist."
+    fi
+    if [ ! -e $HOME/$VIM_P ]; then
+        ln -s $HDOT$VIM_P $HOME/$VIM_P
+    else
+        msg $RED "\n${HOME}/${VIM_P} is already exist."
+    fi
 fi
 
 # git
 if [ ${F_GIT} == 1 ]; then
-    ln -s $HDOT$GIT_C $GIT_C
+    if [ ! -e $HOME/$GIT_C ]; then
+        ln -s $HDOT$GIT_C $HOME/$GIT_C
+    else
+        msg $RED "\n${HOME}/${GIT_C} is already exist."
+    fi
 fi
 
 # zsh
 if [ ${F_ZSH} == 1 ]; then
-    ln -s $HDOT$ZSH_E $ZSH_E
-    ln -s $HDOT$ZSH_C $ZSH_C
+    if [ ! -e $HOME/$ZSH_E ]; then
+        ln -s $HDOT$ZSH_E $HOME/$ZSH_E
+    else
+        msg $RED "\n${HOME}/${ZSH_E} is already exist."
+    fi
+    if [ ! -e $HOME/$ZSH_C ]; then
+        ln -s $HDOT$ZSH_C $HOME/$ZSH_C
+    else
+        msg $RED "\n${HOME}/${ZSH_C} is already exist."
+    fi
 fi
 
 msg $MAGENTA "\n* >> done!"
@@ -165,4 +191,4 @@ msg $MAGENTA "\n* >> done!"
 # ]]
 # * << -------------------------------------------------/
 
-msg $BLUE "\n-----------------------------\n* > all done!\n"
+msg $BLUE "\n-----------------------------\n* > all done!!\n"
