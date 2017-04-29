@@ -135,9 +135,11 @@ hook_add = '''
     let g:watchdogs_check_BufWritePost_enable = 1
     unl s:config
 '''
-hook_post_source ='''
-    cal watchdogs#setup(g:quickrun_config)
-'''
+
+#hook_post_source =
+#'''
+#    cal watchdogs#setup(g:quickrun_config)
+#'''
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
