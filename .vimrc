@@ -60,6 +60,7 @@
 
 
 
+
 " * >   [1] general
 " -------------------------------------------                            /
 " ----------------------------------------------------------------------/
@@ -83,7 +84,6 @@ aug end
 " * >>  var --------------------------------------------/
 " [[
 
-" cf. sugoi-vimrc [[[[
 let $home                   = expand('~')
 let $vim_dir                = expand('$home/.vim')
 
@@ -92,7 +92,6 @@ let $myvimrc                = resolve(expand('$home/.vimrc'))
 let $vim_bak                = $vim_dir . '/tmp/backup'
 let $vim_undo               = $vim_dir . '/tmp/undo'
 let $vim_session            = $vim_dir . '/tmp/session'
-" ]]]]
 
 " ]]
 " * << -------------------------------------------------/
@@ -124,8 +123,8 @@ se formatoptions=c
 se showmatch
 se smarttab
 
-se ts=4 sw=4 "hardtab
-"se ts=4 sw=4 et "space
+"se ts=4 sw=4 "hardtab
+se ts=4 sw=4 et "space
 se softtabstop=0
 
 " ]]
