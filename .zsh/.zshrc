@@ -348,20 +348,18 @@ TRAPALRM() { redraw_tmout }
 case $OSTYPE in #uname http://en.wikipedia.org/wiki/Uname
     # linux
     linux*)
+        export PATH=$HOME/.bin:$PATH
         if [ -f $HOME/.tmux.conf ]; then 
             [[ -z "$TMUX" && -z "$WINDOW" && ! -z "$PS1" ]] && tmux
-        fi
-        ;;
+        fi ;;
     # mac os
     darwin*)
         alias ls='ls -G -F -L'
         function cd() {
             builtin cd $@ && ls;
-        }
-        ;;
+        } ;;
     #windows
-    CYGWIN*)
-        ;;
+    CYGWIN*) ;;
     msys*)
         alias shutdown='shutdown -s -f'
         if (( $+commands[winpty] )); then
@@ -369,8 +367,7 @@ case $OSTYPE in #uname http://en.wikipedia.org/wiki/Uname
             alias diskpart='winpty diskpart'
             alias sdelete='winpty sdelete'
             alias mysql='winpty mysql'
-        fi
-        ;;
+        fi ;;
 esac
 
 # ]
