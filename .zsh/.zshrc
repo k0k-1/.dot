@@ -174,7 +174,7 @@ alias diff='diff -u'
 # * >>> color --------------------------/
 
 # * >>>> cat
-if (( $+commands[pymentize] )); then
+if (( $+commands[pygmentize] )); then
     alias cat='pygmentize -O style=monokai -f console256 -g'
 fi
 
