@@ -1,13 +1,3 @@
-
-"nnoremap t :mytabopen about:blank<CR>:open<Space>
-"command! mytabopen -nargs=1 -description "Open with new tab" :js liberator.open("<args>", liberator.NEW_TAB);
-"nnoremap <C-n> :js gBrowser.mTabContainer.advanceSelectedTab(1, true)<CR>
-"nnoremap <C-p> :js gBrowser.mTabContainer.advanceSelectedTab(-1, true)<CR>
-"nnoremap d :js gBrowser.removeTab(gBrowser.mCurrentTab)<CR>
-"nnoremap u :js undoCloseTab()<CR>
-"nnoremap r :js gBrowser.reload()<CR>
-"nnoremap R :js gBrowser.reload(true)<CR>
-
 nnoremap ; :
 nnoremap j 5j
 nnoremap k 5k
@@ -29,7 +19,6 @@ inoremap <C-A> <Insert><C-A><Insert>
 nnoremap d <nop>
 nnoremap <C-K> <nop>
 nnoremap <C-W> d
-
 
 set focuscontent
 
