@@ -89,8 +89,8 @@ if [ ${F_ZSH} == 1 ]; then
 fi
 
 if [ ${F_TMUX} == 1 ]; then
-    ZSH_D=".tmux-config"
-    ZSH_C=".tmux.conf"
+    TMUX_D=".tmux-config"
+    TMUX_C=".tmux.conf"
 fi
 
 
