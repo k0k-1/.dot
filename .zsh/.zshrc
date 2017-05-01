@@ -193,9 +193,9 @@ if (( $+commands[git] )); then
         if [ -f $HOME/.gitconfi ]; then
             mv $HOME/.gitconfi $HOME/.gitconfig
         fi
-            builtin git $@
+        builtin git $@
         if [ -f $HOME/.gitconfig ]; then
-            mv $HOME/.gitconfig $HOME/.gitconfig
+            mv $HOME/.gitconfig $HOME/.gitconfi
         fi
     }
 fi
