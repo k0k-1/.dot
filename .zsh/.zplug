@@ -12,8 +12,6 @@ fi
 
 zplug "zsh-users/zsh-history-substring-search"
 
-zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
-
 zplug "tcnksm/docker-alias", use:zshrc
 
 zplug "k4rthik/git-cal", as:command, frozen:1
@@ -24,8 +22,6 @@ zplug "junegunn/fzf-bin", \
     rename-to:fzf, \
     use:"*darwin*amd64*"
 
-zplug "modules/prompt", from:prezto
-
 zplug "b4b4r07/enhancd", at:v1
 
 zplug "mollifier/anyframe", at:4c23cb60
@@ -35,20 +31,10 @@ zplug "b4b4r07/79ee61f7c140c63d2786", \
     as:command, \
     use:get_last_pane_path.sh
 
-zplug "b4b4r07/hello_bitbucket", \
-    from:bitbucket, \
-    as:command, \
-    use:"*.sh"
-
 zplug "b4b4r07/httpstat", \
     as:command, \
     use:'(*).sh', \
     rename-to:'$1'
-
-zplug "stedolan/jq", \
-    from:gh-r, \
-    as:command, \
-    rename-to:jq
 
 zplug "b4b4r07/emoji-cli", \
     on:"stedolan/jq"
