@@ -6,7 +6,7 @@
 
 "       * auther    : kip-s
 "       * url       : http://kip-s.net
-"       * ver       : 2.00
+"       * ver       : 3.01
 
 "       * contents  : [1] general
 
@@ -66,7 +66,6 @@ se fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
 "   1234567890
 "   恥の多い生涯を送ってきました。
 
-"se guifont=Source\ Code\ Pro:h10.5
 se guifont=Migu_1M:h10.5:cSHIFTJIS
 if exists('&ambiwidth')
     set ambiwidth=double
