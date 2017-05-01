@@ -132,8 +132,8 @@ fi
 # [[
 
 if (( $+commands[git] )); then
-    if [ -f $ZDOTDIR/.zplug ]; then
-        source $ZDOTDIR/.zplug
+    if [ -f $ZDOTDIR/rc/.zplug ]; then
+        source $ZDOTDIR/rc/.zplug
     fi
 fi
 
@@ -254,11 +254,11 @@ export TERM=xterm-256color
 export LSCOLORS=gxfxcxdxbxegedabagacad
 export LS_COLORS='no=00;38;5;244:rs=0:di=00;38;5;33:ln=00;38;5;37:mh=00:pi=48;5;230;38;5;136;01:so=48;5;230;38;5;136;01:do=48;5;230;38;5;136;01:bd=48;5;230;38;5;244;01:cd=48;5;230;38;5;244;01:or=48;5;235;38;5;160:su=48;5;160;38;5;230:sg=48;5;136;38;5;230:ca=30;41:tw=48;5;64;38;5;230:ow=48;5;235;38;5;33:st=48;5;33;38;5;230:ex=00;38;5;64:'
 if ! [[ $OSTYPE = msys* ]]; then
-    if [ -f $ZDOTDIR/.dircolors ]; then
+    if [ -f $ZDOTDIR/rc/.dircolors ]; then
         if (( $+commands[dircolors] )); then
-            eval $(dircolors $ZDOTDIR/.dircolors)
+            eval $(dircolors $ZDOTDIR/rc/.dircolors)
         elif (( $+commands[gdircolors] )); then
-            eval $(gdircolors $ZDOTDIR/.dircolors)
+            eval $(gdircolors $ZDOTDIR/rc/.dircolors)
         fi
     fi
 fi
