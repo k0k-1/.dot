@@ -19,7 +19,7 @@
 #       * file name : .zshrc
 #       * auther    : kip-s
 #       * url       : http://kip-s.net
-#       * ver       : 3.00
+#       * ver       : 3.11
 
 #       * contents  : [1] general
 #                           > complement
@@ -135,28 +135,6 @@ if (( $+commands[git] )); then
     if [ -f $ZDOTDIR/.zplug ]; then
         source $ZDOTDIR/.zplug
     fi
-fi
-
-if [ -f $GOPATH/bin/peco ]; then
-    function peco-select-history() {
-        local tac
-        local tacv=${commands[tac]:-"tail -r"}
-        BUFFER=$(\history -n 1 | \
-        eval $tac | \
-#        local tac
-#        if which tac > /dev/null; then
-#            tac="tac"
-#        else
-#            tac="tail -r"
-#        fi
-#        BUFFER=$(\history -n 1 | \
-#        eval $tac | \
-        peco --query "$LBUFFER")
-        CURSOR=$#BUFFER
-        zle clear-screen
-    }
-    zle -N peco-select-history
-    bindkey '^r' peco-select-history 
 fi
 
 # ]]
