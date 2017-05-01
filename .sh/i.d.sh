@@ -109,7 +109,7 @@ msg() {
 }
 
 key() {
-    read -p "press [enter] to continue." KEY
+    read -p "press [enter] to start." KEY
 }
 
 switch() {
