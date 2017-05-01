@@ -8,7 +8,7 @@
 #       * file name : i.d.sh
 #       * auther    : kip-s
 #       * url       : http://kip-s.net
-#       * ver       : 1.00
+#       * ver       : 1.02
 
 #       * contents  : [1] init
 #                           > var
