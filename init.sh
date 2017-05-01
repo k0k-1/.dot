@@ -3,7 +3,7 @@
 set -u
 trap exit ERR
 
-CDIR=$(dirname $(readlink -f $0)) # ???/.dot
+CDIR=$(dirname $(readlink -f $0))
 INITSH="i.d.sh"
 
 if [ -e $CDIR/.bin/$INITSH ]; then
