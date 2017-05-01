@@ -229,8 +229,6 @@ se wildignorecase
 " ----------------------------------------------------------------------/
 " [
 
-
-
 if &compatible
   set nocompatible
 en
@@ -245,6 +243,8 @@ if !isdirectory(s:dein_repo_dir)
 en
 
 let &runtimepath = s:dein_repo_dir .",". &runtimepath
+
+
 
 " * >>   load plugin -------------------------------------/
 " [[
@@ -286,8 +286,6 @@ let &runtimepath = s:dein_repo_dir .",". &runtimepath
 "   prefix
 "       t : window & tab
 "       f : ctrlp
-
-
 
 nn ; :
 nn : ;
