@@ -188,18 +188,6 @@ function extract() {
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz,rar}=extract
 
-if (( $+commands[git] )); then
-    function git() {
-        if [ -f $HOME/.gitconfi ]; then
-            mv $HOME/.gitconfi $HOME/.gitconfig
-        fi
-        builtin git $@
-        if [ -f $HOME/.gitconfig ]; then
-            mv $HOME/.gitconfig $HOME/.gitconfi
-        fi
-    }
-fi
-
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
 alias fuck='eval $(thefuck $(fc -ln -1))'
