@@ -131,8 +131,10 @@ fi
 # * >>  plugin -----------------------------------------/
 # [[
 
-if [ -f $ZDOTDIR/.zplug ]; then
-    source $ZDOTDIR/.zplug
+if (( $+commands[git] )); then
+    if [ -f $ZDOTDIR/.zplug ]; then
+        source $ZDOTDIR/.zplug
+    fi
 fi
 
 if [ -f $GOPATH/bin/peco ]; then
