@@ -39,7 +39,7 @@ trap exit ERR
 # * >>  var --------------------------------------------/
 # [[
 
-CDIR=$(dirname $(dirname $(readlink -f $0))) # ???/.dot
+CDIR=$(dirname $(dirname $(readlink -f $0)))
 DOTH=$HOME/.dot/
 echo $CDIR
 
@@ -91,7 +91,6 @@ if [ ${F_TMUX} == 1 ]; then
     TMUX_C=".tmux.conf"
 fi
 
-
 # ]]]
 # * << --------------------------------/
 
@@ -109,7 +108,7 @@ msg() {
 }
 
 key() {
-    read -p "press [enter] to start." KEY
+    read -p "press [enter] to $@." KEY
 }
 
 switch() {
@@ -146,6 +145,7 @@ case $OSTYPE in
         msg $ERRMSG "| - [error]"
         msg $ERRMSG "| - your environment is ${OSTYPE}."
         msg $ERRMSG "| - this script only run for linux."
+        key "exit"
         return 2>&- || exit ;;
     linux*) ;;
 esac
@@ -160,7 +160,7 @@ esac
 # [
 
 msg $H1MSG "\n* > start init.sh!!\n-----------------------------"
-key
+key "start"
 
 switch $F_VIM "vim"
 switch $F_GIT "git"
