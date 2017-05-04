@@ -10,7 +10,6 @@ INITSH="i.d.sh"
 
 msg() {
     printf "\033[$1m${@:2}\033[00m\n"
-    sleep 0.1
 }
 
 if [ -e $CDIR/.sh/$INITSH ]; then
