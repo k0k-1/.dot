@@ -16,11 +16,30 @@ zplug "tcnksm/docker-alias", use:zshrc
 
 zplug "k4rthik/git-cal", as:command, frozen:1
 
-zplug "junegunn/fzf-bin", \
-    from:gh-r, \
-    as:command, \
-    rename-to:fzf, \
-    use:"*darwin*amd64*"
+case $OSTYPE in
+    # linux
+    linux*)
+        zplug "junegunn/fzf-bin", \
+            from:gh-r, \
+            as:command, \
+            rename-to:fzf, \
+            use:"*linux*amd64*" ;;
+    # mac os
+    darwin*)
+        zplug "junegunn/fzf-bin", \
+            from:gh-r, \
+            as:command, \
+            rename-to:fzf, \
+            use:"*darwin*amd64*" ;;
+    #windows
+    CYGWIN*) ;;
+    msys*)
+        zplug "junegunn/fzf-bin", \
+            from:gh-r, \
+            as:command, \
+            rename-to:fzf, \
+            use:"*windows*amd64*" ;;
+esac
 
 zplug "b4b4r07/enhancd", at:v1
 
