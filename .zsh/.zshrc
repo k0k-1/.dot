@@ -137,6 +137,30 @@ if (( $+commands[git] )); then
     fi
 fi
 
+if (( $+commands[fzf] )); then
+    fe() {
+      local file
+      file=$(fzf --query="$1" --select-1 --exit-0)
+      [ -n "$file" ] && ${EDITOR:-vim} "$file"
+    }
+
+    fd() {
+      local dir
+      dir=$(find ${1:-*} -path '*/\.*' -prune \
+                      -o -type d -print 2> /dev/null | fzf +m) &&
+      cd "$dir"
+    }
+
+    fh() {
+      eval $(([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s | sed 's/ *[0-9]* *//')
+    }
+
+    # fkill - kill process
+    fkill() {
+      ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9}
+    }
+fi
+
 # ]]
 # * << -------------------------------------------------/
 
