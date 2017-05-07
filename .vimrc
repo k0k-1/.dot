@@ -23,39 +23,7 @@
 "       * file name : .vimrc
 "       * auther    : kip-s
 "       * url       : http://kip-s.net
-"       * ver       : 3.21
-
-"       * contents  : [1] general
-"                           > var
-"                           > format
-"                           > indent
-"                           > buffer
-"                           > cursor
-"                           > option
-"                           > history
-"                           > search
-
-"                     [2] plugin
-"                           > load plugin
-
-"                     [3] keybinds
-"                           > cursor
-"                           > space
-"                           > window
-"                               > tab
-"                               > buffer
-"                           > shortcut
-"                               > file-access
-"                           > fuck
-
-"                     [4] look
-
-"                     [5] os
-"                           > mac os
-"                           > unix
-"                           > windows 64bit
-"                           > windows 32bit
-
+"       * ver       : 3.22
 
 
 
