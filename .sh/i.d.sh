@@ -8,25 +8,7 @@
 #       * file name : i.d.sh
 #       * auther    : kip-s
 #       * url       : http://kip-s.net
-#       * ver       : 1.02
-
-#       * contents  : [1] init
-#                           > var
-#                               > check
-#                               > color
-#                               > filename
-#                           > function
-
-#                     [2] start
-#                           > make dir
-#                           > install external file
-#                               > zplug
-#                               > tmux.conf
-#                           > make symbolic link
-
-
-
-
+#       * ver       : 1.10
 
 # * >   [1] init
 # -------------------------------------------                            /
@@ -41,7 +23,6 @@ trap exit ERR
 
 CDIR=$(dirname $(dirname $(readlink -f $0)))
 DOTH=$HOME/.dot/
-echo $CDIR
 
 # * >>  check -------------------------/
 # [[[
@@ -283,6 +264,20 @@ if [ ${F_TMUX} == 1 ]; then
         msg $H2MSG "* >> done"
     else
         msg $H2MSG "* >> skip"
+    fi
+fi
+
+if [ ${F_TMUX} == 1 ]; then
+    msg $H2MSG "\n* >> install tpm"
+    if type git >/dev/null 2>&1; then
+    if [ ! -e $HOME/.tmux ]; then
+        msg $LOGMSG "| - [log] installing tpm..."
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        cd $CDIR
+        msg $H2MSG "* >> done"
+    else
+        msg $H2MSG "* >> skip"
+    fi
     fi
 fi
 
