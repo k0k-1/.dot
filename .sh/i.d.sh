@@ -27,6 +27,7 @@ DOTH=$HOME/.dot/
 # * >>  check -------------------------/
 # [[[
 
+COPYHOME=0
 F_VIM=1
 F_GIT=1
 F_ZSH=1
@@ -107,8 +108,8 @@ cchk(){
                 mkdir -p $2
                 msg $LOGMSG "| - [log] make dir '$2' ${HOME}/$2" ;;
             "ln")
-                ln -s $DOTH$2 $HOME/$2
-                msg $LOGMSG "| - [log] make symbolic link ${HOME}/$2" ;;
+                ln -s $CDIR/$2 $HOME/$2
+                msg $LOGMSG "| - [log] make symbolic link ${CDIR}/$2" ;;
             "cp")
                 cp -r $2 $HOME/$3
                 msg $LOGMSG "| - [log] copy $2 -> ${HOME}/$3" ;;
@@ -150,8 +151,11 @@ switch $F_SSH "ssh"
 switch $F_TMUX "tmux"
 switch $F_EMACS "emacs"
 
-if [ ! -e $CDIR ]; then
-    cchk "cp" $CDIR ".dot"
+if [ $COPYHOME == 1 ]; then
+    if [ ! -e $CDIR ]; then
+        cchk "cp" $CDIR ".dot"
+        $CDIR = $DOTH
+    fi
 fi
 
 cd $HOME/
