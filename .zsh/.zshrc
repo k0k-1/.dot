@@ -19,25 +19,7 @@
 #       * file name : .zshrc
 #       * auther    : kip-s
 #       * url       : http://kip-s.net
-#       * ver       : 3.11
-
-#       * contents  : [1] general
-#                           > complement
-#                           > history
-#                           > path
-#                           > plugin
-#                           > alias
-
-#                     [2] look
-#                           > theme
-#                           > ls color
-#                           > prompt
-#                               > prompt reset
-
-#                     [3] os
-#                           > linux
-#                           > mac os
-#                           > windows
+#       * ver       : 3.12
 
 
 
