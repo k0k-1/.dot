@@ -137,7 +137,6 @@ if (( $+commands[fzf] )); then
       eval $(([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s | sed 's/ *[0-9]* *//')
     }
 
-    # fkill - kill process
     fkill() {
       ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9}
     }
@@ -176,6 +175,11 @@ autoload -Uz zmv
 alias zmv='noglob zmv -W'
 alias fuck='eval $(thefuck $(fc -ln -1))'
 alias diff='diff -u'
+
+if (( $+commands[tmux] )); then
+    alias tl='tmux ls'
+    alias tk='tmux kill-session -t $1'
+fi
 
 # * >>> color --------------------------/
 
