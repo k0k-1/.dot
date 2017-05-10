@@ -206,10 +206,12 @@ function man() {
         LESS_TERMCAP_us=$(printf "\e[1;32m") \
         man "$@"
 }
-function less_with_unbuffer () {
-    unbuffer "$@" |& less -SR
-}
-alias ul=less_with_unbuffer
+if (( $+commands[unbuffered] )); then
+    function less_with_unbuffer() {
+        unbuffered "$@" |& less -SR
+    }
+    alias ul=less_with_unbuffer
+fi
 
 # * >>>> grep
 alias grep='grep --color'
