@@ -98,7 +98,7 @@ function history-all { history -E 1 }
 # [[
 
 if (( $+commands[go] )); then
-    if [ -d $HOME/.go ]; then
+    if [ -e $HOME/.go ]; then
         export GOPATH=$HOME/.go
         export PATH=$GOPATH/bin:$PATH
         export GO15VENDOREXPERIMENT=1
@@ -114,7 +114,7 @@ fi
 # [[
 
 if (( $+commands[git] )); then
-    if [ -f $ZDOTDIR/rc/.zplug ]; then
+    if [ -e $ZDOTDIR/rc/.zplug ]; then
         source $ZDOTDIR/rc/.zplug
     fi
 fi
@@ -270,7 +270,7 @@ export TERM=xterm-256color
 export LSCOLORS=gxfxcxdxbxegedabagacad
 export LS_COLORS='no=00;38;5;244:rs=0:di=00;38;5;33:ln=00;38;5;37:mh=00:pi=48;5;230;38;5;136;01:so=48;5;230;38;5;136;01:do=48;5;230;38;5;136;01:bd=48;5;230;38;5;244;01:cd=48;5;230;38;5;244;01:or=48;5;235;38;5;160:su=48;5;160;38;5;230:sg=48;5;136;38;5;230:ca=30;41:tw=48;5;64;38;5;230:ow=48;5;235;38;5;33:st=48;5;33;38;5;230:ex=00;38;5;64:'
 if ! [[ $OSTYPE = msys* ]]; then
-    if [ -f $ZDOTDIR/rc/.dircolors ]; then
+    if [ -e $ZDOTDIR/rc/.dircolors ]; then
         if (( $+commands[dircolors] )); then
             eval $(dircolors $ZDOTDIR/rc/.dircolors)
         elif (( $+commands[gdircolors] )); then
@@ -322,9 +322,9 @@ if [[ $TERM = xterm* ]];then
     RPROMPT="%F{$z_fg}%K{$z_uc} %n $z_c %m $z_c|$z_c %w $z_c|$z_c %* %f%k"
 
     if (( $+commands[python] )); then
-        if [ -f $ZDOTDIR/rc/prompt.py ]; then
+        if [ -e $ZDOTDIR/rc/prompt.py ]; then
             function u_prompt() {
-                if [ -f $ZDOTDIR/rc/prompt.py ]; then
+                if [ -e $ZDOTDIR/rc/prompt.py ]; then
                     export PROMPT="$(~/.zsh/rc/prompt.py $?)"
                 else
                     PROMPT=$z_body
@@ -365,7 +365,7 @@ case $OSTYPE in #uname http://en.wikipedia.org/wiki/Uname
     # linux
     linux*)
         export PATH=$HOME/.bin:$PATH
-        if [ -f $HOME/.tmux.conf ]; then 
+        if [ -e $HOME/.tmux.conf ]; then 
             [[ -z "$TMUX" && -z "$WINDOW" && ! -z "$PS1" ]] && tmux
         fi ;;
     # mac os
@@ -397,8 +397,8 @@ esac
 # ---------------------------------------------------------------------/
 # [
 
-if [ -d $HOME/.cache/zsh ]; then
-    if [ -f $HOME/.cache/zsh/.zsh_local ]; then
+if [ -e $HOME/.cache/zsh ]; then
+    if [ -e $HOME/.cache/zsh/.zsh_local ]; then
         source $HOME/.cache/zsh/.zsh_local
     fi
 fi
