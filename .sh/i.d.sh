@@ -84,6 +84,7 @@ fi
 # * >>  function ---------------------------------------/
 # [[
 
+# \033 = esc
 msg() {
     printf "\033[$1m${@:2}\033[00m\n"
     sleep 0.1
@@ -104,7 +105,7 @@ switch() {
 cchk(){
     if [ ! -e $HOME/$2 ]; then
         case $1 in
-            "mkdir")
+            mkdir)
                 mkdir -p $2
                 msg $LOGMSG "| - [log] make dir '$2' ${HOME}/$2" ;;
             "ln")
@@ -153,7 +154,7 @@ switch $F_EMACS "emacs"
 
 if [ $COPYHOME == 1 ]; then
     if [ ! -e $CDIR ]; then
-        cchk "cp" $CDIR ".dot"
+        cchk cp $CDIR ".dot"
         $CDIR = $DOTH
     fi
 fi
@@ -169,22 +170,22 @@ msg $LOGMSG "| - [log] cd ${HOME}"
 msg $H2MSG "\n* >> make directory"
 
 if [ ${F_VIM} == 1 ]; then
-    cchk "mkdir" ".vim"
+    cchk mkdir ".vim"
 fi
 
 if [ ${F_ZSH} == 1 ]; then
-    cchk "mkdir" ".zplug"
-    cchk "mkdir" ".cache/zsh"
+    cchk mkdir ".zplug"
+    cchk mkdir ".cache/zsh"
 fi
 
 if [ ${F_SSH} == 1 ]; then
-    cchk "mkdir" ".ssh"
-    cchk "mkdir" ".ssh/.pub"
+    cchk mkdir ".ssh"
+    cchk mkdir ".ssh/.pub"
 fi
 
 # sh
 if [ ${F_BIN} == 1 ]; then
-    cchk "mkdir" ".bin"
+    cchk mkdir ".bin"
 fi
 
 msg $H2MSG "* >> done!"
@@ -297,29 +298,29 @@ msg $H2MSG "\n* >> create symbolic link"
 
 # vim
 if [ ${F_VIM} == 1 ]; then
-    cchk "ln" $VIM_C
-    cchk "ln" $VIM_P
+    cchk ln $VIM_C
+    cchk ln $VIM_P
 fi
 
 # git
 if [ ${F_GIT} == 1 ]; then
-    cchk "ln" $GIT_C
+    cchk ln $GIT_C
 fi
 
 # zsh
 if [ ${F_ZSH} == 1 ]; then
-    cchk "ln" $ZSH_E
-    cchk "ln" $ZSH_C
+    cchk ln $ZSH_E
+    cchk ln $ZSH_C
 fi
 
 # tmux
 if [ ${F_TMUX} == 1 ]; then
-    cchk "ln" $TMUX_C
+    cchk ln $TMUX_C
 fi
 
 # sh
 if [ ${F_BIN} == 1 ]; then
-    cchk "ln" ".sh"
+    cchk ln ".sh"
 fi
 
 msg $H2MSG "* >> done!"
