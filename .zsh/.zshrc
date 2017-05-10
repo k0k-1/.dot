@@ -206,6 +206,10 @@ function man() {
         LESS_TERMCAP_us=$(printf "\e[1;32m") \
         man "$@"
 }
+function less_with_unbuffer () {
+    unbuffer "$@" |& less -SR
+}
+alias ul=less_with_unbuffer
 
 # * >>>> grep
 alias grep='grep --color'
