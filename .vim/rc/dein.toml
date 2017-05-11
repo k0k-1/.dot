@@ -394,27 +394,12 @@ repo = 'vim-jp/vimdoc-ja'
 on_ft = 'help'
 
 # > colorscheme
-#[[plugins]]
-#repo = 'w0ng/vim-hybrid'
-#hook_add = '''
-#    set background=dark
-#    au fau VimEnter * nested colorscheme hybrid
-#'''
-
 [[plugins]]
-repo = 'tomasr/molokai'
+repo = 'w0ng/vim-hybrid'
 hook_add = '''
-    let g:molokai_original = 1
-    let g:rehash256 = 1
-    au fau VimEnter * nested colorscheme molokai
+    se background=dark
+    au fau VimEnter * nested color hybrid
 '''
-
-#[[plugins]]
-#repo = 'altercation/vim-colors-solarized'
-#hook_add = '''
-#    set background=dark
-#    au fau VimEnter * nested colorscheme solarized
-#'''
 
 # ]]]
 # * <<< --------------------------------/
