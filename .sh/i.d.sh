@@ -10,7 +10,7 @@
 #       * url       : http://kip-s.net
 #       * ver       : 1.10
 
-# * >   [1] init
+# * »   [1] init
 # -------------------------------------------                            /
 # ----------------------------------------------------------------------/
 # [
@@ -18,13 +18,13 @@
 set -u
 trap exit ERR
 
-# * >>  var --------------------------------------------/
+# * »»  var --------------------------------------------/
 # [[
 
 CDIR=$(dirname $(dirname $(readlink -f $0)))
 DOTH=$HOME/.dot/
 
-# * >>  check -------------------------/
+# * »»  check -------------------------/
 # [[[
 
 COPYHOME=0
@@ -37,9 +37,9 @@ F_TMUX=1
 F_EMACS=0
 
 # ]]]
-# * << --------------------------------/
+# * «« --------------------------------/
 
-# * >>  coler -------------------------/
+# * »»  coler -------------------------/
 # [[[
 
 ERRMSG=31 # red
@@ -49,9 +49,9 @@ H1MSG=34  # blue
 H2MSG=35  # purple
 
 # ]]]
-# * << --------------------------------/
+# * «« --------------------------------/
 
-# * >>  filename ----------------------/
+# * »»  filename ----------------------/
 # [[[
 
 if [ ${F_VIM} == 1 ]; then
@@ -74,14 +74,14 @@ if [ ${F_TMUX} == 1 ]; then
 fi
 
 # ]]]
-# * << --------------------------------/
+# * «« --------------------------------/
 
 # ]]
-# * << -------------------------------------------------/
+# * «« -------------------------------------------------/
 
 
 
-# * >>  function ---------------------------------------/
+# * »»  function ---------------------------------------/
 # [[
 
 # \033 = esc
@@ -121,7 +121,7 @@ cchk(){
 }
 
 # ]]
-# * << -------------------------------------------------/
+# * «« -------------------------------------------------/
 
 case $OSTYPE in
     msys*)
@@ -137,12 +137,12 @@ esac
 
 
 
-# * >   [2] start
+# * »   [2] start
 # -------------------------------------------                            /
 # ----------------------------------------------------------------------/
 # [
 
-msg $H1MSG "\n* > start init.sh!!\n-----------------------------"
+msg $H1MSG "\n* » start init.sh!!\n-----------------------------"
 key "start"
 
 switch $F_VIM "vim"
@@ -164,10 +164,10 @@ msg $LOGMSG "| - [log] cd ${HOME}"
 
 
 
-# * >>  make dir ---------------------------------------/
+# * »»  make dir ---------------------------------------/
 # [[
 
-msg $H2MSG "\n* >> make directory"
+msg $H2MSG "\n* »» make directory"
 
 if [ ${F_VIM} == 1 ]; then
     cchk mkdir ".vim"
@@ -188,17 +188,17 @@ if [ ${F_BIN} == 1 ]; then
     cchk mkdir ".bin"
 fi
 
-msg $H2MSG "* >> done!"
+msg $H2MSG "* »» done!"
 
 # ]]
-# * << -------------------------------------------------/
+# * «« -------------------------------------------------/
 
 
 
-# * >>  install external file --------------------------/
+# * »»  install external file --------------------------/
 # [[
 
-# * >>  git ---------------------------/
+# * »»  git ---------------------------/
 # [[[
 
 GIT_VER="2.13.0-rc1"
@@ -206,7 +206,7 @@ GIT_FN="v${GIT_VER}.tar.gz"
 
 if ! type git >/dev/null 2>&1; then
     if [ ${F_BIN} == 1 && ${F_GIT} == 1 ]; then
-        msg $H2MSG "\n* >> install git-${GIT_VER}"
+        msg $H2MSG "\n* »» install git-${GIT_VER}"
         if type wget >/dev/null 2>&1; then
             msg $LOGMSG "| - [log] downloading git-$GIT_FN"
             wget https://github.com/git/git/archive/$GIT_FN /tar/$GIT_FN
@@ -232,69 +232,69 @@ if ! type git >/dev/null 2>&1; then
 fi
 
 # ]]]
-# * << --------------------------------/
+# * «« --------------------------------/
 
 
 
-# * >>  zplug -------------------------/
+# * »»  zplug -------------------------/
 # [[[
 
 if [ ${F_ZSH} == 1 ]; then
-    msg $H2MSG "\n* >> install zplug"
+    msg $H2MSG "\n* »» install zplug"
     if type git >/dev/null 2>&1; then
         if [ ! -d $HOME/.zplug ]; then
             export ZPLUG_HOME=$HOME/.zplug
             msg $LOGMSG "| - [log] installing zplug..."
             git clone https://github.com/zplug/zplug $ZPLUG_HOME
-            msg $H2MSG "* >> done"
+            msg $H2MSG "* »» done"
         else
-            msg $H2MSG "* >> skip"
+            msg $H2MSG "* »» skip"
         fi
     fi
 fi
 
 # ]]]
-# * << --------------------------------/
+# * «« --------------------------------/
 
-# * >>  tmux.conf ---------------------/
+# * »»  tmux.conf ---------------------/
 # [[[
 
 if [ ${F_TMUX} == 1 ]; then
-    msg $H2MSG "\n* >> init submodule"
+    msg $H2MSG "\n* »» init submodule"
     if [ ! -e $HOME/.tmux.conf ]; then
         msg $LOGMSG "| - [log] installing tmux-config..."
         cd $CDIR/$TMUX_D && git submodule init && git submodule update
         bash install.sh
         cd $CDIR
-        msg $H2MSG "* >> done"
+        msg $H2MSG "* »» done"
     else
-        msg $H2MSG "* >> skip"
+        msg $H2MSG "* »» skip"
     fi
 fi
 
 if [ ${F_TMUX} == 1 ]; then
-    msg $H2MSG "\n* >> install tpm"
+    msg $H2MSG "\n* »» install tpm"
     if type git >/dev/null 2>&1; then
     if [ ! -e $HOME/.tmux ]; then
         msg $LOGMSG "| - [log] installing tpm..."
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
         cd $CDIR
-        msg $H2MSG "* >> done"
+        msg $H2MSG "* »» done"
     else
-        msg $H2MSG "* >> skip"
+        msg $H2MSG "* »» skip"
     fi
     fi
 fi
 
 # ]]]
-# * << --------------------------------/
+# * «« --------------------------------/
 
 
 
-# * >>  create symbolic link ---------------------------/
+# * »»  create symbolic link ---------------------------/
 # [[
 
-msg $H2MSG "\n* >> create symbolic link"
+msg $H2MSG "\n* »» create symbolic link"
 
 # vim
 if [ ${F_VIM} == 1 ]; then
@@ -323,9 +323,9 @@ if [ ${F_BIN} == 1 ]; then
     cchk ln ".sh"
 fi
 
-msg $H2MSG "* >> done!"
+msg $H2MSG "* »» done!"
 
 # ]]
-# * << -------------------------------------------------/
+# * «« -------------------------------------------------/
 
-msg $H1MSG "\n-----------------------------\n* > all done!!\n"
+msg $H1MSG "\n-----------------------------\n* » all done!!\n"
