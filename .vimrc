@@ -22,7 +22,7 @@
 
 "       * file name : .vimrc
 "       * auther    : kip-s
-"       * url       : http://kip-s.net
+"       * url       : https://kip-s.net
 "       * ver       : 3.22
 
 
