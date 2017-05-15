@@ -7,7 +7,7 @@
 
 #       * file name : i.d.sh
 #       * auther    : kip-s
-#       * url       : http://kip-s.net
+#       * url       : https://kip-s.net
 #       * ver       : 1.10
 
 # * »   [1] init
