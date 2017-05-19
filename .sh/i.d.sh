@@ -8,7 +8,7 @@
 #       * file name : i.d.sh
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 1.10
+#       * ver       : 1.11
 
 # * »   [1] init
 # -------------------------------------------                            /
@@ -174,7 +174,6 @@ if [ ${F_VIM} == 1 ]; then
 fi
 
 if [ ${F_ZSH} == 1 ]; then
-    cchk mkdir ".zplug"
     cchk mkdir ".cache/zsh"
 fi
 
@@ -245,6 +244,7 @@ if [ ${F_ZSH} == 1 ]; then
         if [ ! -d $HOME/.zplug ]; then
             export ZPLUG_HOME=$HOME/.zplug
             msg $LOGMSG "| - [log] installing zplug..."
+            cchk mkdir ".zplug"
             git clone https://github.com/zplug/zplug $ZPLUG_HOME
             msg $H2MSG "* »» done"
         else
@@ -264,7 +264,7 @@ if [ ${F_TMUX} == 1 ]; then
     if [ ! -e $HOME/.tmux.conf ]; then
         msg $LOGMSG "| - [log] installing tmux-config..."
         cd $CDIR/$TMUX_D && git submodule init && git submodule update
-        bash install.sh
+        cd $CDIR/$TMUX_D/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
         cd $CDIR
         msg $H2MSG "* »» done"
     else
@@ -277,7 +277,7 @@ if [ ${F_TMUX} == 1 ]; then
     if type git >/dev/null 2>&1; then
     if [ ! -e $HOME/.tmux ]; then
         msg $LOGMSG "| - [log] installing tpm..."
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
         cd $CDIR
         msg $H2MSG "* »» done"
     else
@@ -316,6 +316,7 @@ fi
 # tmux
 if [ ${F_TMUX} == 1 ]; then
     cchk ln $TMUX_C
+    tmux source-file $HOME/.tmux.conf
 fi
 
 # sh
