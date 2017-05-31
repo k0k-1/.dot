@@ -448,7 +448,7 @@ se t_Co=256
 
 se notitle
 se list
-se listchars=tab:»-,extends:»,trail:-,eol:«
+se listchars=tab:>-,extends:>,trail:-,eol:<
 se ruler
 se cursorcolumn
 se cursorline
@@ -501,6 +501,8 @@ if has("mac")
 elsei has("unix")
 " * »»  unix -------------------------------------------/
 " [[
+
+se listchars=tab:»-,extends:»,trail:-,eol:«
 
 " ]]
 " * «« -------------------------------------------------/
