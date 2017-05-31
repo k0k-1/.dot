@@ -8,17 +8,6 @@
 "       * url       : http://kip-s.net
 "       * ver       : 3.01
 
-"       * contents  : [1] general
-
-"                     [2] look
-"                           > font
-
-"                     [3] os
-"                           > mac os
-"                           > unix
-"                           > windows 64bit
-"                           > windows 32bit
-
 
 
 
