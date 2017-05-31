@@ -44,7 +44,6 @@ se guioptions-=b
 
 se fileencoding=utf-8
 se fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
-se listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 
 " * »»  font -------------------------------------------/
 " [[
