@@ -59,6 +59,9 @@ if exists('&ambiwidth')
     set ambiwidth=double
 en
 
+se background=dark
+color hybrid
+
 " ]]
 " * «« -------------------------------------------------/
 
@@ -107,9 +110,6 @@ elseif has("win64")
 elseif has("win32")
 " * »»  windows 32bit ----------------------------------/
 " [[
-
-se background=dark
-color hybrid
 
 " ]]
 " * «« -------------------------------------------------/
