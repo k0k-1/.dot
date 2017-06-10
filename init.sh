@@ -6,7 +6,7 @@ trap exit ERR
 CDIR=$(dirname $(readlink -f $0))
 ERRMSG=31 # red
 
-INITSH="i.d.sh"
+INITSH="start.sh"
 
 msg() {
     printf "\033[$1m${@:2}\033[00m\n"
