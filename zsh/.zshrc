@@ -322,10 +322,10 @@ if [[ $TERM = xterm* ]];then
     RPROMPT="%F{$z_fg}%K{$z_uc} %n $z_c %m $z_c|$z_c %w $z_c|$z_c %* %f%k"
 
     if (( $+commands[python] )); then
-        if [ -e $ZDOTDIR/rc/prompt.py ]; then
+        if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
             function u_prompt() {
-                if [ -e $ZDOTDIR/rc/prompt.py ]; then
-                    export PROMPT="$(~/.zsh/rc/prompt.py $?)"
+                if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
+                    export PROMPT="$(~/.zsh/rc/plugin/prompt.py $?)"
                 else
                     PROMPT=$z_body
                 fi
