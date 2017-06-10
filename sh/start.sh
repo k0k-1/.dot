@@ -5,10 +5,10 @@
 #                  > >    | / / | '_ \___(_-<
 #                 /_/     |_\_\_| .__/   /__/
 
-#       * file name : i.d.sh
+#       * file name : start.sh
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 1.11
+#       * ver       : 2.00
 
 # * »   [1] init
 # -------------------------------------------                            /
@@ -21,20 +21,20 @@ trap exit ERR
 # * »»  var --------------------------------------------/
 # [[
 
-CDIR=$(dirname $(dirname $(readlink -f $0)))
-DOTH=$HOME/.dot/
+WORK_DIR=$(dirname $(dirname $(readlink -f $0)))
+DOTHOME=$HOME/.dot/
 
 # * »»  check -------------------------/
 # [[[
 
 COPYHOME=0
-F_VIM=1
-F_GIT=1
-F_ZSH=1
-F_SSH=1
-F_BIN=1
-F_TMUX=1
-F_EMACS=0
+FLAG_VIM=1
+FLAG_GIT=1
+FLAG_ZSH=1
+FLAG_SSH=1
+FLAG_BIN=1
+FLAG_TMUX=1
+FLAG_EMACS=0
 
 # ]]]
 # * «« --------------------------------/
@@ -54,23 +54,30 @@ H2MSG=35  # purple
 # * »»  filename ----------------------/
 # [[[
 
-if [ ${F_VIM} == 1 ]; then
-    VIM_C=".vimrc"
-    VIM_P=".vim/rc"
+if [ ${FLAG_VIM} == 1 ]; then
+    CONFIG_VIM="vimrc"
+    LINK_CONFIG_VIM=".vimrc"
+    DIR_VIM="vim/rc"
+    LINK_DIR_VIM=".vim/rc"
 fi
 
-if [ ${F_GIT} == 1 ]; then
-    GIT_C=".gitconfig"
+if [ ${FLAG_GIT} == 1 ]; then
+    CONFIG_GIT="gitconfig"
+    LINK_CONFIG_GIT=$CONFIG_GIT
 fi
 
-if [ ${F_ZSH} == 1 ]; then
-    ZSH_E=".zshenv"
-    ZSH_C=".zsh"
+if [ ${FLAG_ZSH} == 1 ]; then
+    CONFIG_ZSH=".zshenv"
+    LINK_CONFIG_ZSH="zshenv"
+    DIR_ZSH="zsh"
+    LINK_DIR_ZSH=".zsh"
 fi
 
-if [ ${F_TMUX} == 1 ]; then
-    TMUX_D=".tmux-config"
-    TMUX_C=".tmux.conf"
+if [ ${FLAG_TMUX} == 1 ]; then
+    DIR_TMUX="tmux-config"
+    LINK_DIR_TMUX=$DIR_TMUX
+    CONFIG_TMUX=".tmux.conf"
+    LINK_CONFIG_TMUX=$CONFIG_TMUX
 fi
 
 # ]]]
@@ -109,8 +116,8 @@ cchk(){
                 mkdir -p $2
                 msg $LOGMSG "| - [log] make dir '$2' ${HOME}/$2" ;;
             "ln")
-                ln -s $CDIR/$2 $HOME/$2
-                msg $LOGMSG "| - [log] make symbolic link ${CDIR}/$2" ;;
+                ln -s $WORK_DIR/$2 $HOME/$3
+                msg $LOGMSG "| - [log] make symbolic link ${WORK_DIR}/$2" ;;
             "cp")
                 cp -r $2 $HOME/$3
                 msg $LOGMSG "| - [log] copy $2 -> ${HOME}/$3" ;;
@@ -145,17 +152,17 @@ esac
 msg $H1MSG "\n* » start init.sh!!\n-----------------------------"
 key "start"
 
-switch $F_VIM "vim"
-switch $F_GIT "git"
-switch $F_ZSH "zsh"
-switch $F_SSH "ssh"
-switch $F_TMUX "tmux"
-switch $F_EMACS "emacs"
+switch $FLAG_VIM "vim"
+switch $FLAG_GIT "git"
+switch $FLAG_ZSH "zsh"
+switch $FLAG_SSH "ssh"
+switch $FLAG_TMUX "tmux"
+switch $FLAG_EMACS "emacs"
 
 if [ $COPYHOME == 1 ]; then
-    if [ ! -e $CDIR ]; then
-        cchk cp $CDIR ".dot"
-        $CDIR = $DOTH
+    if [ ! -e $WORK_DIR ]; then
+        cchk cp $WORK_DIR ".dot"
+        $WORK_DIR = $DOTHOME
     fi
 fi
 
@@ -169,21 +176,21 @@ msg $LOGMSG "| - [log] cd ${HOME}"
 
 msg $H2MSG "\n* »» make directory"
 
-if [ ${F_VIM} == 1 ]; then
+if [ ${FLAG_VIM} == 1 ]; then
     cchk mkdir ".vim"
 fi
 
-if [ ${F_ZSH} == 1 ]; then
+if [ ${FLAG_ZSH} == 1 ]; then
     cchk mkdir ".cache/zsh"
 fi
 
-if [ ${F_SSH} == 1 ]; then
+if [ ${FLAG_SSH} == 1 ]; then
     cchk mkdir ".ssh"
     cchk mkdir ".ssh/.pub"
 fi
 
 # sh
-if [ ${F_BIN} == 1 ]; then
+if [ ${FLAG_BIN} == 1 ]; then
     cchk mkdir ".bin"
 fi
 
@@ -204,7 +211,7 @@ GIT_VER="2.13.0-rc1"
 GIT_FN="v${GIT_VER}.tar.gz"
 
 if ! type git >/dev/null 2>&1; then
-    if [ ${F_BIN} == 1 && ${F_GIT} == 1 ]; then
+    if [ ${FLAG_BIN} == 1 && ${FLAG_GIT} == 1 ]; then
         msg $H2MSG "\n* »» install git-${GIT_VER}"
         if type wget >/dev/null 2>&1; then
             msg $LOGMSG "| - [log] downloading git-$GIT_FN"
@@ -223,7 +230,7 @@ if ! type git >/dev/null 2>&1; then
             fi
             rm -r $GIT_FN $GIT_VER
             msg $LOGMSG "| - [log] removed '${GIT_FN}' and '${GIT_VER}'."
-            cd $CDIR
+            cd $WORK_DIR
         else
             msg $ERRMSG "| - [error] seriously! your computer 'wget' is NOT installed!"
         fi
@@ -238,7 +245,7 @@ fi
 # * »»  zplug -------------------------/
 # [[[
 
-if [ ${F_ZSH} == 1 ]; then
+if [ ${FLAG_ZSH} == 1 ]; then
     msg $H2MSG "\n* »» install zplug"
     if type git >/dev/null 2>&1; then
         if [ ! -d $HOME/.zplug ]; then
@@ -259,26 +266,26 @@ fi
 # * »»  tmux.conf ---------------------/
 # [[[
 
-if [ ${F_TMUX} == 1 ]; then
+if [ ${FLAG_TMUX} == 1 ]; then
     msg $H2MSG "\n* »» init submodule"
     if [ ! -e $HOME/.tmux.conf ]; then
         msg $LOGMSG "| - [log] installing tmux-config..."
-        cd $CDIR/$TMUX_D && git submodule init && git submodule update
-        cd $CDIR/$TMUX_D/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
-        cd $CDIR
+        cd $WORK_DIR/$DIR_TMUX && git submodule init && git submodule update
+        cd $WORK_DIR/$DIR_TMUX/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
+        cd $WORK_DIR
         msg $H2MSG "* »» done"
     else
         msg $H2MSG "* »» skip"
     fi
 fi
 
-if [ ${F_TMUX} == 1 ]; then
+if [ ${FLAG_TMUX} == 1 ]; then
     msg $H2MSG "\n* »» install tpm"
     if type git >/dev/null 2>&1; then
     if [ ! -e $HOME/.tmux ]; then
         msg $LOGMSG "| - [log] installing tpm..."
         git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-        cd $CDIR
+        cd $WORK_DIR
         msg $H2MSG "* »» done"
     else
         msg $H2MSG "* »» skip"
@@ -297,31 +304,31 @@ fi
 msg $H2MSG "\n* »» create symbolic link"
 
 # vim
-if [ ${F_VIM} == 1 ]; then
-    cchk ln $VIM_C
-    cchk ln $VIM_P
+if [ ${FLAG_VIM} == 1 ]; then
+    cchk ln $CONFIG_VIM $LINK_CONFIG_VIM
+    cchk ln $DIR_VIM $LINK_DIR_VIM
 fi
 
 # git
-if [ ${F_GIT} == 1 ]; then
-    cchk ln $GIT_C
+if [ ${FLAG_GIT} == 1 ]; then
+    cchk ln $CONFIG_GIT $LINK_CONFIG_GIT
 fi
 
 # zsh
-if [ ${F_ZSH} == 1 ]; then
-    cchk ln $ZSH_E
-    cchk ln $ZSH_C
+if [ ${FLAG_ZSH} == 1 ]; then
+    cchk ln $CONFIG_ZSH $LINK_CONFIG_ZSH
+    cchk ln $DIR_ZSH $LINK_DIR_ZSH
 fi
 
 # tmux
-if [ ${F_TMUX} == 1 ]; then
-    cchk ln $TMUX_C
+if [ ${FLAG_TMUX} == 1 ]; then
+    cchk ln $CONFIG_TMUX $LINK_TMUX_CONFIG
     tmux source-file $HOME/.tmux.conf
 fi
 
 # sh
-if [ ${F_BIN} == 1 ]; then
-    cchk ln ".sh"
+if [ ${FLAG_BIN} == 1 ]; then
+    cchk ln "sh" ".sh"
 fi
 
 msg $H2MSG "* »» done!"
