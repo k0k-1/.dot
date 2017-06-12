@@ -24,7 +24,7 @@ trap exit ERR
 WORK_DIR=$(dirname $(dirname $(readlink -f $0)))
 DOTHOME=$HOME/.dot/
 
-# * »»  check -------------------------/
+# * »»  flugs -------------------------/
 # [[[
 
 COPYHOME=0
@@ -35,6 +35,7 @@ FLAG_SSH=1
 FLAG_BIN=1
 FLAG_TMUX=1
 FLAG_EMACS=0
+FLAG_SH=1
 
 # ]]]
 # * «« --------------------------------/
@@ -55,29 +56,34 @@ H2MSG=35  # purple
 # [[[
 
 if [ ${FLAG_VIM} == 1 ]; then
-    CONFIG_VIM="vimrc"
-    LINK_CONFIG_VIM=".vimrc"
-    DIR_VIM="vim/rc"
-    LINK_DIR_VIM=".vim/rc"
+  CONFIG_VIM="vimrc"
+  LINK_CONFIG_VIM=".vimrc"
+  DIR_VIM="vim/rc"
+  LINK_DIR_VIM=".vim/rc"
 fi
 
 if [ ${FLAG_GIT} == 1 ]; then
-    CONFIG_GIT=".gitconfig"
-    LINK_CONFIG_GIT=$CONFIG_GIT
+  CONFIG_GIT=".gitconfig"
+  LINK_CONFIG_GIT=$CONFIG_GIT
 fi
 
 if [ ${FLAG_ZSH} == 1 ]; then
-    CONFIG_ZSH="zshenv"
-    LINK_CONFIG_ZSH=".zshenv"
-    DIR_ZSH="zsh"
-    LINK_DIR_ZSH=".zsh"
+  CONFIG_ZSH="zshenv"
+  LINK_CONFIG_ZSH=".zshenv"
+  DIR_ZSH="zsh"
+  LINK_DIR_ZSH=".zsh"
 fi
 
 if [ ${FLAG_TMUX} == 1 ]; then
-    DIR_TMUX="tmux-config"
-    LINK_DIR_TMUX=$DIR_TMUX
-    CONFIG_TMUX=".tmux.conf"
-    LINK_CONFIG_TMUX=$CONFIG_TMUX
+  DIR_TMUX="tmux-config"
+  LINK_DIR_TMUX=$DIR_TMUX
+  CONFIG_TMUX=".tmux.conf"
+  LINK_CONFIG_TMUX=$CONFIG_TMUX
+fi
+
+if [ ${FLAG_SH} == 1 ]; then
+  DIR_SH="sh"
+  LINK_DIR_SH=".sh"
 fi
 
 # ]]]
@@ -328,7 +334,7 @@ fi
 
 # sh
 if [ ${FLAG_BIN} == 1 ]; then
-    cchk ln ".sh" "sh"
+    cchk ln $LINK_DIR_SH $DIR_SH
 fi
 
 msg $H2MSG "* »» done!"
