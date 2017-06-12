@@ -12,8 +12,8 @@ msg() {
     printf "\033[$1m${@:2}\033[00m\n"
 }
 
-if [ -e $CDIR/.sh/$INITSH ]; then
-    bash $CDIR/.sh/$INITSH
+if [ -e $CDIR/sh/$INITSH ]; then
+    bash $CDIR/sh/$INITSH
 else
     msg $ERRMSG "[error] '${INITSH}' doesn't exist."
     return 2>&- || exit

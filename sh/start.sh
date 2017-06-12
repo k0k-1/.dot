@@ -8,7 +8,7 @@
 #       * file name : start.sh
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 2.00
+#       * ver       : 2.01
 
 # * »   [1] init
 # -------------------------------------------                            /
@@ -62,13 +62,13 @@ if [ ${FLAG_VIM} == 1 ]; then
 fi
 
 if [ ${FLAG_GIT} == 1 ]; then
-    CONFIG_GIT="gitconfig"
+    CONFIG_GIT=".gitconfig"
     LINK_CONFIG_GIT=$CONFIG_GIT
 fi
 
 if [ ${FLAG_ZSH} == 1 ]; then
-    CONFIG_ZSH=".zshenv"
-    LINK_CONFIG_ZSH="zshenv"
+    CONFIG_ZSH="zshenv"
+    LINK_CONFIG_ZSH=".zshenv"
     DIR_ZSH="zsh"
     LINK_DIR_ZSH=".zsh"
 fi
@@ -116,8 +116,8 @@ cchk(){
                 mkdir -p $2
                 msg $LOGMSG "| - [log] make dir '$2' ${HOME}/$2" ;;
             "ln")
-                ln -s $WORK_DIR/$2 $HOME/$3
-                msg $LOGMSG "| - [log] make symbolic link ${WORK_DIR}/$2" ;;
+                ln -s $WORK_DIR/$3 $HOME/$2
+                msg $LOGMSG "| - [log] make symbolic link ${HOME}/$2" ;;
             "cp")
                 cp -r $2 $HOME/$3
                 msg $LOGMSG "| - [log] copy $2 -> ${HOME}/$3" ;;
@@ -305,30 +305,30 @@ msg $H2MSG "\n* »» create symbolic link"
 
 # vim
 if [ ${FLAG_VIM} == 1 ]; then
-    cchk ln $CONFIG_VIM $LINK_CONFIG_VIM
-    cchk ln $DIR_VIM $LINK_DIR_VIM
+    cchk ln $LINK_CONFIG_VIM $CONFIG_VIM
+    cchk ln $LINK_DIR_VIM $DIR_VIM
 fi
 
 # git
 if [ ${FLAG_GIT} == 1 ]; then
-    cchk ln $CONFIG_GIT $LINK_CONFIG_GIT
+    cchk ln $LINK_CONFIG_GIT $CONFIG_GIT
 fi
 
 # zsh
 if [ ${FLAG_ZSH} == 1 ]; then
-    cchk ln $CONFIG_ZSH $LINK_CONFIG_ZSH
-    cchk ln $DIR_ZSH $LINK_DIR_ZSH
+    cchk ln $LINK_CONFIG_ZSH $CONFIG_ZSH
+    cchk ln $LINK_DIR_ZSH $DIR_ZSH
 fi
 
 # tmux
 if [ ${FLAG_TMUX} == 1 ]; then
-    cchk ln $CONFIG_TMUX $LINK_TMUX_CONFIG
+    cchk ln $LINK_CONFIG_TMUX $CONFIG_TMUX
     tmux source-file $HOME/.tmux.conf
 fi
 
 # sh
 if [ ${FLAG_BIN} == 1 ]; then
-    cchk ln "sh" ".sh"
+    cchk ln ".sh" "sh"
 fi
 
 msg $H2MSG "* »» done!"
