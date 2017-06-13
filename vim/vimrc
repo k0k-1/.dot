@@ -23,7 +23,7 @@
 "       * file name : .vimrc
 "       * auther    : kip-s
 "       * url       : https://kip-s.net
-"       * ver       : 4.00
+"       * ver       : 4.01
 
 
 
@@ -61,6 +61,12 @@ let s:im_windows = has('win32') || has('win64')
 
 fu! s:ruwindows() abort
   return s:im_windows
+endf
+
+fu! s:rumac() abort
+  return !s:im_windows && !has('win32unix')
+    \ && (has('mac') || has('macunix') || has('gui_macvim')
+    \   || (!executable('xdg-open') && system('uname') =~? '^darwin'))
 endf
 
 filetype off
@@ -163,9 +169,7 @@ se foldmethod=manual
 "se foldopen=all
 "se foldclose=all
 se updatetime=0
-if has('mouse')
-  se mouse=a
-en
+se packpath=
 
 " ]]
 " * << -------------------------------------------------/
@@ -516,14 +520,17 @@ se statusline& statusline+=[%p%%]
 " ----------------------------------------------------------------------/
 " [
 
+if has('gui_running')
+  cal s:source_rc('gui.rc.vim')
+en
+
 if s:ruwindows()
   cal s:source_rc('windows.rc.vim')
 else
   cal s:source_rc('unix.rc.vim')
 en
 
-if has('gui_running')
-  cal s:source_rc('gui.rc.vim')
+if s:rumac()
 en
 
 " ]

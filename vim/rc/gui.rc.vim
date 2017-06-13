@@ -6,32 +6,24 @@ if has('gui_running')
 "                 |_|
 
 "       * auther    : kip-s
-"       * url       : http://kip-s.net
-"       * ver       : 3.21
+"       * url       : https://kip-s.net
+"       * ver       : 3.30
 
+let s:im_windows = has('win32') || has('win64')
 
+fu! s:ruwindows() abort
+  return s:im_windows
+endf
 
-
-
-" * >   [1] general
-" -------------------------------------------                            /
-" ----------------------------------------------------------------------/
-" [
+fu! s:rumac() abort
+  return !s:im_windows && !has('win32unix')
+    \ && (has('mac') || has('macunix') || has('gui_macvim')
+    \   || (!executable('xdg-open') && system('uname') =~? '^darwin'))
+endf
 
 aug fau
     au!
 aug END
-
-" ]
-
-
-
-
-
-" * >   [2] look
-" -------------------------------------------                            /
-" ----------------------------------------------------------------------/
-" [
 
 se cmdheight=1
 
@@ -45,6 +37,14 @@ se guioptions-=b
 
 se fileencoding=utf-8
 se fileencodings=utf-8,iso-2022-jp,cp932,euc-jp
+
+if has('mouse')
+  se mouse=a
+en
+
+if has('multi_byte_ime')
+  se iminsert=0 imsearch=0
+en
 
 " * >>  font -------------------------------------------/
 " [[
@@ -60,75 +60,19 @@ if exists('&ambiwidth')
     se ambiwidth=double
 en
 
-se background=dark
-color hybrid
-
 " ]]
 " * << -------------------------------------------------/
 
-" ]
 
 
+if s:ruwindows()
+  cal s:source_rc('windows.rc.vim')
+elseif has('unix')
+  cal s:source_rc('unix.rc.vim')
+en
 
-
-
-" * >   [3] os
-" -------------------------------------------                            /
-" ----------------------------------------------------------------------/
-" [
-
-if has('unix')
-    " * >>  unix -------------------------------------------/
-    " [[
-
-    se guifont=Migu\ 1M 10
-
-    " ]]
-    " * << -------------------------------------------------/
-
-
-
-elsei has('mac')
-    " * >>  mac os -----------------------------------------/
-    " [[
-
-    se guifont=Migu_1M:h10:cANSI
-
-    " ]]
-    " * << -------------------------------------------------/
-
-
-
-else
-    " * >>  windows ----------------------------------------/
-    " [[
-
-    se rop=type:directx
-
-    " ]]
-    " * << -------------------------------------------------/
-
-
-
-    if has('win64')
-    " * >>  windows 64bit ----------------------------------/
-    " [[
-
-
-    " ]]
-    " * << -------------------------------------------------/
-
-
-
-    elsei has('win32')
-    " * >>  windows 32bit ----------------------------------/
-    " [[
-
-
-    " ]]
-    " * << -------------------------------------------------/
-    en
-
+if s:rumac()
+  se guifont=Migu_1M:h10:cANSI
 en
 
 " ]
