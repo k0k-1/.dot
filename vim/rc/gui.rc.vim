@@ -9,6 +9,27 @@ if has('gui_running')
 "       * url       : https://kip-s.net
 "       * ver       : 3.30
 
+fu! s:source_rc(path, ...) abort
+  let use_global = get(a:000, 0, !has('vim_starting'))
+  let abspath = resolve(expand('~/.vim/rc/' .a:path))
+  if !use_global
+    exe 'source' fnameescape(abspath)
+    return
+  en
+
+  let content map(readfile(abspath),
+    \ 'substitute(v:val, "^\\W*\\zsset\\ze\\W", "setglobal", "")')
+  let tempfile = tempname()
+  try
+    cal writefile(content, tempfile)
+    exe 'source' fnameescape(tempfile)
+  finally
+    if filereadable(tempfile)
+      cal delete(tempfile)
+    en
+  endt
+endf
+
 let s:im_windows = has('win32') || has('win64')
 
 fu! s:ruwindows() abort
