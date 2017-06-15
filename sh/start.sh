@@ -24,10 +24,10 @@ trap exit ERR
 WORK_DIR=$(dirname $(dirname $(readlink -f $0)))
 DOTHOME=$HOME/.dot/
 
-# * »»  flugs -------------------------/
+# * »»  flags -------------------------/
 # [[[
 
-COPYHOME=0
+COPYHOME=1
 FLAG_VIM=1
 FLAG_GIT=1
 FLAG_ZSH=1
