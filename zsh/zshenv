@@ -16,9 +16,8 @@
 #               /_/     /__|___/_||_|     ___
 #                                        |___|
 
-#       * file name : .zshenv
 #       * auther    : kip-s
 #       * url       : http://kip-s.net
-#       * ver       : 1.00
+#       * ver       : 0.10
 
 export ZDOTDIR=$HOME/.zsh
