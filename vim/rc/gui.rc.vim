@@ -1,13 +1,13 @@
 if has('gui_running')
-"        __           _
-"        \ \     __ _(_)_ __
-"         > >    \ V / | '  \
-"        /_/      \_/|_|_|_|_|     ___
-"                                 |___|
+"               __           _
+"               \ \     __ _(_)_ __
+"                > >    \ V / | '  \
+"               /_/      \_/|_|_|_|_|     ___
+"                                        |___|
 
 "       * auther    : kip-s
 "       * url       : https://kip-s.net
-"       * ver       : 3.31
+"       * ver       : 3.32
 
 fu! s:source_rc(path, ...) abort
   let use_global = get(a:000, 0, !has('vim_starting'))
