@@ -8,7 +8,7 @@
 #       * file name : start.sh
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 2.02
+#       * ver       : 2.10
 
 # * »   [1] init
 # -------------------------------------------                            /
@@ -99,12 +99,12 @@ fi
 
 # \033 = esc
 msg() {
-    printf "\033[$1m${@:2}\033[00m\n"
-    sleep 0.1
-}
-
-key() {
-    read -p "press [enter] to $@." KEY
+    if [ $1 == "key" ]; then
+      read -p "press [enter] to ${@:2}." KEY
+    else
+      printf "\033[$1m${@:2}\033[00m\n"
+      sleep 0.1
+    fi
 }
 
 switch() {
@@ -121,10 +121,10 @@ cchk(){
             mkdir)
                 mkdir -p $2
                 msg $LOGMSG "| - [log] make dir '$2' ${HOME}/$2" ;;
-            "ln")
+            ln)
                 ln -s $WORK_DIR/$3 $HOME/$2
                 msg $LOGMSG "| - [log] make symbolic link ${HOME}/$2" ;;
-            "cp")
+            cp)
                 cp -r $2 $HOME/$3
                 msg $LOGMSG "| - [log] copy $2 -> ${HOME}/$3" ;;
         esac
@@ -141,7 +141,7 @@ case $OSTYPE in
         msg $ERRMSG "| - [error]"
         msg $ERRMSG "| - your environment is ${OSTYPE}."
         msg $ERRMSG "| - this script only run for linux."
-        key "exit"
+        msg "key" "exit"
         return 2>&- || exit ;;
     linux*) ;;
 esac
@@ -156,7 +156,7 @@ esac
 # [
 
 msg $H1MSG "\n* » start init.sh!!\n-----------------------------"
-key "start"
+msg "key" "start"
 
 switch $FLAG_VIM "vim"
 switch $FLAG_GIT "git"
