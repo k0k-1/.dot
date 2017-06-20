@@ -55,33 +55,33 @@ H2MSG=35  # purple
 # * »»  filename ----------------------/
 # [[[
 
-if [ ${FLAG_VIM} == 1 ]; then
+if [ $FLAG_VIM == 1 ]; then
   CONFIG_VIM="vimrc"
   LINK_CONFIG_VIM=".vimrc"
   DIR_VIM="vim/rc"
   LINK_DIR_VIM=".vim/rc"
 fi
 
-if [ ${FLAG_GIT} == 1 ]; then
+if [ $FLAG_GIT == 1 ]; then
   CONFIG_GIT=".gitconfig"
   LINK_CONFIG_GIT=$CONFIG_GIT
 fi
 
-if [ ${FLAG_ZSH} == 1 ]; then
+if [ $FLAG_ZSH == 1 ]; then
   CONFIG_ZSH="zshenv"
   LINK_CONFIG_ZSH=".zshenv"
   DIR_ZSH="zsh"
   LINK_DIR_ZSH=".zsh"
 fi
 
-if [ ${FLAG_TMUX} == 1 ]; then
+if [ $FLAG_TMUX == 1 ]; then
   DIR_TMUX="tmux-config"
   LINK_DIR_TMUX=$DIR_TMUX
   CONFIG_TMUX=".tmux.conf"
   LINK_CONFIG_TMUX=$CONFIG_TMUX
 fi
 
-if [ ${FLAG_SH} == 1 ]; then
+if [ $FLAG_SH == 1 ]; then
   DIR_SH="sh"
   LINK_DIR_SH=".sh"
 fi
@@ -120,16 +120,16 @@ cchk(){
         case $1 in
             mkdir)
                 mkdir -p $2
-                msg $LOGMSG "| - [log] make dir '$2' ${HOME}/$2" ;;
+                msg $LOGMSG "| - [log] make dir '$2' $HOME/$2" ;;
             ln)
                 ln -s $WORK_DIR/$3 $HOME/$2
-                msg $LOGMSG "| - [log] make symbolic link ${HOME}/$2" ;;
+                msg $LOGMSG "| - [log] make symbolic link $HOME/$2" ;;
             cp)
                 cp -r $2 $HOME/$3
-                msg $LOGMSG "| - [log] copy $2 -> ${HOME}/$3" ;;
+                msg $LOGMSG "| - [log] copy $2 -> $HOME/$3" ;;
         esac
     else
-        msg $WRNMSG "| - [msg] ${HOME}/$2 is already exist."
+        msg $WRNMSG "| - [msg] $HOME/$2 is already exist."
     fi
 }
 
@@ -139,7 +139,7 @@ cchk(){
 case $OSTYPE in
     msys*)
         msg $ERRMSG "| - [error]"
-        msg $ERRMSG "| - your environment is ${OSTYPE}."
+        msg $ERRMSG "| - your environment is $OSTYPE."
         msg $ERRMSG "| - this script only run for linux."
         msg "key" "exit"
         return 2>&- || exit ;;
@@ -173,7 +173,7 @@ if [ $COPYHOME == 1 ]; then
 fi
 
 cd $HOME/
-msg $LOGMSG "| - [log] cd ${HOME}"
+msg $LOGMSG "| - [log] cd $HOME"
 
 
 
@@ -182,21 +182,21 @@ msg $LOGMSG "| - [log] cd ${HOME}"
 
 msg $H2MSG "\n* »» make directory"
 
-if [ ${FLAG_VIM} == 1 ]; then
+if [ $FLAG_VIM == 1 ]; then
     cchk mkdir ".vim"
 fi
 
-if [ ${FLAG_ZSH} == 1 ]; then
+if [ $FLAG_ZSH == 1 ]; then
     cchk mkdir ".cache/zsh"
 fi
 
-if [ ${FLAG_SSH} == 1 ]; then
+if [ $FLAG_SSH == 1 ]; then
     cchk mkdir ".ssh"
     cchk mkdir ".ssh/.pub"
 fi
 
 # sh
-if [ ${FLAG_BIN} == 1 ]; then
+if [ $FLAG_BIN == 1 ]; then
     cchk mkdir ".bin"
 fi
 
@@ -214,11 +214,11 @@ msg $H2MSG "* »» done!"
 # [[[
 
 GIT_VER="2.13.0-rc1"
-GIT_FN="v${GIT_VER}.tar.gz"
+GIT_FN="v$GIT_VER.tar.gz"
 
 if ! type git >/dev/null 2>&1; then
-    if [ ${FLAG_BIN} == 1 && ${FLAG_GIT} == 1 ]; then
-        msg $H2MSG "\n* »» install git-${GIT_VER}"
+    if [ $FLAG_BIN == 1 && $FLAG_GIT == 1 ]; then
+        msg $H2MSG "\n* »» install git-$GIT_VER"
         if type wget >/dev/null 2>&1; then
             msg $LOGMSG "| - [log] downloading git-$GIT_FN"
             wget https://github.com/git/git/archive/$GIT_FN /tar/$GIT_FN
@@ -235,7 +235,7 @@ if ! type git >/dev/null 2>&1; then
                 msg $ERRMSG "| - [error] your computer 'make' is not installed."
             fi
             rm -r $GIT_FN $GIT_VER
-            msg $LOGMSG "| - [log] removed '${GIT_FN}' and '${GIT_VER}'."
+            msg $LOGMSG "| - [log] removed '$GIT_FN' and '$GIT_VER'."
             cd $WORK_DIR
         else
             msg $ERRMSG "| - [error] seriously! your computer 'wget' is NOT installed!"
@@ -249,7 +249,7 @@ fi
 # * »»  zplug -------------------------/
 # [[[
 
-if [ ${FLAG_ZSH} == 1 ]; then
+if [ $FLAG_ZSH == 1 ]; then
     msg $H2MSG "\n* »» install zplug"
     if type git >/dev/null 2>&1; then
         if [ ! -d $HOME/.zplug ]; then
@@ -270,7 +270,7 @@ fi
 # * »»  tmux.conf ---------------------/
 # [[[
 
-if [ ${FLAG_TMUX} == 1 ]; then
+if [ $FLAG_TMUX == 1 ]; then
     msg $H2MSG "\n* »» init submodule"
     if [ ! -e $HOME/.tmux.conf ]; then
         msg $LOGMSG "| - [log] installing tmux-config..."
@@ -283,7 +283,7 @@ if [ ${FLAG_TMUX} == 1 ]; then
     fi
 fi
 
-if [ ${FLAG_TMUX} == 1 ]; then
+if [ $FLAG_TMUX == 1 ]; then
     msg $H2MSG "\n* »» install tpm"
     if type git >/dev/null 2>&1; then
     if [ ! -e $HOME/.tmux ]; then
@@ -308,30 +308,30 @@ fi
 msg $H2MSG "\n* »» create symbolic link"
 
 # vim
-if [ ${FLAG_VIM} == 1 ]; then
+if [ $FLAG_VIM == 1 ]; then
     cchk ln $LINK_CONFIG_VIM $CONFIG_VIM
     cchk ln $LINK_DIR_VIM $DIR_VIM
 fi
 
 # git
-if [ ${FLAG_GIT} == 1 ]; then
+if [ $FLAG_GIT == 1 ]; then
     cchk ln $LINK_CONFIG_GIT $CONFIG_GIT
 fi
 
 # zsh
-if [ ${FLAG_ZSH} == 1 ]; then
+if [ $FLAG_ZSH == 1 ]; then
     cchk ln $LINK_CONFIG_ZSH $CONFIG_ZSH
     cchk ln $LINK_DIR_ZSH $DIR_ZSH
 fi
 
 # tmux
-if [ ${FLAG_TMUX} == 1 ]; then
+if [ $FLAG_TMUX == 1 ]; then
     cchk ln $LINK_CONFIG_TMUX $CONFIG_TMUX
     tmux source-file $HOME/.tmux.conf
 fi
 
 # sh
-if [ ${FLAG_BIN} == 1 ]; then
+if [ $FLAG_BIN == 1 ]; then
     cchk ln $LINK_DIR_SH $DIR_SH
 fi
 
