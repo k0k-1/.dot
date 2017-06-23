@@ -16,8 +16,7 @@ if !has('gui_running')
 en
 
 if has('gui_running')
-  se rop=type:directx
-
+  se rop=type:directx,gamma:1.6,contrast:0.24,level:0.75,geom:1,renmode:5,taamode:3
   se background=dark
   color hybrid
 en
