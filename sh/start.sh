@@ -222,7 +222,7 @@ if ! type git >/dev/null 2>&1; then
         if type wget >/dev/null 2>&1; then
             msg $LOGMSG "| - [log] downloading git-$GIT_FN"
             wget https://github.com/git/git/archive/$GIT_FN /tar/$GIT_FN
-            msg $LOGMSG "| - [log] downloaded git-$GIT_FN"
+            msg $LOGMSG "| - [log] download completed!-$GIT_FN"
             cd /tmp/
             tar -zxf $GIT_FN $GIT_VER
             cd /tmp/$GIT_VER
