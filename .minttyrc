@@ -2,3 +2,4 @@ BoldAsFont=-1
 BackgroundColour=30,30,30
 Font=Migu 1M
 FontHeight=11
+CursorType=block
