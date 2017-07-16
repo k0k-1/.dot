@@ -19,7 +19,7 @@
 #       * file name : .zshrc
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 3.20
+#       * ver       : 3.21
 
 
 
@@ -52,7 +52,7 @@ alias v='vim .'
 # * »»  complement -------------------------------------/
 # [[
 
-autoload -Uz compinit; compinit -u
+autoload -Uz compinit; compinit
 setopt auto_list 
 setopt auto_menu 
 setopt list_packed 
