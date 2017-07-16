@@ -52,7 +52,7 @@ alias v='vim .'
 # * »»  complement -------------------------------------/
 # [[
 
-autoload -U compinit; compinit
+autoload -Uz compinit; compinit -u
 setopt auto_list 
 setopt auto_menu 
 setopt list_packed 
