@@ -23,7 +23,7 @@
 "       * file name : .vimrc
 "       * auther    : kip-s
 "       * url       : https://kip-s.net
-"       * ver       : 4.01
+"       * ver       : 4.02
 
 
 
@@ -170,7 +170,7 @@ se foldmethod=manual
 "se foldopen=all
 "se foldclose=all
 se updatetime=0
-se packpath=
+"se packpath=
 
 " ]]
 " * << -------------------------------------------------/
