@@ -103,6 +103,7 @@ let $vim_session = $vim_dir . '/tmp/session'
 " * >>  format -----------------------------------------/
 " [[
 
+se enc=utf-8
 scriptencoding utf-8
 se fileformat=unix                              " write
 se fileformats=unix,dos,mac                     " read
