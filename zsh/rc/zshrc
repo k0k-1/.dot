@@ -44,7 +44,7 @@ setopt auto_pushd
 setopt auto_cd
 setopt no_beep
 setopt no_list_beep
-alias history='history -E'
+alias history='h'
 alias v='vim .'
 
 
