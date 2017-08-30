@@ -8,7 +8,7 @@
 #       * file name : start.sh
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 2.10
+#       * ver       : 2.11
 
 # * »   [1] init
 # -------------------------------------------                            /
@@ -56,7 +56,7 @@ H2MSG=35  # purple
 # [[[
 
 if [ $FLAG_VIM == 1 ]; then
-  CONFIG_VIM="vimrc"
+  CONFIG_VIM="vim/vimrc"
   LINK_CONFIG_VIM=".vimrc"
   DIR_VIM="vim/rc"
   LINK_DIR_VIM=".vim/rc"
@@ -68,7 +68,7 @@ if [ $FLAG_GIT == 1 ]; then
 fi
 
 if [ $FLAG_ZSH == 1 ]; then
-  CONFIG_ZSH="zshenv"
+  CONFIG_ZSH="zsh/zshenv"
   LINK_CONFIG_ZSH=".zshenv"
   DIR_ZSH="zsh"
   LINK_DIR_ZSH=".zsh"
