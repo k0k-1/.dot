@@ -29,11 +29,11 @@ DOTHOME=$HOME/.dot/
 
 COPYHOME=1
 FLAG_VIM=1
-FLAG_GIT=1
+FLAG_GIT=0
 FLAG_ZSH=1
-FLAG_SSH=1
+FLAG_SSH=0
 FLAG_BIN=1
-FLAG_TMUX=1
+FLAG_TMUX=0
 FLAG_EMACS=0
 FLAG_SH=1
 
@@ -56,10 +56,11 @@ H2MSG=35  # purple
 # [[[
 
 if [ $FLAG_VIM == 1 ]; then
-  CONFIG_VIM="vim/vimrc"
+  VIM="vim/"
+  CONFIG_VIM="${VIM}vimrc"
   LINK_CONFIG_VIM=".vimrc"
-  DIR_VIM="vim/rc"
-  LINK_DIR_VIM=".vim/rc"
+  DIR_RC_VIM="${VIM}rc"
+  LINK_DIR_RC_VIM=".vim/rc"
 fi
 
 if [ $FLAG_GIT == 1 ]; then
@@ -68,7 +69,8 @@ if [ $FLAG_GIT == 1 ]; then
 fi
 
 if [ $FLAG_ZSH == 1 ]; then
-  CONFIG_ZSH="zsh/zshenv"
+  ZSH="zsh/"
+  CONFIG_ZSH="${ZSH}zshenv"
   LINK_CONFIG_ZSH=".zshenv"
   DIR_ZSH="zsh"
   LINK_DIR_ZSH=".zsh"
