@@ -8,24 +8,13 @@
 #       * file name : start.sh
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 2.12
-
-# * »   [1] init
-# -------------------------------------------                            /
-# ----------------------------------------------------------------------/
-# [
+#       * ver       : 2.13
 
 set -u
 trap exit ERR
 
-# * »»  var --------------------------------------------/
-# [[
-
 WORK_DIR=$(dirname $(dirname $(readlink -f $0)))
 DOTHOME=$HOME/.dot/
-
-# * »»  flags -------------------------/
-# [[[
 
 COPYHOME=1
 FLAG_VIM=1
@@ -37,23 +26,11 @@ FLAG_TMUX=0
 FLAG_EMACS=0
 FLAG_SH=1
 
-# ]]]
-# * «« --------------------------------/
-
-# * »»  coler -------------------------/
-# [[[
-
 ERRMSG=31 # red
 LOGMSG=32 # green
 WRNMSG=33 # yellow
 H1MSG=34  # blue
 H2MSG=35  # purple
-
-# ]]]
-# * «« --------------------------------/
-
-# * »»  filename ----------------------/
-# [[[
 
 if [ $FLAG_VIM == 1 ]; then
   VIM="vim/"
@@ -87,17 +64,6 @@ if [ $FLAG_SH == 1 ]; then
   DIR_SH="sh"
   LINK_DIR_SH=".sh"
 fi
-
-# ]]]
-# * «« --------------------------------/
-
-# ]]
-# * «« -------------------------------------------------/
-
-
-
-# * »»  function ---------------------------------------/
-# [[
 
 # \033 = esc
 msg() {
@@ -135,9 +101,6 @@ cchk(){
     fi
 }
 
-# ]]
-# * «« -------------------------------------------------/
-
 case $OSTYPE in
     msys*)
         msg $ERRMSG "| - [error]"
@@ -147,15 +110,6 @@ case $OSTYPE in
         return 2>&- || exit ;;
     linux*) ;;
 esac
-
-
-
-
-
-# * »   [2] start
-# -------------------------------------------                            /
-# ----------------------------------------------------------------------/
-# [
 
 msg $H1MSG "\n* » start init.sh!!\n-----------------------------"
 msg "key" "start"
@@ -176,11 +130,6 @@ fi
 
 cd $HOME/
 msg $LOGMSG "| - [log] cd $HOME"
-
-
-
-# * »»  make dir ---------------------------------------/
-# [[
 
 msg $H2MSG "\n* »» make directory"
 
@@ -203,17 +152,6 @@ if [ $FLAG_BIN == 1 ]; then
 fi
 
 msg $H2MSG "* »» done!"
-
-# ]]
-# * «« -------------------------------------------------/
-
-
-
-# * »»  install external file --------------------------/
-# [[
-
-# * »»  git ---------------------------/
-# [[[
 
 GIT_VER="2.13.0-rc1"
 GIT_FN="v$GIT_VER.tar.gz"
@@ -245,12 +183,6 @@ if ! type git >/dev/null 2>&1; then
     fi
 fi
 
-# ]]]
-# * «« --------------------------------/
-
-# * »»  zplug -------------------------/
-# [[[
-
 if [ $FLAG_ZSH == 1 ]; then
     msg $H2MSG "\n* »» install zplug"
     if type git >/dev/null 2>&1; then
@@ -265,12 +197,6 @@ if [ $FLAG_ZSH == 1 ]; then
         fi
     fi
 fi
-
-# ]]]
-# * «« --------------------------------/
-
-# * »»  tmux.conf ---------------------/
-# [[[
 
 if [ $FLAG_TMUX == 1 ]; then
     msg $H2MSG "\n* »» init submodule"
@@ -299,14 +225,6 @@ if [ $FLAG_TMUX == 1 ]; then
     fi
 fi
 
-# ]]]
-# * «« --------------------------------/
-
-
-
-# * »»  create symbolic link ---------------------------/
-# [[
-
 msg $H2MSG "\n* »» create symbolic link"
 
 # vim
@@ -328,20 +246,15 @@ fi
 
 # tmux
 if [ $FLAG_TMUX == 1 ]; then
-    cchk ln $LINK_CONFIG_TMUX $CONFIG_TMUX
-    tmux source-file $HOME/.tmux.conf
+  cchk ln $LINK_CONFIG_TMUX $CONFIG_TMUX
+  tmux source-file $HOME/.tmux.conf
 fi
 
 # sh
 if [ $FLAG_BIN == 1 ]; then
-    cchk ln $LINK_DIR_SH $DIR_SH
+  cchk ln $LINK_DIR_SH $DIR_SH
 fi
 
 msg $H2MSG "* »» done!"
-
-# ]]
-# * «« -------------------------------------------------/
-
-
 
 msg $H1MSG "\n-----------------------------\n* » all done!!\n"
