@@ -4,7 +4,7 @@ set -u
 trap exit ERR
 
 CDIR=$(dirname $(readlink -f $0))
-ERRMSG=31 # red
+RED=31
 
 INITSH="start.sh"
 
@@ -15,6 +15,6 @@ msg() {
 if [ -e $CDIR/sh/$INITSH ]; then
     bash $CDIR/sh/$INITSH
 else
-    msg $ERRMSG "[error] '${INITSH}' doesn't exist."
+    msg $RED "[error] '${INITSH}' doesn't exist."
     return 2>&- || exit
 fi
