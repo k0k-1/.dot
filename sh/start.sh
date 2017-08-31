@@ -8,7 +8,7 @@
 #       * file name : start.sh
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 2.11
+#       * ver       : 2.12
 
 # * »   [1] init
 # -------------------------------------------                            /
@@ -59,8 +59,8 @@ if [ $FLAG_VIM == 1 ]; then
   VIM="vim/"
   CONFIG_VIM="${VIM}vimrc"
   LINK_CONFIG_VIM=".vimrc"
-  DIR_RC_VIM="${VIM}rc"
-  LINK_DIR_RC_VIM=".vim/rc"
+  DIR_VIM="${VIM}rc"
+  LINK_DIR_VIM=".vim/rc"
 fi
 
 if [ $FLAG_GIT == 1 ]; then
