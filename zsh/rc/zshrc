@@ -19,7 +19,7 @@
 #       * file name : .zshrc
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 3.21
+#       * ver       : 3.22
 
 
 
@@ -364,7 +364,12 @@ TRAPALRM() { redraw_tmout }
 case $OSTYPE in #uname http://en.wikipedia.org/wiki/Uname
   # linux
   linux*)
-    export PATH=$HOME/.bin:$PATH
+    if [ -d $HOME/bin ]; then
+      export PATH=$HOME/bin:$PATH
+    fi
+    if [ -d $HOME/usr/bin ]; then
+      export PATH=$HOME/usr/bin:$PATH
+    fi
     if [ -e $HOME/.tmux.conf ]; then 
       [[ -z "$TMUX" && -z "$WINDOW" && ! -z "$PS1" ]] && tmux
     fi ;;
