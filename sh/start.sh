@@ -123,11 +123,11 @@ setconf ()
         if [ ${#FILENAME[@]} == ${#LINKNAME[@]} ]; then
         for n in ${FILENAME[@]}
         do
-          local FILEPATH=(${FILEPATH[@]} "${WORKDIR}/${DIRNAME}/${n}")
+          local FILEPATH+=("${WORKDIR}/${DIRNAME}/${n}")
         done
         for n in ${LINKNAME[@]}
         do
-          local LINKPATH=(${LINKPATH[@]} "${HOME}/${n}")
+          local LINKPATH+=("${HOME}/${n}")
         done
         fi
         for (( i = 0; i < ${#FILEPATH[@]}; ++i ))
@@ -244,6 +244,12 @@ fi
 for f in ${FLAG[@]}
 do
   msg h2 "start ${f}"
+  if [ ${f} == "zsh" ]; then
+    zpluginstall
+  fi
+  if [ ${f} == "tmux" ]; then
+    tmuxinit
+  fi
   setconf ${f}
   msg h2 "end ${f}\n"
 done
