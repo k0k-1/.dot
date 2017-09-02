@@ -9,7 +9,7 @@
 #       * file name : start.sh
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 3.00
+#       * ver       : 3.10
 
 set -u
 trap exit ERR
