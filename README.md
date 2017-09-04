@@ -1,4 +1,4 @@
-# dot files
+# dotfiles
 
 usage
 -------------------
