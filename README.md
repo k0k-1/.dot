@@ -1,7 +1,8 @@
 # dot files
 
-##usage
+usage
 -------------------
-`bash
+
+```bash
 $ bash init.sh
-`
+```
