@@ -185,6 +185,7 @@ fi
 
 # * »»»> cat
 if (( $+commands[pygmentize] )); then
+  alias ocat='/bin/cat'
   alias cat='pygmentize -O style=monokai -f console256 -g'
 fi
 
