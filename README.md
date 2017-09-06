@@ -7,7 +7,7 @@ usage
 $ bash init.sh
 ```
 
-type of dotfiles
+supported type
 -------------------
 * vim
 * zsh
