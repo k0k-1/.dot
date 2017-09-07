@@ -183,18 +183,18 @@ fi
 
 # * »»» color --------------------------/
 
-# * »»»> cat
+# * »»»» cat
 if (( $+commands[pygmentize] )); then
   alias ocat='/bin/cat'
   alias cat='pygmentize -O style=monokai -f console256 -g'
 fi
 
-# * »»»> diff
+# * »»»» diff
 if (( $+commands[colordiff] )); then
   alias diff='colordiff -u'
 fi
 
-# * »»»> less
+# * »»»» less
 export MANPAGER='less -R'
 function man() {
   env \
@@ -214,10 +214,10 @@ if (( $+commands[unbuffered] )); then
     alias ul=less_with_unbuffer
 fi
 
-# * »»»> grep
+# * »»»» grep
 alias grep='grep --color'
 
-# * »»»> grc
+# * »»»» grc
 if (( $+commands[grc] )); then
   alias mount='grc mount'
   alias ifconfig='grc ifconfig'
@@ -302,32 +302,32 @@ RPROMPT="[%n|%m|%w|%*]"
 SPROMPT="%r is correct [n,y,a,e]: "
 
 if [[ $TERM = xterm* ]];then
-  z_d_gray=237
-  z_white=15
-  z_blue=31
-  z_red=161
+  local DARKGRAY=237
+  local WHITE=15
+  local BLUE=31
+  local RED=161
 
-  z_bg=$z_d_gray
-  z_fg=$z_white
-  z_c=%F{$z_fg}%K{$z_bg}
-  z_body="$z_c %~ $z_c%F{$z_white}%(?.%K{$z_blue}.%K{$z_red}) * %f%k "
+  local BACKGROUND=$DARKGRAY
+  local FOREGROUND=$WHITE
+  local COLOR=%F{$FOREGROUND}%K{$BACKGROUND}
+  local PROMPTBODY="$COLOR %~ $COLOR%F{$WHITE}%(?.%K{$BLUE}.%K{$RED}) * %f%k "
 
   case ${UID} in
     0) #root
-      z_uc=$z_red;;
+      UCOLOR=$RED;;
     *)
-      z_uc=$z_blue;;
+      UCOLOR=$BLUE;;
   esac
 
-  PROMPT=$z_body
-  RPROMPT="%F{$z_fg}%K{$z_uc} %n $z_c %m $z_c|$z_c %w $z_c|$z_c %* %f%k"
+  PROMPT=$PROMPTBODY
+  RPROMPT="%F{$FOREGROUND}%K{$UCOLOR} %n $COLOR %m $COLOR|$COLOR %w $COLOR|$COLOR %* %f%k"
 
   if (( $+commands[python] )); then
     if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
       function u_prompt() {
-        local return=$?
+        local RETURN=$?
         if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
-          PROMPT="$(~/.zsh/rc/plugin/prompt.py $return)"
+          PROMPT="$(~/.zsh/rc/plugin/prompt.py $RETURN)"
         else
           PROMPT=$z_body
         fi
