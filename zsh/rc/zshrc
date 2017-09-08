@@ -180,6 +180,8 @@ alias diff='diff -u'
 if (( $+commands[tmux] )); then
   alias tl='tmux ls'
   alias tk='tmux kill-session -t $1'
+  alias ta='tmux a'
+  alias tat='tmux a -t $1'
 fi
 
 # * »»» color --------------------------/
