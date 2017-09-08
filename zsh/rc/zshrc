@@ -45,7 +45,6 @@ setopt auto_cd
 setopt no_beep
 setopt no_list_beep
 alias history='history -E'
-alias v='vim .'
 
 
 
@@ -149,6 +148,8 @@ fi
 
 # * »»  alias -------------------------------------------/
 # [[
+
+alias v='vim'
 
 function runcpp () { g++ $1 && shift && ./a.out $@ }
 alias -s {c,cpp}=runcpp
