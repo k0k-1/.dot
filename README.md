@@ -7,7 +7,7 @@ usage
 $ bash init.sh
 ```
 
-supported type
+supported types
 -------------------
 * vim
 * zsh
