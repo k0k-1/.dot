@@ -1,13 +1,13 @@
 # 💻 dotfiles 💨💨
 
-usage
+Usage
 -------------------
 
 ```bash
 $ bash init.sh
 ```
 
-supported types
+Supported types
 -------------------
 * vim
 * zsh
