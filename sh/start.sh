@@ -9,7 +9,7 @@
 #       * file name : start.sh
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 3.10
+#       * ver       : 3.21
 
 set -u
 trap exit ERR
@@ -237,9 +237,9 @@ if [ ! -e ${WORKDIR} ]; then
   ${WORKDIR} = ${DOTHOME}
 fi
 
-#if ! type git >/dev/null 2>&1; then
-#  gitinstall
-#fi
+if ! type git >/dev/null 2>&1; then
+  gitinstall
+fi
 
 for f in ${FLAG[@]}
 do
