@@ -88,12 +88,12 @@ setconf ()
       local LINKNAME=(".zshenv" ".${DIRNAME}")
       local OPTION=("dir" "link")
       ;;
-    git)
-      local DIRNAME="git"
-      local FILENAME=("gitconfig")
-      local LINKNAME=(".gitconfig")
-      local OPTION=("link")
-      ;;
+#    git)
+#      local DIRNAME="git"
+#      local FILENAME=("gitconfig")
+#      local LINKNAME=(".gitconfig")
+#      local OPTION=("link")
+#      ;;
     ssh)
       local DIRNAME="ssh"
       local MAKEDIR="${DIRNAME}/.pub"
@@ -237,9 +237,9 @@ if [ ! -e ${WORKDIR} ]; then
   ${WORKDIR} = ${DOTHOME}
 fi
 
-if ! type git >/dev/null 2>&1; then
-  gitinstall
-fi
+#if ! type git >/dev/null 2>&1; then
+#  gitinstall
+#fi
 
 for f in ${FLAG[@]}
 do
