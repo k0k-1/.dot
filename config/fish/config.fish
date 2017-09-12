@@ -19,29 +19,6 @@
 #               /_/     |_| |_/__/_||_|     ___
 #                                          |___|
 
-#       + file name : config.fish
-#       * auther    : kip-s
-#       * url       : http://kip-s.net
-#       * ver       : 1.00
-
-#       * contents  : [1] init
-#                           > msys
-
-#                     [2] general
-
-#                     [3] key
-
-#                     [4] look
-
-#                     [5] os
-#                           > linux
-#                           > mac os
-#                           > cygwin
-#                           > msys
-
-#       * cf.       : sgur - gist       =
-#                       [ https://gist.github.com/sgur/1d96885a1cf34fc2bb86 ]
-
 
 
 
@@ -49,8 +26,8 @@
 # * >   [1] init
 # -------------------------------------------                            /
 # ----------------------------------------------------------------------/
-# [
 
+# * cf. sgur gist =[ https://gist.github.com/sgur/1d96885a1cf34fc2bb86 ]
 switch (uname)
 case 'MSYS*'
   # 
