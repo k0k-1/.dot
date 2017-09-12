@@ -147,15 +147,14 @@ setconf ()
 
 gitinstall()
 {
-  local GITVER="2.13.0-rc1"
-  local GITFN="v${GITVER}.tar.gz"
+  local GITVER="2.14.1"
+  local GITFILE="v${GITVER}.tar.gz"
   msg h2 "install git-${GITVER}"
   if type wget >/dev/null 2>&1; then
     msg log "downloading git-${GITFILE}"
-    wget https://github.com/git/git/archive/${GITFILE} /tmp/${GITFILE}
+    https://github.com/git/git/archive/${GITFILE} /tmp/${GITFILE}
     msg log "download completed!-${GITFILE}"
-    cd /tmp/
-    tar -zxf ${GITFILE} ${GITVER}
+    tar -zxf /tmp/${GITFILE} /tmp/${GITVER}
     cd /tmp/${GITVER}
     if type make >/dev/null 2>&1; then
       make configure
@@ -194,27 +193,33 @@ tmuxinit()
   msg h2 "init submodule"
   if [ ! -e ${HOME}/.tmux.conf ]; then
     msg log "installing tmux-config..."
-  if type git >/dev/null 2>&1; then
-    git clone https://github.com/kip-s/${DIR_TMUX} ${WORKDIR}/${DIR_TMUX}
-    cd ${WORKDIR}/${DIR_TMUX} && git submodule init && git submodule update
-    cd ${WORKDIR}/${DIR_TMUX}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
-    cd ${WORKDIR}
-    msg h2 "done"
+    if type git >/dev/null 2>&1; then
+      git clone https://github.com/kip-s/${DIR_TMUX} ${WORKDIR}/${DIR_TMUX}
+      cd ${WORKDIR}/${DIR_TMUX} && git submodule init && git submodule update
+      cd ${WORKDIR}/${DIR_TMUX}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
+      cd ${WORKDIR}
+      msg h2 "done"
+    else
+      msg error "your computer 'git' is not installed."
+      msg failed "installation for 'zplug' was not executed"
+    fi
   else
     msg h2 "skip"
-  fi
   fi
 
   msg h2 "install tpm"
-  if type git >/dev/null 2>&1; then
   if [ ! -e ${HOME}/.tmux ]; then
     msg log "installing tpm..."
-    git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
-    cd ${WORKDIR}
-    msg h2 "done"
+    if type git >/dev/null 2>&1; then
+      git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+      cd ${WORKDIR}
+      msg h2 "done"
+    else
+      msg error "your computer 'git' is not installed."
+      msg failed "installation for 'tpm' was not executed"
+    fi
   else
     msg h2 "skip"
-  fi
   fi
 }
 
@@ -226,7 +231,7 @@ case ${OSTYPE} in
   linux*)
     ;;
   *)
-    msg error "Your environment is ${OSTYPE}. This script can run only on linux."
+    msg error "your environment is ${OSTYPE}. This script can run only on linux."
     msg input "exit"
     return 2>&- || exit
     ;;
