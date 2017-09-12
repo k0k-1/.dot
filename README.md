@@ -12,5 +12,5 @@ Supported types
 * vim
 * zsh
 * tmux
-* git
+* git (installation only)
 * fish
