@@ -19,7 +19,7 @@ DOTHOME="${HOME}/.dot"
 
 ## FLAG ########################################################
 
-FLAG=("sh" "vim" "zsh" "ssh") # "tmux" )
+FLAG=("sh" "vim" "zsh" "ssh")
 
 ################################################################
 
@@ -88,12 +88,6 @@ setconf ()
       local LINKNAME=(".zshenv" ".${DIRNAME}")
       local OPTION=("dir" "link")
       ;;
-#    git)
-#      local DIRNAME="git"
-#      local FILENAME=("gitconfig")
-#      local LINKNAME=(".gitconfig")
-#      local OPTION=("link")
-#      ;;
     ssh)
       local DIRNAME="ssh"
       local MAKEDIR="${DIRNAME}/.pub"
