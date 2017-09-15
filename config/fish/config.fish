@@ -30,7 +30,6 @@
 # * cf. sgur gist =[ https://gist.github.com/sgur/1d96885a1cf34fc2bb86 ]
 switch (uname)
 case 'MSYS*'
-  # 
   if status --is-login
     set PATH /usr/local/bin /usr/bin /bin $PATH
     set MANPATH /usr/local/man /usr/share/fish/man /usr/share/man /usr/man /share/man $MANPATH
@@ -91,7 +90,6 @@ case 'MSYS*'
 end
 
 # ]
-
 
 set -U EDITOR vim
 set fish_vi_mode
