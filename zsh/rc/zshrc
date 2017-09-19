@@ -64,7 +64,6 @@ unsetopt caseglob
 autoload predict-on
 fpath=($ZDOTDIR/rc/completion $fpath)
 
-
 # ]]
 # * «« -------------------------------------------------/
 
