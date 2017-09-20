@@ -9,7 +9,7 @@
 #       * file name : start.sh
 #       * auther    : kip-s
 #       * url       : https://kip-s.net
-#       * ver       : 3.21
+#       * ver       : 3.22
 
 set -u
 trap exit ERR
@@ -23,6 +23,7 @@ FLAG=("sh" "vim" "zsh" "ssh")
 
 ################################################################
 
+# usage: msg {error|success|failed|h1|h2|log} "message"
 msg()
 {
   if [ $1 == "input" ]; then
@@ -60,6 +61,7 @@ msg()
         local HEADER=${HEADERYPE1}
         local FOOTER=""
     esac
+
     local HEADER="\033[${COLOR}m${HEADER}"
     local FOOTER="${FOOTER}\033[00m\n"
     printf "${HEADER}${@:2}${FOOTER}"
