@@ -17,8 +17,8 @@ if has('gui_running')
   finish
 en
 
-if exists('+termguicolors')
-  se termguicolors
-en
+"if exists('+termguicolors')
+"  se termguicolors
+"en
 
-se mouse=
+"se mouse=
