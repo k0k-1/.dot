@@ -58,7 +58,7 @@ msg()
         ;;
       log)
         local COLOR=1
-        local HEADER=${HEADERYPE1}
+        local HEADER=${HEADERTYPE1}
         local FOOTER=""
     esac
 
