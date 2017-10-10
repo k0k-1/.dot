@@ -196,9 +196,9 @@ hook_add = '''
     endf
 '''
 
-[[plugins]]
-repo = 'vim-jp/vimdoc-ja'
-on_ft = 'help'
+#[[plugins]]
+#repo = 'vim-jp/vimdoc-ja'
+#on_ft = 'help'
 
 # > colorscheme
 [[plugins]]
