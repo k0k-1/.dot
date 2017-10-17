@@ -14,7 +14,7 @@ def out(n):
     os.system("tput setab 0")
 
 # normal colors 1 - 16
-os.system("tput setaf 16")
+os.system("tput setaf 15")
 for n in range(8):
     out(n)
 echo("\n")
