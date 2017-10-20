@@ -1,4 +1,4 @@
 [submodule "tmux-config"]
 	path = tmux
-	url = https://github.com/kip-s/tmux-config
+	url = https://github.com/kip-s/tconf
 
