@@ -286,10 +286,15 @@ let &runtimepath = s:dein_repo_dir .",". &runtimepath
 
 nn ; :
 nn : ;
-nn <c-c> <esc>
-ino <c-c> <esc>
-nn <c-c><c-c> :noh<cr>
-nn <esc><esc> :noh<cr>
+"nn <c-c> <esc>
+"ino <c-c> <esc>
+"nn <c-c><c-c> :noh<cr>
+"nn <esc><esc> :noh<cr>
+
+nn <c-c> <nop>
+ino <c-c> <nop>
+nn <c-c><c-c> <nop>
+nn <esc><esc> <nop>
 
 let mapleader="\<space>"
 map <space> <leader>
@@ -299,15 +304,15 @@ map <space> <leader>
 " * >>  space ------------------------------------------/
 " [[
 
-map <leader>i gg=<S-g><C-o><C-o>zz
+map <leader>i gg=<s-g><c-o><c-o>zz
  
 no <leader>v 0v$h
 no <leader>d 0v$hx
 no <leader>y 0v$hy
 no <leader>s :%s;
-map <leader>co <S-i># <ESC>
+map <leader>co <s-i># <esc>
 map <leader>uc ^xx<ESC>
-vm <leader>co <S-i># <ESC>
+vm <leader>co <s-i># <esc>
 vn <leader>p "0p
 nn <leader>w :<c-u>write!<cr>
 
