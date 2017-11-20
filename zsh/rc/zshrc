@@ -118,6 +118,7 @@ if (( $+commands[git] )); then
 fi
 
 if (( $+commands[fzf] )); then
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
   fe() {
     local file
     file=$(fzf --query="$1" --select-1 --exit-0)
