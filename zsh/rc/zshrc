@@ -113,7 +113,7 @@ fi
 
 if (( $+commands[git] )); then
   if [ -e $ZDOTDIR/rc/zplug ]; then
-    source $ZDOTDIR/rc/zplug
+    #source $ZDOTDIR/rc/zplug
   fi
 fi
 
