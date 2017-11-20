@@ -112,9 +112,7 @@ fi
 # [[
 
 if (( $+commands[git] )); then
-  if [ -e $ZDOTDIR/rc/zplug ]; then
-    #source $ZDOTDIR/rc/zplug
-  fi
+  # task: make plugin manager
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -127,8 +125,7 @@ if (( $+commands[fzf] )); then
 
   fd() {
     local dir
-    dir=$(find ${1:-*} -path '*/\.*' -prune \
-                    -o -type d -print 2> /dev/null | fzf +m) &&
+    dir=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
     cd "$dir"
   }
 
