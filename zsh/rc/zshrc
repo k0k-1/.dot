@@ -183,9 +183,13 @@ fi
 
 # * »»» color --------------------------/
 
+# * »»»» ls
+if (( $+commands[colorls] )); then
+    alias ls='colorls'
+fi
+
 # * »»»» cat
 if (( $+commands[pygmentize] )); then
-  alias ocat='/bin/cat'
   alias cat='pygmentize -O style=monokai -f console256 -g'
 fi
 
