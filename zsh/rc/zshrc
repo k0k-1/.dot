@@ -1,32 +1,32 @@
-#               ,______________________,
-#               |****;/''   /*********/
-#               |**7'      /*********/
-#               |;(       /*********/
-#                       /'********/'
-#                      /*********/
-#                    /'********/'
-#                   /*********/       _.
-#                 /'********/'       )*|
-#                /*********/       ,7**|
-#               /*********/______/*****|
-#               """"""""""""""""""""""""
-#               __              _
-#               \ \      ___ __| |_
-#                > >    |_ /(_-< ' \
-#               /_/     /__|___/_||_|     ___
-#                                        |___|
+#								,______________________,
+#								|****;/''		/*********/
+#								|**7'			 /*********/
+#								|;(				/*********/
+#												/'********/'
+#											 /*********/
+#										 /'********/'
+#										/*********/				_.
+#									/'********/'			 )*|
+#								 /*********/			 ,7**|
+#								/*********/______/*****|
+#								""""""""""""""""""""""""
+#								__							_
+#								\ \			 ___ __| |_
+#								 > >		|_ /(_-< ' \
+#								/_/			/__|___/_||_|			___
+#																				 |___|
 
-#       * file name : .zshrc
-#       * auther    : kip-s
-#       * url       : https://kip-s.net
-#       * ver       : 3.22
-
-
+#				* file name : .zshrc
+#				* auther		: kip-s
+#				* url				: https://kip-s.net
+#				* ver				: 3.22
 
 
 
-# * »   [1] general
-# -------------------------------------------                            /
+
+
+# * »		[1] general
+# -------------------------------------------														 /
 # ----------------------------------------------------------------------/
 # [
 
@@ -48,7 +48,7 @@ alias history='history -E'
 
 
 
-# * »»  complement -------------------------------------/
+# * »»	complement -------------------------------------/
 # [[
 
 autoload -Uz compinit; compinit
@@ -69,7 +69,7 @@ fpath=($ZDOTDIR/rc/completion $fpath)
 
 
 
-# * »»  history ----------------------------------------/
+# * »»	history ----------------------------------------/
 # [[
 
 HISTFILE=$HOME/.zsh_history
@@ -92,15 +92,15 @@ function history-all { history -E 1 }
 
 
 
-# * »»  path -------------------------------------------/
+# * »»	path -------------------------------------------/
 # [[
 
 if (( $+commands[go] )); then
-  if [ -e $HOME/.go ]; then
-    export GOPATH=$HOME/.go
-    export PATH=$GOPATH/bin:$PATH
-    export GO15VENDOREXPERIMENT=1
-  fi
+	if [ -e $HOME/.go ]; then
+		export GOPATH=$HOME/.go
+		export PATH=$GOPATH/bin:$PATH
+		export GO15VENDOREXPERIMENT=1
+	fi
 fi
 
 # ]]
@@ -108,34 +108,34 @@ fi
 
 
 
-# * »»  plugin -----------------------------------------/
+# * »»	plugin -----------------------------------------/
 # [[
 
 if (( $+commands[git] )); then
-  # task: make plugin manager
+	# task: make plugin manager
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if (( $+commands[fzf] )); then
-  fe() {
-    local file
-    file=$(fzf --query="$1" --select-1 --exit-0)
-    [ -n "$file" ] && ${EDITOR:-vim} "$file"
-  }
+	fe() {
+		local file
+		file=$(fzf --query="$1" --select-1 --exit-0)
+		[ -n "$file" ] && ${EDITOR:-vim} "$file"
+	}
 
-  fd() {
-    local dir
-    dir=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
-    cd "$dir"
-  }
+	fd() {
+		local dir
+		dir=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
+		cd "$dir"
+	}
 
-  fh() {
-    eval $(([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s | sed 's/ *[0-9]* *//')
-  }
+	fh() {
+		eval $(([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s | sed 's/ *[0-9]* *//')
+	}
 
-  fkill() {
-    ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9}
-  }
+	fkill() {
+		ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9}
+	}
 fi
 
 # ]]
@@ -143,7 +143,7 @@ fi
 
 
 
-# * »»  alias -------------------------------------------/
+# * »»	alias -------------------------------------------/
 # [[
 
 alias v='vim'
@@ -152,20 +152,20 @@ function runcpp () { g++ $1 && shift && ./a.out $@ }
 alias -s {c,cpp}=runcpp
 
 function extract() {
-  case $1 in
-    *.tar.gz|*.tgz) tar xzvf $1;;
-    *.tar.xz) tar Jxvf $1;;
-    *.zip) unzip $1;;
-    *.lzh) lha e $1;;
-    *.tar.bz2|*.tbz) tar xjvf $1;;
-    *.tar.Z) tar zxvf $1;;
-    *.gz) gzip -d $1;;
-    *.bz2) bzip2 -dc $1;;
-    *.Z) uncompress $1;;
-    *.tar) tar xvf $1;;
-    *.arj) unarj $1;;
-    *.rar) unrar $1;;
-  esac
+	case $1 in
+		*.tar.gz|*.tgz) tar xzvf $1;;
+		*.tar.xz) tar Jxvf $1;;
+		*.zip) unzip $1;;
+		*.lzh) lha e $1;;
+		*.tar.bz2|*.tbz) tar xjvf $1;;
+		*.tar.Z) tar zxvf $1;;
+		*.gz) gzip -d $1;;
+		*.bz2) bzip2 -dc $1;;
+		*.Z) uncompress $1;;
+		*.tar) tar xvf $1;;
+		*.arj) unarj $1;;
+		*.rar) unrar $1;;
+	esac
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz,rar}=extract
 
@@ -175,42 +175,42 @@ alias fuck='eval $(thefuck $(fc -ln -1))'
 alias diff='diff -u'
 
 if (( $+commands[tmux] )); then
-  alias tl='tmux ls'
-  alias tk='tmux kill-session -t $1'
-  alias ta='tmux a'
-  alias tat='tmux a -t $1'
+	alias tl='tmux ls'
+	alias tk='tmux kill-session -t $1'
+	alias ta='tmux a'
+	alias tat='tmux a -t $1'
 fi
 
 # * »»» color --------------------------/
 
 # * »»»» cat
 if (( $+commands[pygmentize] )); then
-  alias cat='pygmentize -O style=monokai -f console256 -g'
+	alias cat='pygmentize -O style=monokai -f console256 -g'
 fi
 
 # * »»»» diff
 if (( $+commands[colordiff] )); then
-  alias diff='colordiff -u'
+	alias diff='colordiff -u'
 fi
 
 # * »»»» less
 export MANPAGER='less -R'
 function man() {
-  env \
-    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-    LESS_TERMCAP_md=$(printf "\e[1;31m") \
-    LESS_TERMCAP_me=$(printf "\e[0m") \
-    LESS_TERMCAP_se=$(printf "\e[0m") \
-    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-    LESS_TERMCAP_ue=$(printf "\e[0m") \
-    LESS_TERMCAP_us=$(printf "\e[1;32m") \
-    man "$@"
+	env \
+		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+		LESS_TERMCAP_md=$(printf "\e[1;31m") \
+		LESS_TERMCAP_me=$(printf "\e[0m") \
+		LESS_TERMCAP_se=$(printf "\e[0m") \
+		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+		LESS_TERMCAP_ue=$(printf "\e[0m") \
+		LESS_TERMCAP_us=$(printf "\e[1;32m") \
+		man "$@"
 }
 if (( $+commands[unbuffered] )); then
-  function less_with_unbuffer() {
-    unbuffered "$@" |& less -SR
-  }
-    alias ul=less_with_unbuffer
+	function less_with_unbuffer() {
+		unbuffered "$@" |& less -SR
+	}
+		alias ul=less_with_unbuffer
 fi
 
 # * »»»» grep
@@ -218,16 +218,16 @@ alias grep='grep --color'
 
 # * »»»» grc
 if (( $+commands[grc] )); then
-  alias mount='grc mount'
-  alias ifconfig='grc ifconfig'
-  alias dig='grc dig'
-  alias ldap='grc ldap'
-  alias netstat='grc netstat'
-  alias ping='grc ping'
-  alias ps='grc ps'
-  alias traceroute='grc traceroute'
-  alias gcc='grc gcc'
-  alias g++='grc g++'
+	alias mount='grc mount'
+	alias ifconfig='grc ifconfig'
+	alias dig='grc dig'
+	alias ldap='grc ldap'
+	alias netstat='grc netstat'
+	alias ping='grc ping'
+	alias ps='grc ps'
+	alias traceroute='grc traceroute'
+	alias gcc='grc gcc'
+	alias g++='grc g++'
 fi
 
 # * ««« --------------------------------/
@@ -242,8 +242,8 @@ fi
 
 
 
-# * »   [2] look
-# -------------------------------------------                           /
+# * »		[2] look
+# -------------------------------------------														/
 # ---------------------------------------------------------------------/
 # [
 
@@ -253,7 +253,7 @@ setopt prompt_subst
 
 
 
-# * »»  theme ------------------------------------------/
+# * »»	theme ------------------------------------------/
 # [[
 
 autoload -U colors; colors
@@ -264,19 +264,19 @@ export TERM=xterm-256color
 
 
 
-# * »»  ls color ---------------------------------------/
+# * »»	ls color ---------------------------------------/
 # [[
 
 export LSCOLORS=gxfxcxdxbxegedabagacad
 export LS_COLORS='no=00;38;5;244:rs=0:di=00;38;5;33:ln=00;38;5;37:mh=00:pi=48;5;230;38;5;136;01:so=48;5;230;38;5;136;01:do=48;5;230;38;5;136;01:bd=48;5;230;38;5;244;01:cd=48;5;230;38;5;244;01:or=48;5;235;38;5;160:su=48;5;160;38;5;230:sg=48;5;136;38;5;230:ca=30;41:tw=48;5;64;38;5;230:ow=48;5;235;38;5;33:st=48;5;33;38;5;230:ex=00;38;5;64:'
 if ! [[ $OSTYPE = msys* ]]; then
-  if [ -e $ZDOTDIR/rc/dircolors ]; then
-    if (( $+commands[dircolors] )); then
-      eval $(dircolors $ZDOTDIR/rc/dircolors)
-    elif (( $+commands[gdircolors] )); then
-      eval $(gdircolors $ZDOTDIR/rc/dircolors)
-    fi
-  fi
+	if [ -e $ZDOTDIR/rc/dircolors ]; then
+		if (( $+commands[dircolors] )); then
+			eval $(dircolors $ZDOTDIR/rc/dircolors)
+		elif (( $+commands[gdircolors] )); then
+			eval $(gdircolors $ZDOTDIR/rc/dircolors)
+		fi
+	fi
 fi
 export ZLS_COLORS=$LS_COLORS
 export CLICOLOR=true
@@ -285,7 +285,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 alias ls='ls -F --color=auto --group-directories-first'
 
 function cd() {
-  builtin cd $@ && ls;
+	builtin cd $@ && ls;
 }
 
 # ]]
@@ -293,7 +293,7 @@ function cd() {
 
 
 
-# * »»  prompt -----------------------------------------/
+# * »»	prompt -----------------------------------------/
 # [[
 
 PROMPT="[%~]%(!,#,$) "
@@ -301,39 +301,39 @@ RPROMPT="[%n|%m|%w|%*]"
 SPROMPT="%r is correct [n,y,a,e]: "
 
 if [[ $TERM = xterm* ]];then
-  local DARKGRAY=237
-  local WHITE=15
-  local BLUE=31
-  local RED=161
+	local DARKGRAY=237
+	local WHITE=15
+	local BLUE=31
+	local RED=161
 
-  local BACKGROUND=$DARKGRAY
-  local FOREGROUND=$WHITE
-  local COLOR=%F{$FOREGROUND}%K{$BACKGROUND}
-  local PROMPTBODY="$COLOR %~ $COLOR%F{$WHITE}%(?.%K{$BLUE}.%K{$RED}) * %f%k "
+	local BACKGROUND=$DARKGRAY
+	local FOREGROUND=$WHITE
+	local COLOR=%F{$FOREGROUND}%K{$BACKGROUND}
+	local PROMPTBODY="$COLOR %~ $COLOR%F{$WHITE}%(?.%K{$BLUE}.%K{$RED}) * %f%k "
 
-  case ${UID} in
-    0) #root
-      UCOLOR=$RED;;
-    *)
-      UCOLOR=$BLUE;;
-  esac
+	case ${UID} in
+		0) #root
+			UCOLOR=$RED;;
+		*)
+			UCOLOR=$BLUE;;
+	esac
 
-  PROMPT=$PROMPTBODY
-  RPROMPT="%F{$FOREGROUND}%K{$UCOLOR} %n $COLOR %m $COLOR|$COLOR %w $COLOR|$COLOR %* %f%k"
+	PROMPT=$PROMPTBODY
+	RPROMPT="%F{$FOREGROUND}%K{$UCOLOR} %n $COLOR %m $COLOR|$COLOR %w $COLOR|$COLOR %* %f%k"
 
-  if (( $+commands[python] )); then
-    if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
-      function u_prompt() {
-        local RETURN=$?
-        if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
-          PROMPT="$(~/.zsh/rc/plugin/prompt.py $RETURN)"
-        else
-          PROMPT=$z_body
-        fi
-      }
-      precmd() { u_prompt }
-    fi
-  fi
+	if (( $+commands[python] )); then
+		if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
+			function u_prompt() {
+				local RETURN=$?
+				if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
+					PROMPT="$(~/.zsh/rc/plugin/prompt.py $RETURN)"
+				else
+					PROMPT=$z_body
+				fi
+			}
+			precmd() { u_prompt }
+		fi
+	fi
 fi
 
 
@@ -357,39 +357,39 @@ TRAPALRM() { redraw_tmout }
 
 
 
-# * »   [3] os
-# -------------------------------------------                           /
+# * »		[3] os
+# -------------------------------------------														/
 # ---------------------------------------------------------------------/
 # [
 
 case $OSTYPE in #uname http://en.wikipedia.org/wiki/Uname
-  # linux
-  linux*)
-    if [ -d $HOME/bin ]; then
-      export PATH=$HOME/bin:$PATH
-    fi
-    if [ -d $HOME/usr/bin ]; then
-      export PATH=$HOME/usr/bin:$PATH
-    fi
-    if [ -e $HOME/.tmux.conf ]; then 
-      [[ -z "$TMUX" && -z "$WINDOW" && ! -z "$PS1" ]] && tmux
-    fi ;;
-  # mac os
-  darwin*)
-    alias ls='ls -G -F -L'
-    function cd() {
-      builtin cd $@ && ls;
-    } ;;
-  #windows
-  CYGWIN*) ;;
-  msys*)
-    alias shutdown='shutdown -s -f'
-    if (( $+commands[winpty] )); then
-      alias cl='winpty cl'
-      alias diskpart='winpty diskpart'
-      alias sdelete='winpty sdelete'
-      alias mysql='winpty mysql'
-    fi ;;
+	# linux
+	linux*)
+		if [ -d $HOME/bin ]; then
+			export PATH=$HOME/bin:$PATH
+		fi
+		if [ -d $HOME/usr/bin ]; then
+			export PATH=$HOME/usr/bin:$PATH
+		fi
+		if [ -e $HOME/.tmux.conf ]; then 
+			[[ -z "$TMUX" && -z "$WINDOW" && ! -z "$PS1" ]] && tmux
+		fi ;;
+	# mac os
+	darwin*)
+		alias ls='ls -G -F -L'
+		function cd() {
+			builtin cd $@ && ls;
+		} ;;
+	#windows
+	CYGWIN*) ;;
+	msys*)
+		alias shutdown='shutdown -s -f'
+		if (( $+commands[winpty] )); then
+			alias cl='winpty cl'
+			alias diskpart='winpty diskpart'
+			alias sdelete='winpty sdelete'
+			alias mysql='winpty mysql'
+		fi ;;
 esac
 
 # ]
@@ -398,15 +398,15 @@ esac
 
 
 
-# * »   [4] local setting
-# -------------------------------------------                           /
+# * »		[4] local setting
+# -------------------------------------------														/
 # ---------------------------------------------------------------------/
 # [
 
 if [ -e $HOME/.cache/zsh ]; then
-    if [ -e $HOME/.cache/zsh/.zsh_local ]; then
-      source $HOME/.cache/zsh/.zsh_local
-    fi
+		if [ -e $HOME/.cache/zsh/.zsh_local ]; then
+			source $HOME/.cache/zsh/.zsh_local
+		fi
 fi
 
 # ]
