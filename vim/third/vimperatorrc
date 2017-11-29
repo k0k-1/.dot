@@ -30,13 +30,13 @@ set complete=sl
 javascript <<EOM
 liberator.modules.commands.addUserCommand(["togglepin"], "add pin to current tab",
 function(){
-    var currentTab = gBrowser.mCurrentTab
-    if(currentTab.pinned){
-        gBrowser.unpinTab(currentTab)
-    }
-    else{
-        gBrowser.pinTab(currentTab)
-    }
+		var currentTab = gBrowser.mCurrentTab
+		if(currentTab.pinned){
+				gBrowser.unpinTab(currentTab)
+		}
+		else{
+				gBrowser.pinTab(currentTab)
+		}
 });
 EOM
 nnoremap : :togglepin<CR>
