@@ -245,9 +245,6 @@ fi
 for f in ${FLAG[@]}
 do
 	msg h2 "start ${f}"
-	if [ ${f} == "zsh" ]; then
-		zpluginstall
-	fi
 	if [ ${f} == "tmux" ]; then
 		tmuxinit
 	fi
