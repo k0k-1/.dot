@@ -79,14 +79,14 @@ setconf ()
 		vim)
 			local DIRNAME="vim"
 			local MAKEDIR=".${DIRNAME}"
-			local FILENAME=("vimrc" "${MAKEDIR}/rc")
+			local FILENAME=("vimrc" "rc")
 			local LINKNAME=(".vimrc" "${MAKEDIR}/rc")
 			local OPTION=("dir" "link")
 			;;
 		zsh)
 			local DIRNAME="zsh"
 			local MAKEDIR=".cache/${DIRNAME}"
-			local FILENAME=("zshenv" ${DIRNAME})
+			local FILENAME=("zshenv" "")
 			local LINKNAME=(".zshenv" ".${DIRNAME}")
 			local OPTION=("dir" "link")
 			;;
