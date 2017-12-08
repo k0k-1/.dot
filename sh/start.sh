@@ -154,16 +154,6 @@ tmuxinit()
 	else
 		msg h2 "skip."
 	fi
-
-	msg h2 "install tpm"
-	if [ ! -e ${HOME}/.tmux ]; then
-		msg log "installing tpm..."
- 		git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
- 		cd ${WORKDIR}
- 		msg h2 "done."
-	else
-		msg h2 "skip."
-	fi
 }
 
 ## MAIN ########################################################
