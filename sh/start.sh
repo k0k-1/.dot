@@ -141,20 +141,6 @@ setconf ()
 	done
 }
 
-zpluginstall()
-{
-	msg h2 "install zplug"
- 	if [ ! -d ${HOME}/.zplug ]; then
- 		export ZPLUG_HOME=$HOME/.zplug
- 		msg log "installing zplug..."
- 		cchk mkdir ".zplug"
- 		git clone https://github.com/zplug/zplug ${ZPLUG_HOME}
- 		msg h2 "done."
- 	else
- 		msg h2 "skip."
- 	fi
-}
-
 tmuxinit()
 {
 	msg h2 "init submodule"
