@@ -177,9 +177,9 @@ zpluginstall()
 			msg log "installing zplug..."
 			cchk mkdir ".zplug"
 			git clone https://github.com/zplug/zplug ${ZPLUG_HOME}
-			msg h2 "done"
+			msg h2 "done."
 		else
-			msg h2 "skip"
+			msg h2 "skip."
 		fi
 	fi
 }
@@ -190,17 +190,17 @@ tmuxinit()
 	if [ ! -e ${HOME}/.tmux.conf ]; then
 		msg log "installing tmux-config..."
 		if type git >/dev/null 2>&1; then
-			git clone https://github.com/kip-s/${DIR_TMUX} ${WORKDIR}/${DIR_TMUX}
+			cd ${WORKDIR} && git submodule init && git submodule update
 			cd ${WORKDIR}/${DIR_TMUX} && git submodule init && git submodule update
 			cd ${WORKDIR}/${DIR_TMUX}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
 			cd ${WORKDIR}
-			msg h2 "done"
+			msg h2 "done."
 		else
 			msg error "your computer 'git' is not installed."
 			msg failed "installation for 'zplug' was not executed"
 		fi
 	else
-		msg h2 "skip"
+		msg h2 "skip."
 	fi
 
 	msg h2 "install tpm"
@@ -209,13 +209,13 @@ tmuxinit()
 		if type git >/dev/null 2>&1; then
 			git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 			cd ${WORKDIR}
-			msg h2 "done"
+			msg h2 "done."
 		else
 			msg error "your computer 'git' is not installed."
-			msg failed "installation for 'tpm' was not executed"
+			msg failed "installation for 'tpm' was not executed."
 		fi
 	else
-		msg h2 "skip"
+		msg h2 "skip."
 	fi
 }
 
@@ -228,7 +228,7 @@ case ${OSTYPE} in
 		;;
 	*)
 		msg error "your environment is ${OSTYPE}. This script can run only on linux."
-		msg input "exit"
+		msg input "exit."
 		return 2>&- || exit
 		;;
 esac
