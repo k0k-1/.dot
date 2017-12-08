@@ -141,47 +141,18 @@ setconf ()
 	done
 }
 
-gitinstall()
-{
-	local GITVER="2.14.1"
-	local GITFILE="v${GITVER}.tar.gz"
-	msg h2 "install git-${GITVER}"
-	if type wget >/dev/null 2>&1; then
-		msg log "downloading git-${GITFILE}"
-		https://github.com/git/git/archive/${GITFILE} /tmp/${GITFILE}
-		msg log "download completed!-${GITFILE}"
-		tar -zxf /tmp/${GITFILE} /tmp/${GITVER}
-		cd /tmp/${GITVER}
-		if type make >/dev/null 2>&1; then
-			make configure
-			./configure --prefix=usr
-			make all doc info
-			sudo make install
-		else
-			msg error "your computer 'make' is not installed."
-		fi
-		rm -r ${GITFILE} ${GITVER}
-		msg log "removed '${GITFILE}' and '${GITVER}'."
-		cd ${WORKDIR}
-	else
-		msg error "seriously! your computer 'wget' is NOT installed!"
-	fi
-}
-
 zpluginstall()
 {
 	msg h2 "install zplug"
-	if type git >/dev/null 2>&1; then
-		if [ ! -d ${HOME}/.zplug ]; then
-			export ZPLUG_HOME=$HOME/.zplug
-			msg log "installing zplug..."
-			cchk mkdir ".zplug"
-			git clone https://github.com/zplug/zplug ${ZPLUG_HOME}
-			msg h2 "done."
-		else
-			msg h2 "skip."
-		fi
-	fi
+ 	if [ ! -d ${HOME}/.zplug ]; then
+ 		export ZPLUG_HOME=$HOME/.zplug
+ 		msg log "installing zplug..."
+ 		cchk mkdir ".zplug"
+ 		git clone https://github.com/zplug/zplug ${ZPLUG_HOME}
+ 		msg h2 "done."
+ 	else
+ 		msg h2 "skip."
+ 	fi
 }
 
 tmuxinit()
@@ -189,16 +160,11 @@ tmuxinit()
 	msg h2 "init submodule"
 	if [ ! -e ${HOME}/.tmux.conf ]; then
 		msg log "installing tmux-config..."
-		if type git >/dev/null 2>&1; then
-			cd ${WORKDIR} && git submodule init && git submodule update
-			cd ${WORKDIR}/${DIR_TMUX} && git submodule init && git submodule update
-			cd ${WORKDIR}/${DIR_TMUX}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
-			cd ${WORKDIR}
-			msg h2 "done."
-		else
-			msg error "your computer 'git' is not installed."
-			msg failed "installation for 'zplug' was not executed"
-		fi
+ 		cd ${WORKDIR} && git submodule init && git submodule update
+ 		cd ${WORKDIR}/${DIR_TMUX} && git submodule init && git submodule update
+ 		cd ${WORKDIR}/${DIR_TMUX}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
+ 		cd ${WORKDIR}
+ 		msg h2 "done."
 	else
 		msg h2 "skip."
 	fi
@@ -206,14 +172,9 @@ tmuxinit()
 	msg h2 "install tpm"
 	if [ ! -e ${HOME}/.tmux ]; then
 		msg log "installing tpm..."
-		if type git >/dev/null 2>&1; then
-			git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
-			cd ${WORKDIR}
-			msg h2 "done."
-		else
-			msg error "your computer 'git' is not installed."
-			msg failed "installation for 'tpm' was not executed."
-		fi
+ 		git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+ 		cd ${WORKDIR}
+ 		msg h2 "done."
 	else
 		msg h2 "skip."
 	fi
@@ -233,13 +194,15 @@ case ${OSTYPE} in
 		;;
 esac
 
+if ! type git >/dev/null 2>&1; then
+	msg error "your computer 'git' is not installed."
+	msg input "exit."
+	return 2>&- || exit
+fi
+
 if [ ! -e ${WORKDIR} ]; then
 	cp -r ${WORKDIR} ${DOTHOME}
 	${WORKDIR} = ${DOTHOME}
-fi
-
-if ! type git >/dev/null 2>&1; then
-	gitinstall
 fi
 
 for f in ${FLAG[@]}
