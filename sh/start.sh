@@ -103,6 +103,9 @@ setconf ()
 			;;
 	esac
 
+	local FILEPATH=()
+	local LINKPATH=()
+
 	for c in ${OPTION[@]}
 	do
 		case $c in
@@ -119,11 +122,11 @@ setconf ()
 				if [ ${#FILENAME[@]} == ${#LINKNAME[@]} ]; then
 				for n in ${FILENAME[@]}
 				do
-					local FILEPATH+=("${WORKDIR}/${DIRNAME}/${n}")
+					FILEPATH=("${WORKDIR}/${DIRNAME}/${n}")
 				done
 				for n in ${LINKNAME[@]}
 				do
-					local LINKPATH+=("${HOME}/${n}")
+					LINKPATH+=("${HOME}/${n}")
 				done
 				fi
 				for (( i = 0; i < ${#FILEPATH[@]}; ++i ))
