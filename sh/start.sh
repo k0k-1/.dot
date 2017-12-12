@@ -19,7 +19,7 @@ DOTHOME="${HOME}/.dot"
 
 ## FLAG ########################################################
 
-FLAG=("sh" "vim" "zsh" "ssh")
+FLAG=("sh" "vim" "zsh" "ssh" "tmux")
 
 ################################################################
 
@@ -142,22 +142,22 @@ setconf ()
 			;;
 		esac
 	done
-}
 
-tmuxinit()
-{
-	msg h2 "init submodule"
-	if [ ! -e ${HOME}/.tmux.conf ]; then
-		msg log "installing tmux-config..."
- 		cd ${WORKDIR} && git submodule init && git submodule update
- 		cd ${WORKDIR}/${DIR_TMUX} && git submodule init && git submodule update
- 		cd ${WORKDIR}/${DIR_TMUX}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
- 		cd ${WORKDIR}
- 		msg h2 "done."
-	else
-		msg h2 "skip."
+	if [ ${f} == "tmux" ]; then
+		msg h2 "init submodule"
+		if [ ! -e ${HOME}/.tmux.conf ]; then
+			msg log "installing tmux-config..."
+ 			cd ${WORKDIR} && git submodule init && git submodule update
+ 			cd ${WORKDIR}/${DIRNAME} && git submodule init && git submodule update
+ 			cd ${WORKDIR}/${DIRNAME}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
+ 			cd ${WORKDIR}
+ 			msg h2 "done."
+		else
+			msg h2 "skip."
+		fi
 	fi
 }
+
 
 ## MAIN ########################################################
 
@@ -187,9 +187,6 @@ fi
 for f in ${FLAG[@]}
 do
 	msg h2 "start ${f}"
-	if [ ${f} == "tmux" ]; then
-		tmuxinit
-	fi
 	setconf ${f}
 	msg h2 "end ${f}\n"
 done
