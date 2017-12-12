@@ -143,11 +143,11 @@ setconf ()
 		esac
 	done
 
-	if [ ${f} == "tmux" ]; then
+	if [ ${1} == "tmux" ]; then
 		msg h2 "init submodule"
 		if [ ! -e ${HOME}/.tmux.conf ]; then
 			msg log "installing tmux-config..."
- 			cd ${WORKDIR} && git submodule init && git submodule update
+			cd ${WORKDIR} && git submodule add git@github.com:kip-s/tconf.git tmux
  			cd ${WORKDIR}/${DIRNAME} && git submodule init && git submodule update
  			cd ${WORKDIR}/${DIRNAME}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
  			cd ${WORKDIR}
