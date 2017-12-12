@@ -4,7 +4,7 @@ Usage
 -------------------
 
 ```bash
-$ ./init
+$ ./init.sh
 ```
 
 Supported types
