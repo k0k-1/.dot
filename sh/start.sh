@@ -137,25 +137,25 @@ setconf ()
 					else
 						msg failed "${LINKPATH[$i]} is already exist. [symblic link]"
 					fi
+					if [ ${1} == "tmux" ]; then
+						msg h2 "init submodule"
+						if [ ! -e ${HOME}/${FILENAME} ]; then
+							msg log "installing tmux-config..."
+							cd ${WORKDIR} && git submodule init && git submodule update
+							cd ${WORKDIR}/${DIRNAME} && git submodule init && git submodule update
+							cd ${WORKDIR}/${DIRNAME}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
+							cd ${WORKDIR}
+							msg h2 "done."
+						else
+							msg h2 "skip."
+						fi
+					fi
 				done
 				unset FILEPATH LINKPATH
 			;;
 		esac
 	done
 
-	if [ ${1} == "tmux" ]; then
-		msg h2 "init submodule"
-		if [ ! -e ${HOME}/.tmux.conf ]; then
-			msg log "installing tmux-config..."
- 			cd ${WORKDIR} && git submodule init && git submodule update
- 			cd ${WORKDIR}/${DIRNAME} && git submodule init && git submodule update
- 			cd ${WORKDIR}/${DIRNAME}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
- 			cd ${WORKDIR}
- 			msg h2 "done."
-		else
-			msg h2 "skip."
-		fi
-	fi
 }
 
 
