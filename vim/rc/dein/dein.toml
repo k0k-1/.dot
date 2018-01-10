@@ -37,11 +37,11 @@ depends = 'context_filetype.vim'
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 hook_add = '''
-    nn ff :<c-u>Denite
-    nn <silent> fd :<c-u>Denite file_rec<cr>
-    nn <silent> fb :<c-u>Denite buffer<cr>
-    nn <silent> fj :<c-u>Denite grep<cr>
-    nn <silent> fh :<c-u>Denite help<cr>
+	nn ff :<c-u>Denite
+	nn <silent> fd :<c-u>Denite file_rec<cr>
+	nn <silent> fb :<c-u>Denite buffer<cr>
+	nn <silent> fj :<c-u>Denite grep<cr>
+	nn <silent> fh :<c-u>Denite help<cr>
 '''
 #]]]]
 
@@ -104,7 +104,7 @@ on_ft = 'toml'
 # kaoriya-vimrc [[[[
 #[[plugins]]
 #repo = 'gist:koron/1436273'
-#if   = '''has('kaoriya')'''
+#if	= '''has('kaoriya')'''
 # ]]]]
 
 # ]]]
@@ -121,7 +121,7 @@ repo = 'thinca/vim-localrc'
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
-    nn <silent> no :<c-u>NERDTreeToggle<cr>
+	nn <silent> no :<c-u>NERDTreeToggle<cr>
 '''
 
 # ]]]
@@ -135,65 +135,65 @@ hook_add = '''
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-    let g:lightline = {
-        \ 'colorscheme'          : 'wombat',
-        \ 'component'            : {
-        \    'readonly'          : '%{&readonly?#\u2b64#:##}', },
-        \ 'mode_map'             : {'c': 'NORMAL'},
-        \ 'active'               : {
-        \    'left'              : [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ] },
-        \ 'component_function'   : {
-        \    'modified'          : 'MyModified',
-        \    'readonly'          : 'MyReadonly',
-        \    'fugitive'          : 'MyFugitive',
-        \    'filename'          : 'MyFilename',
-        \    'fileformat'        : 'MyFileformat',
-        \    'filetype'          : 'MyFiletype',
-        \    'fileencoding'      : 'MyFileencoding',
-        \    'mode'              : 'MyMode' },
-        \ }
+	let g:lightline = {
+		\ 'colorscheme'			 : 'wombat',
+		\ 'component'			 : {
+		\	 'readonly'			 : '%{&readonly?#\u2b64#:##}', },
+		\ 'mode_map'			 : {'c': 'NORMAL'},
+		\ 'active'				 : {
+		\	 'left'				 : [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ] },
+		\ 'component_function'	 : {
+		\	 'modified'			 : 'MyModified',
+		\	 'readonly'			 : 'MyReadonly',
+		\	 'fugitive'			 : 'MyFugitive',
+		\	 'filename'			 : 'MyFilename',
+		\	 'fileformat'		 : 'MyFileformat',
+		\	 'filetype'			 : 'MyFiletype',
+		\	 'fileencoding'		 : 'MyFileencoding',
+		\	 'mode'				 : 'MyMode' },
+		\ }
 
-    fu! MyModified()
-        retu &ft =~ 'help\|VimFiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-    endf
+	fu! MyModified()
+		retu &ft =~ 'help\|VimFiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+	endf
 
-    fu! MyReadonly()
-        retu &ft !~? 'help\|VimFiler\|gundo' && &readonly ? 'x' : ''
-    endf
+	fu! MyReadonly()
+		retu &ft !~? 'help\|VimFiler\|gundo' && &readonly ? 'x' : ''
+	endf
 
-    fu! MyFilename()
-        retu ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \(&ft == 'VimFiler' ? VimFiler#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \'' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \('' != MyModified() ? ' ' . MyModified() : '')
-    endf
+	fu! MyFilename()
+		retu ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+		\(&ft == 'VimFiler' ? VimFiler#get_status_string() :
+		\ &ft == 'vimshell' ? vimshell#get_status_string() :
+		\'' != expand('%:t') ? expand('%:t') : '[No Name]') .
+		\('' != MyModified() ? ' ' . MyModified() : '')
+	endf
 
-    fu! MyFugitive()
-        try
-            if &ft !~? 'VimFiler\|gundo' && exists('*fugitive#head')
-                retu fugitive#head()
-            endif
-            catch
-        endt
-        retu ''
-    endf
+	fu! MyFugitive()
+		try
+			if &ft !~? 'VimFiler\|gundo' && exists('*fugitive#head')
+				retu fugitive#head()
+			endif
+			catch
+		endt
+		retu ''
+	endf
 
-    fu! MyFileformat()
-        retu winwidth(0) > 70 ? &fileformat : ''
-    endf
+	fu! MyFileformat()
+		retu winwidth(0) > 70 ? &fileformat : ''
+	endf
 
-    fu! MyFiletype()
-        retu winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-    endf
+	fu! MyFiletype()
+		retu winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+	endf
 
-    fu! MyFileencoding()
-        retu winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-    endf
+	fu! MyFileencoding()
+		retu winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+	endf
 
-    fu! MyMode()
-        retu winwidth(0) > 60 ? lightline#mode() : ''
-    endf
+	fu! MyMode()
+		retu winwidth(0) > 60 ? lightline#mode() : ''
+	endf
 '''
 
 #[[plugins]]
@@ -204,14 +204,25 @@ hook_add = '''
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
 hook_add = '''
-    se bg=dark
-    au fau VimEnter * nested color hybrid
+	se bg=dark
+	au fau VimEnter * nested color hybrid
 '''
 
 # ]]]
 # * <<< --------------------------------/
 
 
+
+# * >>>  api ---------------------------/
+# [[[
+[[plugins]]
+repo = 'kakkyz81/evervim'
+if = '''has('python')'''
+hook_add = '''
+	let g:evervim_devtoken='S=s440:U=8c9eb4e:E=1683779bb2f:C=160dfc88e58:P=1cd:A=en-devtoken:V=2:H=f27b7503a6993fb7f67b9b9336b4418e'
+'''
+# ]]]
+# * <<< --------------------------------/
 
 # * >>>  joke --------------------------/
 # [[[
@@ -226,9 +237,9 @@ repo = 'thinca/vim-scouter'
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 hook_add = '''
-    "let g:indentLine_color_term = 0
-    "let g:indentLine_color_gui = '#000000'
-    let g:indentLine_char = '|'
+	"let g:indentLine_color_term = 0
+	"let g:indentLine_color_gui = '#000000'
+	let g:indentLine_char = '|'
 '''
 
 # ]]
