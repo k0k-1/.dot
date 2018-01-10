@@ -213,17 +213,6 @@ hook_add = '''
 
 
 
-# * >>>  api ---------------------------/
-# [[[
-[[plugins]]
-repo = 'kakkyz81/evervim'
-if = '''has('python')'''
-hook_add = '''
-	let g:evervim_devtoken='S=s440:U=8c9eb4e:E=1683779bb2f:C=160dfc88e58:P=1cd:A=en-devtoken:V=2:H=f27b7503a6993fb7f67b9b9336b4418e'
-'''
-# ]]]
-# * <<< --------------------------------/
-
 # * >>>  joke --------------------------/
 # [[[
 
