@@ -1,14 +1,5 @@
 #/bin/bash
 
-#							__		 _	 _
-#							\ \		| |_(_)_ __ ___ ___
-#							 > >	| / / | '_ \___(_-<
-#							/_/		|_\_\_| .__/	 /__/
-#													|_|
-
-#				* file name : start.sh
-#				* auther		: kip-s
-#				* url				: https://kip-s.net
 #				* ver				: 3.22
 
 set -u
