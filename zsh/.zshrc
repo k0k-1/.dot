@@ -16,9 +16,8 @@
 #								/_/			/__|___/_||_|			___
 #																				 |___|
 
-#				* auther		: kip-s
-#				* url				: https://kip-s.net
-#				* ver				: 0.10
+#				* auther		: k0k1
+#				* ver				: 0.11
 
 
 if [ -e $ZDOTDIR/rc/zshrc ]; then
