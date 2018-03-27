@@ -405,7 +405,7 @@ esac
 
 if [ -e $HOME/.cache/zsh ]; then
 		if [ -e $HOME/.cache/zsh/.zsh_local ]; then
-			source $HOME/.cache/zsh/.zsh_local
+			source $HOME/.cache/zsh/.zsh*
 		fi
 fi
 
