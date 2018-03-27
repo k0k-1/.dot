@@ -5,9 +5,8 @@
 "								/_/			 \_/|_|_|_|_|			___
 "																				 |___|
 
-"				* auther		: kip-s
-"				* url				: https://kip-s.net
-"				* ver				: 0.03
+"				* auther		: k0k1s
+"				* ver				: 0.04
 
 se shell=sh
 se listchars=tab:»-,extends:»,trail:-,eol:«

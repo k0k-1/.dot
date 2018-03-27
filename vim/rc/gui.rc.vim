@@ -5,9 +5,8 @@ if has('gui_running')
 "								/_/			 \_/|_|_|_|_|			___
 "																				 |___|
 
-"				* auther		: kip-s
-"				* url				: https://kip-s.net
-"				* ver				: 3.32
+"				* auther		: k0k1
+"				* ver				: 3.33
 
 fu! s:source_rc(path, ...) abort
 	let use_global = get(a:000, 0, !has('vim_starting'))
