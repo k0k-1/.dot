@@ -88,6 +88,12 @@ repo = 'dag/vim2hs'
 on_ft = 'haskell'
 # ]]]]
 
+# rust [[[[
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+# ]]]]
+
 # shell_script [[[[
 [[plugins]]
 repo = 'dag/vim-fish'
