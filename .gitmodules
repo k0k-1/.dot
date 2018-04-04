@@ -1,7 +1,7 @@
-[submodule "tmux"]
+[submodule "k0k-1/tmux"]
 	path = tmux
 	url = git@github.com:k0k-1/tconf.git
 
-[submodule "zsh-syntax-highlights"]
+[submodule "zsh-users/zsh-syntax-highlights"]
 	path = zsh/rc/plugin
 	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
