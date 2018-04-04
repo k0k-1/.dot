@@ -2,6 +2,6 @@
 	path = tmux
 	url = git@github.com:k0k-1/tconf.git
 
-[submodule "zsh-users/zsh-syntax-highlights"]
-	path = zsh/rc/plugin
-	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+[submodule "zsh/rc/plugin/syntax"]
+	path = zsh/rc/plugin/syntax
+	url = git@github.com:zsh-users/zsh-syntax-highlighting
