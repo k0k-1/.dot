@@ -402,6 +402,10 @@ esac
 # [
 
 if [ -e $HOME/.cache/zsh ]; then
+	source $ZDOTDIR/rc/plugin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if [ -e $HOME/.cache/zsh ]; then
 		if [ -e $HOME/.cache/zsh/.zsh_local ]; then
 			source $HOME/.cache/zsh/.zsh*
 		fi
