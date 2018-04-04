@@ -301,32 +301,33 @@ SPROMPT="%r is correct [n,y,a,e]: "
 if [[ $TERM = xterm* ]];then
 	local DARKGRAY=237
 	local WHITE=15
+	local GREEN=47
 	local BLUE=31
 	local RED=161
 
-	local BACKGROUND=$DARKGRAY
-	local FOREGROUND=$WHITE
-	local COLOR=%F{$FOREGROUND}%K{$BACKGROUND}
-	local PROMPTBODY="$COLOR %~ $COLOR%F{$WHITE}%(?.%K{$BLUE}.%K{$RED}) * %f%k "
+	local BACKGROUND=${DARKGRAY}
+	local FOREGROUND=${WHITE}
+	local COLOR="%F{${FOREGROUND}}%K{${BACKGROUND}}"
+	local PROMPTBODY="${COLOR} %~ ${COLOR}%F{${WHITE}}%(?.%K{${BLUE}}.%K{${RED}}) * %f%k "
 
 	case ${UID} in
 		0) #root
-			UCOLOR=$RED;;
+			local UCOLOR=${RED};;
 		*)
-			UCOLOR=$BLUE;;
+			local UCOLOR=${BLUE};;
 	esac
 
-	PROMPT=$PROMPTBODY
-	RPROMPT="%F{$FOREGROUND}%K{$UCOLOR} %n $COLOR %m $COLOR|$COLOR %w $COLOR|$COLOR %* %f%k"
+	PROMPT=${PROMPTBODY}
+	RPROMPT="%F{${FOREGROUND}}%K{${UCOLOR}} %n %F{${GREEN}}%K{${BACKGROUND}} %m ${COLOR}|${COLOR} %w ${COLOR}|${COLOR} %* %f%k"
 
 	if (( $+commands[python] )); then
 		if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
 			function u_prompt() {
 				local RETURN=$?
 				if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
-					PROMPT="$(~/.zsh/rc/plugin/prompt.py $RETURN)"
+					PROMPT="$(~/.zsh/rc/plugin/prompt.py ${RETURN})"
 				else
-					PROMPT=$z_body
+					PROMPT=${PROMPTBODY}
 				fi
 			}
 			precmd() { u_prompt }
