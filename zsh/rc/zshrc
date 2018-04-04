@@ -402,13 +402,12 @@ esac
 # [
 
 if [ -e $HOME/.cache/zsh ]; then
-	source $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh
+	source $HOME/.cache/zsh/.zsh*
 fi
 
-if [ -e $HOME/.cache/zsh ]; then
-		if [ -e $HOME/.cache/zsh/.zsh_local ]; then
-			source $HOME/.cache/zsh/.zsh*
-		fi
+if [ -e $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh ]; then
+	alias hl='source $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh'
 fi
 
 # ]
+
