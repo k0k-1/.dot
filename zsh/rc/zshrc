@@ -407,7 +407,7 @@ if [ -e ${HOME}/.cache/zsh ]; then
 fi
 
 if [ -e ${ZDOTDIR}/rc/plugin/syntax/zsh-syntax-highlighting.zsh ]; then
-	if [ -n ${H_FLUG} ]; then
+	if [ ${H_FLUG} = 1 ]; then
 		source $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh
 	fi
 fi
