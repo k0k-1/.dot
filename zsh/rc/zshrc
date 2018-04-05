@@ -341,7 +341,7 @@ fi
 
 zmodload zsh/datetime
 reset_tmout() { TMOUT=$[1-EPOCHSECONDS%1] }
-precmd_functions=($precmd_functions reset_tmout)
+precmd_functions=(${precmd_functions} reset_tmout)
 redraw_tmout() { zle reset-prompt; reset_tmout }
 TRAPALRM() { redraw_tmout }
 
@@ -361,17 +361,17 @@ TRAPALRM() { redraw_tmout }
 # ---------------------------------------------------------------------/
 # [
 
-case $OSTYPE in #uname http://en.wikipedia.org/wiki/Uname
+case ${OSTYPE} in #uname http://en.wikipedia.org/wiki/Uname
 	# linux
 	linux*)
-		if [ -d $HOME/bin ]; then
-			export PATH=$HOME/bin:$PATH
+		if [ -d ${HOME}/bin ]; then
+			export PATH=${HOME}/bin:${PATH}
 		fi
-		if [ -d $HOME/usr/bin ]; then
-			export PATH=$HOME/usr/bin:$PATH
+		if [ -d ${HOME}/usr/bin ]; then
+			export PATH=${HOME}/usr/bin:${PATH}
 		fi
-		if [ -e $HOME/.tmux.conf ]; then 
-			[[ -z "$TMUX" && -z "$WINDOW" && ! -z "$PS1" ]] && tmux
+		if [ -e ${HOME}/.tmux.conf ]; then 
+			[[ -z "${TMUX}" && -z "${WINDOW}" && ! -z "${PS1}" ]] && tmux
 		fi ;;
 	# mac os
 	darwin*)
@@ -402,12 +402,14 @@ esac
 # ---------------------------------------------------------------------/
 # [
 
-if [ -e $HOME/.cache/zsh ]; then
-	source $HOME/.cache/zsh/.zsh*
+if [ -e ${HOME}/.cache/zsh ]; then
+	source ${HOME}/.cache/zsh/.zsh*
 fi
 
-if [ -e $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh ]; then
-	alias hl='source $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh'
+if [ -e ${ZDOTDIR}/rc/plugin/syntax/zsh-syntax-highlighting.zsh ]; then
+	if [ -eq ${H_FLUG} 0 ]; then
+		alias hl='source $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh'
+	fi
 fi
 
 # ]
