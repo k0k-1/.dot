@@ -402,6 +402,8 @@ esac
 # ---------------------------------------------------------------------/
 # [
 
+export H_FLUG=0
+
 if [ -e ${HOME}/.cache/zsh ]; then
 	source ${HOME}/.cache/zsh/.zsh*
 fi
