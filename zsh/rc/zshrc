@@ -17,7 +17,7 @@
 #																				 |___|
 
 #				* auther		: k0k1
-#				* ver				: 3.26
+#				* ver				: 3.30
 
 
 
@@ -43,6 +43,20 @@ setopt auto_cd
 setopt no_beep
 setopt no_list_beep
 alias history='history -E'
+
+# ref. https://rcmdnk.com/blog/2017/10/13/computer-bash-zsh
+function source_file {
+	if [ $# -lt 1 ];then
+		echo "ERROR!!! source_file is called w/o an argument"
+		return
+	fi
+	arg="$1"
+	shift
+	if [ -r "$arg" ]; then
+		source "$arg"
+	fi
+}
+# end
 
 
 
@@ -113,7 +127,7 @@ if (( $+commands[git] )); then
 	# task: make plugin manager
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source_file $HOME/.fzf.zsh
 if (( $+commands[fzf] )); then
 	fe() {
 		local file
@@ -404,14 +418,10 @@ esac
 
 export H_FLUG=0
 
-if [ -e ${HOME}/.cache/zsh ]; then
-	source ${HOME}/.cache/zsh/zsh_local
-fi
+source_file ${HOME}/.cache/zsh/zsh_local
 
-if [ -e ${ZDOTDIR}/rc/plugin/syntax/zsh-syntax-highlighting.zsh ]; then
-	if [ ${H_FLUG} = 1 ]; then
-		source $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh
-	fi
+if [ ${H_FLUG} = 1 ]; then
+	source_file $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh
 fi
 
 # ]
