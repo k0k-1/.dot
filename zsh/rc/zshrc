@@ -404,13 +404,8 @@ esac
 
 export H_FLUG=0
 
-if [ -d ${HOME}/.cache/zsh ]; then
-	if [ -d ${HOME}/.cache/zsh/.zsh* ]; then
-		source ${HOME}/.cache/zsh/.zsh*
-	fi
-	if [ -d ${HOME}/.cache/zsh/zsh* ]; then
-		source ${HOME}/.cache/zsh/zsh*
-	fi
+if [ -e ${HOME}/.cache/zsh ]; then
+	source ${HOME}/.cache/zsh/zsh_local
 fi
 
 if [ -e ${ZDOTDIR}/rc/plugin/syntax/zsh-syntax-highlighting.zsh ]; then
