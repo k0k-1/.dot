@@ -75,7 +75,7 @@ en
 "		1234567890
 "		恥の多い生涯を送ってきました。
 
-se guifont=Migu_1M:h10:cSHIFTJIS
+se guifont=Migu_2M:h10:cSHIFTJIS
 if exists('&ambiwidth')
 		se ambiwidth=double
 en
