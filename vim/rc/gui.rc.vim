@@ -92,7 +92,7 @@ elseif has('unix')
 en
 
 if s:rumac()
-	se guifont=Migu_1M:h10:cANSI
+	se guifont=Migu_2M:h10:cANSI
 en
 
 " ]
