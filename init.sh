@@ -126,7 +126,7 @@ setconf ()
 						ln -s ${FILEPATH[$i]} ${LINKPATH[$i]}
 						msg success "link ${FILEPATH[$i]} -> ${LINKPATH[$i]}"
 					else
-						msg failed "${LINKPATH[$i]} is already exist. [symblic link]"
+						msg failed "${LINKPATH[$i]} is already exist. [symbolic link]"
 					fi
 					if [ ${1} == "tmux" ]; then
 						msg h2 "init submodule"
