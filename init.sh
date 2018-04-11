@@ -10,7 +10,7 @@ DOTHOME="${HOME}/.dot"
 
 ## FLAG ########################################################
 
-FLAG=("sh" "vim" "zsh" "ssh" "tmux")
+FLAG=("vim" "zsh" "ssh" "tmux")
 
 ################################################################
 
@@ -62,11 +62,6 @@ msg()
 setconf ()
 {
 	case $1 in
-		sh)
-			local DIRNAME="sh"
-			local MAKEDIR="bin"
-			local OPTION=("dir")
-			;;
 		vim)
 			local DIRNAME="vim"
 			local MAKEDIR=".${DIRNAME}"
