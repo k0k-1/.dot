@@ -136,15 +136,6 @@ setconf ()
 				fi
 				for ((i=0;${i}<=${#FILEPATH[@]}-1;i++))
 				do
-					msg dbg "i = ${i}"
-					msg dbg "FILEPATH[${i}] = ${FILEPATH[${i}]}"
-					msg dbg "LINKPATH[${i}] = ${LINKPATH[${i}]}"
-					if [ ! -e ${LINKPATH[$i]} ]; then
-						ln -s ${FILEPATH[$i]} ${LINKPATH[$i]}
-						msg success "link ${FILEPATH[$i]} -> ${LINKPATH[$i]}"
-					else
-						msg failed "${LINKPATH[$i]} is already exist. [symbolic link]"
-					fi
 					if [ ${1} = "tmux" ]; then
 						msg h2 "init submodule"
 						if [ ! -e ${HOME}/${FILENAME} ]; then
@@ -164,6 +155,17 @@ setconf ()
 							msg h2 "skip."
 						fi
 					fi
+
+					msg dbg "i = ${i}"
+					msg dbg "FILEPATH[${i}] = ${FILEPATH[${i}]}"
+					msg dbg "LINKPATH[${i}] = ${LINKPATH[${i}]}"
+					if [ ! -e ${LINKPATH[$i]} ]; then
+						ln -s ${FILEPATH[$i]} ${LINKPATH[$i]}
+						msg success "link ${FILEPATH[$i]} -> ${LINKPATH[$i]}"
+					else
+						msg failed "${LINKPATH[$i]} is already exist. [symbolic link]"
+					fi
+
 				done
 				unset FILEPATH LINKPATH
 			;;
