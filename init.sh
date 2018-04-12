@@ -80,7 +80,7 @@ setconf ()
 			;;
 		ssh)
 			local DIRNAME="ssh"
-			local MAKEDIR="${DIRNAME}/.pub"
+			local MAKEDIR=".${DIRNAME}/pub"
 			local OPTION=("dir")
 			;;
 		tmux)
