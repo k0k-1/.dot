@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 #				* ver				: 3.43
 
@@ -14,47 +14,58 @@ FLAG=("vim" "zsh" "ssh" "tmux")
 
 ################################################################
 
-# usage: msg {error|success|failed|h1|h2|log} "message"
+# usage: msg {input|error|success|failed|h1|h2|log} "message body"
 msg()
 {
-	if [ $1 == "input" ]; then
+	local DEBUG=0
+
+	if [ $1 = "input" ]; then
 		read -p "press [enter] to ${@:2}." KEY
 	else
 		local HEADERTYPE1="|-- [$1] "
 		case $1 in
 			error)
-				local COLOR=31 #RED
-				local HEADER="\n%% ERROR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n"
-				local FOOTER="\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n"
+				local COLOR=200 #RED
+				local HEADER="\n!! ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+				local FOOTER="\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
 				;;
 			success)
-				local COLOR=32 # GREEN
+				local COLOR=47 # GREEN
 				local HEADER=${HEADERTYPE1}
 				local FOOTER=""
 				;;
 			failed)
-				local COLOR=31 #YELLOW
+				local COLOR=197 #RED
 				local HEADER=${HEADERTYPE1}
 				local FOOTER=""
 				;;
 			h1)
-				local COLOR=34 #BLUE
-				local HEADER="\n## WELCOME ####################################################\n"
-				local FOOTER=""
+				local COLOR=110 #BLUE
+				local HEADER="\n###############################################################\n"
+				local FOOTER="\n###############################################################\n"
 				;;
 			h2)
-				local COLOR=35 #PURPLE
+				local COLOR=216 #ORANGE
 				local HEADER="|-- [msg] "
 				local FOOTER=""
 				;;
 			log)
-				local COLOR=1
+				local COLOR=15 #WHITE
 				local HEADER=${HEADERTYPE1}
 				local FOOTER=""
 				;;
+			dbg)
+				if [ ${DEBUG} = 1 ];then
+					local COLOR=83 #GREEN
+					local HEADER=${HEADERTYPE1}
+					local FOOTER=""
+				else
+					return
+				fi
+				;;
 		esac
 
-		local HEADER="\033[${COLOR}m${HEADER}"
+		local HEADER="\x1b[38;05;${COLOR}m${HEADER}"
 		local FOOTER="${FOOTER}\033[00m\n"
 		printf "${HEADER}${@:2}${FOOTER}"
 	fi
@@ -98,7 +109,7 @@ setconf ()
 		case $c in
 			dir)
 				local DIRPATH="${HOME}/${MAKEDIR}"
-				msg log "DIRPATH = ${DIRPATH}"
+				msg dbg "DIRPATH = ${DIRPATH}"
 				if [ ! -d ${DIRPATH} ]; then
 					mkdir -p ${DIRPATH}
 					msg success "mkdir ${DIRPATH}"
@@ -107,32 +118,34 @@ setconf ()
 				fi
 			;;
 			link)
-				if [ ${#FILENAME[@]} == ${#LINKNAME[@]} ]; then
-					msg log "FILENAME = ${#FILENAME[@]}"
-					msg log "LINKNAME = ${#LINKNAME[@]}"
+				if [ ${#FILENAME[@]} = ${#LINKNAME[@]} ]; then
+					msg dbg "FILENAME = ${#FILENAME[@]}"
+					msg dbg "LINKNAME = ${#LINKNAME[@]}"
 					for n in ${FILENAME[@]}
 					do
-						FILEPATH=("${WORKDIR}/${DIRNAME}/${n}")
+						FILEPATH+=("${WORKDIR}/${DIRNAME}/${n}")
+					msg dbg "FILEPATH = ${n}"
 					done
+					msg dbg "FILEPATH = ${#FILEPATH[@]}"
 					for n in ${LINKNAME[@]}
 					do
 						LINKPATH+=("${HOME}/${n}")
+					msg dbg "LINKPATH = ${n}"
 					done
+					msg dbg "LINKPATH = ${#LINKPATH[@]}"
 				fi
-				for (( i = 0; i <= ${#FILEPATH[@]}; i++ ))
+				for ((i=0;${i}<=${#FILEPATH[@]}-1;i++))
 				do
-					msg log "i = ${i}"
-					msg log "FILEPATH = ${#FILEPATH[@]}"
-					msg log "LINKPATH = ${#LINKPATH[@]}"
-					msg log "FILEPATH = ${FILEPATH}"
-					msg log "LINKPATH[${i}] = ${LINKPATH[$i]}"
+					msg dbg "i = ${i}"
+					msg dbg "FILEPATH[${i}] = ${FILEPATH[${i}]}"
+					msg dbg "LINKPATH[${i}] = ${LINKPATH[${i}]}"
 					if [ ! -e ${LINKPATH[$i]} ]; then
 						ln -s ${FILEPATH[$i]} ${LINKPATH[$i]}
 						msg success "link ${FILEPATH[$i]} -> ${LINKPATH[$i]}"
 					else
 						msg failed "${LINKPATH[$i]} is already exist. [symbolic link]"
 					fi
-					if [ ${1} == "tmux" ]; then
+					if [ ${1} = "tmux" ]; then
 						msg h2 "init submodule"
 						if [ ! -e ${HOME}/${FILENAME} ]; then
 							msg log "installing tmux-config..."
@@ -145,8 +158,6 @@ setconf ()
 							msg h2 "skip."
 						fi
 					fi
-					FILEPATH=("${FILEPATH[@]:1}")
-					LINKPATH=("${LINKPATH[@]:1}")
 				done
 				unset FILEPATH LINKPATH
 			;;
@@ -158,7 +169,7 @@ setconf ()
 
 ## MAIN ########################################################
 
-msg h1 "scriptname: $0\n"
+msg h1 "scriptname: $0"
 
 case ${OSTYPE} in
 	linux*)
@@ -176,7 +187,7 @@ if ! type git >/dev/null 2>&1; then
 	return 2>&- || exit
 fi
 
-if [ -e ${HOME}/.gitconfig ]; then
+if [ ! -e ${HOME}/.gitconfig ]; then
 	msg error "your computer '.gitconfig' is not found."
 	msg input "exit."
 	return 2>&- || exit
@@ -194,4 +205,5 @@ do
 	msg h2 "end ${f}\n"
 done
 
+msg h1 "all done."
 ################################################################
