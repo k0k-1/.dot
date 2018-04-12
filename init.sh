@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#				* ver				: 3.60
+#				* ver				: 3.61
 
 set -u
 trap exit ERR
@@ -106,6 +106,10 @@ setconf ()
 			return
 			;;
 	esac
+
+	if [ ${1} = "submodule" ]; then
+		return
+	fi
 
 	local FILEPATH=()
 	local LINKPATH=()
