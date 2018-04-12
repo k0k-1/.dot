@@ -5,7 +5,7 @@
 set -u
 trap exit ERR
 
-WORKDIR=$(dirname $(dirname $(readlink -f $0)))
+WORKDIR=$(dirname $(readlink -f $0))
 DOTHOME="${HOME}/.dot"
 
 ## FLAG ########################################################
@@ -51,11 +51,13 @@ msg()
 				local COLOR=1
 				local HEADER=${HEADERTYPE1}
 				local FOOTER=""
+				;;
 		esac
 
 		local HEADER="\033[${COLOR}m${HEADER}"
 		local FOOTER="${FOOTER}\033[00m\n"
 		printf "${HEADER}${@:2}${FOOTER}"
+		local DEBUG=0
 	fi
 }
 
@@ -72,7 +74,7 @@ setconf ()
 		zsh)
 			local DIRNAME="zsh"
 			local MAKEDIR=".cache/${DIRNAME}"
-			local FILENAME=("zshenv" "")
+			local FILENAME=("zshenv" ".")
 			local LINKNAME=(".zshenv" ".${DIRNAME}")
 			local OPTION=("dir" "link")
 			;;
@@ -96,9 +98,10 @@ setconf ()
 	do
 		case $c in
 			dir)
-				local DIRPATH="${WORKDIR}/${MAKEDIR}"
+				local DIRPATH="${HOME}/${MAKEDIR}"
+				msg log "DIRPATH = ${DIRPATH}"
 				if [ -d ${DIRPATH} ]; then
-					mkdir -p ${DIRPATH}
+					#mkdir -p ${DIRPATH}
 					msg success "mkdir ${DIRPATH}"
 				else
 					msg failed "${DIRPATH} is already exist. [directory]"
@@ -106,19 +109,26 @@ setconf ()
 			;;
 			link)
 				if [ ${#FILENAME[@]} == ${#LINKNAME[@]} ]; then
-				for n in ${FILENAME[@]}
-				do
-					FILEPATH=("${WORKDIR}/${DIRNAME}/${n}")
-				done
-				for n in ${LINKNAME[@]}
-				do
-					LINKPATH+=("${HOME}/${n}")
-				done
+					msg log "FILENAME = ${#FILENAME[@]}"
+					msg log "LINKNAME = ${#LINKNAME[@]}"
+					for n in ${FILENAME[@]}
+					do
+						FILEPATH=("${WORKDIR}/${DIRNAME}/${n}")
+					done
+					for n in ${LINKNAME[@]}
+					do
+						LINKPATH+=("${HOME}/${n}")
+					done
 				fi
-				for (( i = 0; i < ${#FILEPATH[@]}; ++i ))
+				for (( i = 0; i <= ${#FILEPATH[@]}; i++ ))
 				do
+					msg log "i = ${i}"
+					msg log "FILEPATH = ${#FILEPATH[@]}"
+					msg log "LINKPATH = ${#LINKPATH[@]}"
+					msg log "FILEPATH = ${FILEPATH}"
+					msg log "LINKPATH[${i}] = ${LINKPATH[$i]}"
 					if [ ! -e ${LINKPATH[$i]} ]; then
-						ln -s ${FILEPATH[$i]} ${LINKPATH[$i]}
+						#ln -s ${FILEPATH[$i]} ${LINKPATH[$i]}
 						msg success "link ${FILEPATH[$i]} -> ${LINKPATH[$i]}"
 					else
 						msg failed "${LINKPATH[$i]} is already exist. [symbolic link]"
@@ -136,6 +146,8 @@ setconf ()
 							msg h2 "skip."
 						fi
 					fi
+					FILEPATH=("${FILEPATH[@]:1}")
+					LINKPATH=("${LINKPATH[@]:1}")
 				done
 				unset FILEPATH LINKPATH
 			;;
