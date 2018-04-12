@@ -141,7 +141,7 @@ setconf ()
 						if [ ! -e ${HOME}/${FILENAME} ]; then
 							msg log "installing tmux-config..."
 							if ! type cmake >/dev/null 2>&1; then
-								msg error "Your computer 'cmake' is NOT installed.\nPlease execute something similar to the following command\nsudo apt install build-essential"
+								msg error "Your computer 'cmake' is NOT installed.\nPlease execute something similar to the following command\nsudo apt install cmake build-essential"
 								msg input "skip."
 								continue
 							else
