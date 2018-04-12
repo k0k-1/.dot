@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#				* ver				: 3.54
+#				* ver				: 3.60
 
 set -u
 trap exit ERR
@@ -10,7 +10,7 @@ DOTHOME="${HOME}/.dot"
 
 ## FLAG ########################################################
 
-FLAG=("vim" "zsh" "ssh" "tmux")
+FLAG=("vim" "zsh" "ssh" "tmux" "submodule")
 
 ################################################################
 
@@ -99,6 +99,12 @@ setconf ()
 			local LINKNAME=(".tmux.conf")
 			local OPTION=("link")
 			;;
+		submodule)
+			msg h2 "init submodule"
+			cd ${WORKDIR} && git submodule init && git submodule update
+			cd ${WORKDIR}/${DIRNAME} && git submodule init && git submodule update
+			return
+			;;
 	esac
 
 	local FILEPATH=()
@@ -137,7 +143,7 @@ setconf ()
 				for ((i=0;${i}<=${#FILEPATH[@]}-1;i++))
 				do
 					if [ ${1} = "tmux" ]; then
-						msg h2 "init submodule"
+						msg h2 "compile tmux plugin"
 						if [ ! -e ${HOME}/${FILENAME} ]; then
 							msg log "installing tmux-config..."
 							if ! type cmake >/dev/null 2>&1; then
@@ -145,8 +151,6 @@ setconf ()
 								msg input "skip."
 								continue
 							else
-								cd ${WORKDIR} && git submodule init && git submodule update
-								cd ${WORKDIR}/${DIRNAME} && git submodule init && git submodule update
 								cd ${WORKDIR}/${DIRNAME}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
 								cd ${WORKDIR}
 								msg h2 "done."
