@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#				* ver				: 3.43
+#				* ver				: 3.51
 
 set -u
 trap exit ERR
@@ -149,11 +149,17 @@ setconf ()
 						msg h2 "init submodule"
 						if [ ! -e ${HOME}/${FILENAME} ]; then
 							msg log "installing tmux-config..."
-							cd ${WORKDIR} && git submodule init && git submodule update
-							cd ${WORKDIR}/${DIRNAME} && git submodule init && git submodule update
-							cd ${WORKDIR}/${DIRNAME}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
-							cd ${WORKDIR}
-							msg h2 "done."
+							if ! type cmake >/dev/null 2>&1; then
+								msg error "your computer 'cmake' is not installed."
+								msg input "skip."
+								continue
+							else
+								cd ${WORKDIR} && git submodule init && git submodule update
+								cd ${WORKDIR}/${DIRNAME} && git submodule init && git submodule update
+								cd ${WORKDIR}/${DIRNAME}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
+								cd ${WORKDIR}
+								msg h2 "done."
+							fi
 						else
 							msg h2 "skip."
 						fi
