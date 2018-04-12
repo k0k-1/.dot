@@ -57,7 +57,6 @@ msg()
 		local HEADER="\033[${COLOR}m${HEADER}"
 		local FOOTER="${FOOTER}\033[00m\n"
 		printf "${HEADER}${@:2}${FOOTER}"
-		local DEBUG=0
 	fi
 }
 
