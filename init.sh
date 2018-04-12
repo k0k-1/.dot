@@ -177,6 +177,12 @@ if ! type git >/dev/null 2>&1; then
 	return 2>&- || exit
 fi
 
+if [ -e ${HOME}/.gitconfig ]; then
+	msg error "your computer '.gitconfig' is not found."
+	msg input "exit."
+	return 2>&- || exit
+fi
+
 if [ ! -e ${WORKDIR} ]; then
 	cp -r ${WORKDIR} ${DOTHOME}
 	${WORKDIR} = ${DOTHOME}
