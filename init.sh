@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#				* ver				: 3.61
+#				* ver				: 3.62
 
 set -u
 trap exit ERR
@@ -102,14 +102,10 @@ setconf ()
 		submodule)
 			msg h2 "init submodule"
 			cd ${WORKDIR} && git submodule init && git submodule update
-			cd ${WORKDIR}/${DIRNAME} && git submodule init && git submodule update
+			cd ${WORKDIR}/tmux && git submodule init && git submodule update
 			return
 			;;
 	esac
-
-	if [ ${1} = "submodule" ]; then
-		return
-	fi
 
 	local FILEPATH=()
 	local LINKPATH=()
