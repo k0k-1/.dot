@@ -1,6 +1,6 @@
 #/bin/bash
 
-#				* ver				: 3.30
+#				* ver				: 3.40
 
 set -u
 trap exit ERR
