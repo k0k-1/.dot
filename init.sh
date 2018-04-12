@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#				* ver				: 3.51
+#				* ver				: 3.52
 
 set -u
 trap exit ERR
@@ -141,7 +141,7 @@ setconf ()
 						if [ ! -e ${HOME}/${FILENAME} ]; then
 							msg log "installing tmux-config..."
 							if ! type cmake >/dev/null 2>&1; then
-								msg error "your computer 'cmake' is not installed."
+								msg error "Your computer 'cmake' is NOT installed.\n Please execute something similar to the following command\nsudo apt install build-essential"
 								msg input "skip."
 								continue
 							else
@@ -183,20 +183,20 @@ case ${OSTYPE} in
 	linux*)
 		;;
 	*)
-		msg error "your environment is ${OSTYPE}. This script can run only on linux."
+		msg error "Your environment is ${OSTYPE}. This script can run only on linux."
 		msg input "exit."
 		return 2>&- || exit
 		;;
 esac
 
 if ! type git >/dev/null 2>&1; then
-	msg error "your computer 'git' is not installed."
+	msg error "Your computer 'git' is NOT installed."
 	msg input "exit."
 	return 2>&- || exit
 fi
 
 if [ ! -e ${HOME}/.gitconfig ]; then
-	msg error "your computer '.gitconfig' is not found."
+	msg error "Your computer '.gitconfig' is NOT found."
 	msg input "exit."
 	return 2>&- || exit
 fi
