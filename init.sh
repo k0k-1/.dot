@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#				* ver				: 3.62
+#				* ver				: 3.63
 
 set -u
 trap exit ERR
@@ -10,7 +10,7 @@ DOTHOME="${HOME}/.dot"
 
 ## FLAG ########################################################
 
-FLAG=("vim" "zsh" "ssh" "tmux" "submodule")
+FLAG=("submodule" "vim" "zsh" "ssh" "tmux")
 
 ################################################################
 
