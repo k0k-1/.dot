@@ -100,8 +100,8 @@ setconf ()
 			dir)
 				local DIRPATH="${HOME}/${MAKEDIR}"
 				msg log "DIRPATH = ${DIRPATH}"
-				if [ -d ${DIRPATH} ]; then
-					#mkdir -p ${DIRPATH}
+				if [ ! -d ${DIRPATH} ]; then
+					mkdir -p ${DIRPATH}
 					msg success "mkdir ${DIRPATH}"
 				else
 					msg failed "${DIRPATH} is already exist. [directory]"
@@ -128,7 +128,7 @@ setconf ()
 					msg log "FILEPATH = ${FILEPATH}"
 					msg log "LINKPATH[${i}] = ${LINKPATH[$i]}"
 					if [ ! -e ${LINKPATH[$i]} ]; then
-						#ln -s ${FILEPATH[$i]} ${LINKPATH[$i]}
+						ln -s ${FILEPATH[$i]} ${LINKPATH[$i]}
 						msg success "link ${FILEPATH[$i]} -> ${LINKPATH[$i]}"
 					else
 						msg failed "${LINKPATH[$i]} is already exist. [symbolic link]"
