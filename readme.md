@@ -4,6 +4,12 @@ Usage
 -------------------
 
 ```bash
+$ ./init.sh
+```
+
+or
+
+```bash
 $ bash init.sh
 ```
 
