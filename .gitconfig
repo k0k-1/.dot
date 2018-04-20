@@ -58,4 +58,4 @@
   add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
   gr = grep
   gn = grep -n
-	submodule-upgrade = git submodule foreach git pull origin master
+	submodule-upgrade = submodule foreach git pull origin master
