@@ -127,6 +127,7 @@ if (( $+commands[git] )); then
 	# task: make plugin manager
 fi
 
+#https://github.com/junegunn/fzf
 source_file $HOME/.fzf.zsh
 if (( $+commands[fzf] )); then
 	fe() {
