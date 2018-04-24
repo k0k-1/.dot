@@ -49,11 +49,6 @@ msg()
 				local HEADER="|-- [msg] "
 				local FOOTER=""
 				;;
-			log)
-				local COLOR=15 #WHITE
-				local HEADER=${HEADERTYPE1}
-				local FOOTER=""
-				;;
 			dbg)
 				if [ ${DEBUG} = 1 ];then
 					local COLOR=83 #GREEN
@@ -62,6 +57,11 @@ msg()
 				else
 					return
 				fi
+				;;
+			*)
+				local COLOR=15 #WHITE
+				local HEADER=${HEADERTYPE1}
+				local FOOTER=""
 				;;
 		esac
 
