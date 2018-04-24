@@ -14,7 +14,7 @@ FLAG=("submodule" "vim" "zsh" "ssh" "tmux")
 
 ################################################################
 
-# usage: msg {input|error|success|failed|h1|h2|log} "message body"
+# usage: msg {input|error|success|failed|em|msg|log} "message body"
 msg()
 {
 	local DEBUG=0
@@ -39,12 +39,12 @@ msg()
 				local HEADER=${HEADERTYPE1}
 				local FOOTER=""
 				;;
-			h1)
+			em)
 				local COLOR=110 #BLUE
 				local HEADER="\n###############################################################\n"
 				local FOOTER="\n###############################################################\n"
 				;;
-			h2)
+			msg)
 				local COLOR=216 #ORANGE
 				local HEADER="|-- [msg] "
 				local FOOTER=""
@@ -100,7 +100,7 @@ setconf ()
 			local OPTION=("link")
 			;;
 		submodule)
-			msg h2 "init submodule"
+			msg msg "init submodule"
 			cd ${WORKDIR} && git submodule init && git submodule update
 			cd ${WORKDIR}/tmux && git submodule init && git submodule update
 			return
@@ -143,7 +143,7 @@ setconf ()
 				for ((i=0;${i}<=${#FILEPATH[@]}-1;i++))
 				do
 					if [ ${1} = "tmux" ]; then
-						msg h2 "compile tmux plugin"
+						msg msg "compile tmux plugin"
 						if [ ! -e ${HOME}/${FILENAME} ]; then
 							msg log "installing tmux-config..."
 							if ! type cmake >/dev/null 2>&1; then
@@ -153,10 +153,10 @@ setconf ()
 							else
 								cd ${WORKDIR}/${DIRNAME}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
 								cd ${WORKDIR}
-								msg h2 "done."
+								msg msg "done."
 							fi
 						else
-							msg h2 "skip."
+							msg msg "skip."
 						fi
 					fi
 
@@ -181,7 +181,7 @@ setconf ()
 
 ## MAIN ########################################################
 
-msg h1 "scriptname: $0"
+msg em "scriptname: $0"
 
 case ${OSTYPE} in
 	linux*)
@@ -212,10 +212,10 @@ fi
 
 for f in ${FLAG[@]}
 do
-	msg h2 "start ${f}"
+	msg msg "start ${f}"
 	setconf ${f}
-	msg h2 "end ${f}\n"
+	msg msg "end ${f}\n"
 done
 
-msg h1 "all done."
+msg em "all done."
 ################################################################
