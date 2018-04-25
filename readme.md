@@ -4,13 +4,13 @@ Usage
 -------------------
 
 ```bash
-$ ./init.sh
+$ ./install
 ```
 
 or
 
 ```bash
-$ bash init.sh
+$ bash install
 ```
 
 Supported types
