@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#				* ver				: 3.82
+#				* ver				: 3.83
 
 set -u
 trap exit ERR
@@ -13,8 +13,8 @@ help() {
 	cat << EOF
 usage: $0 [options]
 
-    --help               Show this message
-    --all (-a )          Install dotfiles of ssh, submodule, tmux, vim and zsh
+    --help (-h )         Show this message
+    --all  (-a )         Install dotfiles of ssh, submodule, tmux, vim and zsh
     --ssh                Install only the configuration files of ssh
     --submodule          Execute only settings related to submodules
      -tmux               Install only the dotfiles of tmux
@@ -30,6 +30,10 @@ fi
 
 for opt in ${@}; do
 	case $opt in
+		-h)
+			help
+			exit 0
+			;;
 		--help)
 			help
 			exit 0
