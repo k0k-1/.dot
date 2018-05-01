@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-#				* ver				: 3.80
+#				* ver				: 3.81
 
 set -u
 trap exit ERR
 
 workdir=$(dirname $(readlink -f $0))
-dothome="${home}/.dot"
+dothome="${HOME}/.dot"
 flag=()
 
 help() {
@@ -149,7 +149,7 @@ setconf ()
 	do
 		case $c in
 			dir)
-				local dirpath="${home}/${makedir}"
+				local dirpath="${HOME}/${makedir}"
 				msg dbg "dirpath = ${dirpath}"
 				if [ ! -d ${dirpath} ]; then
 					mkdir -p ${dirpath}
@@ -170,7 +170,7 @@ setconf ()
 					msg dbg "filepath = ${#filepath[@]}"
 					for n in ${linkname[@]}
 					do
-						linkpath+=("${home}/${n}")
+						linkpath+=("${HOME}/${n}")
 					msg dbg "linkpath = ${n}"
 					done
 					msg dbg "linkpath = ${#linkpath[@]}"
@@ -179,7 +179,7 @@ setconf ()
 				do
 					if [ ${1} = "tmux" ]; then
 						msg msg "compile tmux plugin"
-						if [ ! -e ${home}/${filename} ]; then
+						if [ ! -e ${HOME}/${filename} ]; then
 							msg log "installing tmux-config..."
 							if ! type cmake >/dev/null 2>&1; then
 								msg error "Your computer 'cmake' is NOT installed.\nPlease execute something similar to the following command\nsudo apt install cmake build-essential"
@@ -218,11 +218,11 @@ setconf ()
 
 msg em "scriptname: $0"
 
-case ${ostype} in
+case ${OSTYPE} in
 	linux*)
 		;;
 	*)
-		msg error "Your environment is ${ostype}. This script can run only on linux."
+		msg error "Your environment is ${OSTYPE}. This script can run only on linux."
 		msg input "exit."
 		return 2>&- || exit
 		;;
@@ -234,7 +234,7 @@ if ! type git >/dev/null 2>&1; then
 	return 2>&- || exit
 fi
 
-if [ ! -e ${home}/.gitconfig ]; then
+if [ ! -e ${HOME}/.gitconfig ]; then
 	msg error "Your computer '.gitconfig' is NOT found."
 	msg input "exit."
 	return 2>&- || exit
