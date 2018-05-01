@@ -1,18 +1,53 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-#				* ver				: 3.72
+#				* ver				: 3.80
 
 set -u
 trap exit ERR
 
 WORKDIR=$(dirname $(readlink -f $0))
 DOTHOME="${HOME}/.dot"
+FLAG=()
 
-## FLAG ########################################################
+help() {
+	cat << EOF
+usage: $0 [OPTIONS]
 
-FLAG=("submodule" "vim" "zsh" "ssh" "tmux")
+    --help               Show this message
+    --all (-a )          Install dotfiles of ssh, submodule, tmux, vim and zsh
+    --ssh                Install only the configuration files of ssh
+    --submodule          Execute only settings related to submodules
+     -tmux               Install only the dotfiles of tmux
+    --vim                Install only the dotfiles of vim
+    --zsh                Install only the dotfiles of zsh
+EOF
+}
 
-################################################################
+if [ $# -le 0 ]; then
+	help
+  exit 1
+fi
+
+for opt in "$@"; do
+	case $opt in
+		--help)
+			help
+			exit 0
+			;;
+		-a)          FLAG+=("ssh" "submodule" "tmux" "vim" "zsh");;
+		--all)       FLAG+=("ssh" "submodule" "tmux" "vim" "zsh");;
+		--ssh)       FLAG+=("ssh");;
+		--submodule) FLAG+=("submodule");;
+		--tmux)      FLAG+=("tmux");;
+		--vim)       FLAG+=("vim");;
+		--zsh)       FLAG+=("zsh");;
+		*)
+			echo "unknown option: $opt"
+			help
+			exit 1
+			;;
+	esac
+done
 
 # usage: msg {input|error|success|failed|em|msg|log} "message body"
 msg()
