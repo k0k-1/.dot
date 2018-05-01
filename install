@@ -5,13 +5,13 @@
 set -u
 trap exit ERR
 
-WORKDIR=$(dirname $(readlink -f $0))
-DOTHOME="${HOME}/.dot"
-FLAG=()
+workdir=$(dirname $(readlink -f $0))
+dothome="${home}/.dot"
+flag=()
 
 help() {
 	cat << EOF
-usage: $0 [OPTIONS]
+usage: $0 [options]
 
     --help               Show this message
     --all (-a )          Install dotfiles of ssh, submodule, tmux, vim and zsh
@@ -34,13 +34,13 @@ for opt in "$@"; do
 			help
 			exit 0
 			;;
-		-a)          FLAG+=("ssh" "submodule" "tmux" "vim" "zsh");;
-		--all)       FLAG+=("ssh" "submodule" "tmux" "vim" "zsh");;
-		--ssh)       FLAG+=("ssh");;
-		--submodule) FLAG+=("submodule");;
-		--tmux)      FLAG+=("tmux");;
-		--vim)       FLAG+=("vim");;
-		--zsh)       FLAG+=("zsh");;
+		-a)          flag+=("ssh" "submodule" "tmux" "vim" "zsh");;
+		--all)       flag+=("ssh" "submodule" "tmux" "vim" "zsh");;
+		--ssh)       flag+=("ssh");;
+		--submodule) flag+=("submodule");;
+		--tmux)      flag+=("tmux");;
+		--vim)       flag+=("vim");;
+		--zsh)       flag+=("zsh");;
 		*)
 			echo "unknown option: $opt"
 			help
@@ -52,57 +52,57 @@ done
 # usage: msg {input|error|success|failed|em|msg|log} "message body"
 msg()
 {
-	local DEBUG=0
+	local debug=0
 
 	if [ $1 = "input" ]; then
 		read -p "press [enter] to ${@:2}." KEY
 	else
-		local HEADERTYPE1="|-- [$1] "
+		local headertype1="|-- [$1] "
 		case $1 in
 			error)
-				local COLOR=200 #RED
-				local HEADER="\n!! ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
-				local FOOTER="\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+				local color=200 #RED
+				local header="\n!! ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+				local footer="\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
 				;;
 			success)
-				local COLOR=47 # GREEN
-				local HEADER=${HEADERTYPE1}
-				local FOOTER=""
+				local color=47 # GREEN
+				local header=${headertype1}
+				local footer=""
 				;;
 			failed)
-				local COLOR=197 #RED
-				local HEADER=${HEADERTYPE1}
-				local FOOTER=""
+				local color=197 #RED
+				local header=${headertype1}
+				local footer=""
 				;;
 			em)
-				local COLOR=110 #BLUE
-				local HEADER="\n###############################################################\n"
-				local FOOTER="\n###############################################################\n"
+				local color=110 #BLUE
+				local header="\n###############################################################\n"
+				local footer="\n###############################################################\n"
 				;;
 			msg)
-				local COLOR=216 #ORANGE
-				local HEADER="|-- [msg] "
-				local FOOTER=""
+				local color=216 #ORANGE
+				local header="|-- [msg] "
+				local footer=""
 				;;
 			dbg)
-				if [ ${DEBUG} = 1 ];then
-					local COLOR=83 #GREEN
-					local HEADER=${HEADERTYPE1}
-					local FOOTER=""
+				if [ ${debug} = 1 ];then
+					local color=83 #GREEN
+					local header=${headertype1}
+					local footer=""
 				else
 					return
 				fi
 				;;
 			*)
-				local COLOR=15 #WHITE
-				local HEADER=${HEADERTYPE1}
-				local FOOTER=""
+				local color=15 #WHITE
+				local header=${headertype1}
+				local footer=""
 				;;
 		esac
 
-		local HEADER="\x1b[38;05;${COLOR}m${HEADER}"
-		local FOOTER="${FOOTER}\033[00m\n"
-		printf "${HEADER}${@:2}${FOOTER}"
+		local header="\x1b[38;05;${color}m${header}"
+		local footer="${footer}\033[00m\n"
+		printf "${header}${@:2}${footer}"
 	fi
 }
 
@@ -110,84 +110,84 @@ setconf ()
 {
 	case $1 in
 		vim)
-			local DIRNAME="vim"
-			local MAKEDIR=".${DIRNAME}"
-			local FILENAME=("vimrc" "rc")
-			local LINKNAME=(".vimrc" "${MAKEDIR}/rc")
-			local OPTION=("dir" "link")
+			local dirname="vim"
+			local makedir=".${dirname}"
+			local filename=("vimrc" "rc")
+			local linkname=(".vimrc" "${makedir}/rc")
+			local option=("dir" "link")
 			;;
 		zsh)
-			local DIRNAME="zsh"
-			local MAKEDIR=".cache/${DIRNAME}"
-			local FILENAME=("zshenv" ".")
-			local LINKNAME=(".zshenv" ".${DIRNAME}")
-			local OPTION=("dir" "link")
+			local dirname="zsh"
+			local makedir=".cache/${dirname}"
+			local filename=("zshenv" ".")
+			local linkname=(".zshenv" ".${dirname}")
+			local option=("dir" "link")
 			;;
 		ssh)
-			local DIRNAME="ssh"
-			local MAKEDIR=".${DIRNAME}/pub"
-			local OPTION=("dir")
+			local dirname="ssh"
+			local makedir=".${dirname}/pub"
+			local option=("dir")
 			;;
 		tmux)
-			local DIRNAME="tmux"
-			local FILENAME=(".tmux.conf")
-			local LINKNAME=(".tmux.conf")
-			local OPTION=("link")
+			local dirname="tmux"
+			local filename=(".tmux.conf")
+			local linkname=(".tmux.conf")
+			local option=("link")
 			;;
 		submodule)
 			msg msg "init submodule"
-			cd ${WORKDIR} && git submodule init && git submodule update
-			cd ${WORKDIR}/tmux && git submodule init && git submodule update
+			cd ${workdir} && git submodule init && git submodule update
+			cd ${workdir}/tmux && git submodule init && git submodule update
 			return
 			;;
 	esac
 
-	local FILEPATH=()
-	local LINKPATH=()
+	local filepath=()
+	local linkpath=()
 
-	for c in ${OPTION[@]}
+	for c in ${option[@]}
 	do
 		case $c in
 			dir)
-				local DIRPATH="${HOME}/${MAKEDIR}"
-				msg dbg "DIRPATH = ${DIRPATH}"
-				if [ ! -d ${DIRPATH} ]; then
-					mkdir -p ${DIRPATH}
-					msg success "mkdir ${DIRPATH}"
+				local dirpath="${home}/${makedir}"
+				msg dbg "dirpath = ${dirpath}"
+				if [ ! -d ${dirpath} ]; then
+					mkdir -p ${dirpath}
+					msg success "mkdir ${dirpath}"
 				else
-					msg failed "${DIRPATH} is already exist. [directory]"
+					msg failed "${dirpath} is already exist. [directory]"
 				fi
 			;;
 			link)
-				if [ ${#FILENAME[@]} = ${#LINKNAME[@]} ]; then
-					msg dbg "FILENAME = ${#FILENAME[@]}"
-					msg dbg "LINKNAME = ${#LINKNAME[@]}"
-					for n in ${FILENAME[@]}
+				if [ ${#filename[@]} = ${#linkname[@]} ]; then
+					msg dbg "filename = ${#filename[@]}"
+					msg dbg "linkname = ${#linkname[@]}"
+					for n in ${filename[@]}
 					do
-						FILEPATH+=("${WORKDIR}/${DIRNAME}/${n}")
-					msg dbg "FILEPATH = ${n}"
+						filepath+=("${workdir}/${dirname}/${n}")
+					msg dbg "filepath = ${n}"
 					done
-					msg dbg "FILEPATH = ${#FILEPATH[@]}"
-					for n in ${LINKNAME[@]}
+					msg dbg "filepath = ${#filepath[@]}"
+					for n in ${linkname[@]}
 					do
-						LINKPATH+=("${HOME}/${n}")
-					msg dbg "LINKPATH = ${n}"
+						linkpath+=("${home}/${n}")
+					msg dbg "linkpath = ${n}"
 					done
-					msg dbg "LINKPATH = ${#LINKPATH[@]}"
+					msg dbg "linkpath = ${#linkpath[@]}"
 				fi
-				for ((i=0;${i}<=${#FILEPATH[@]}-1;i++))
+				for ((i=0;${i}<=${#filepath[@]}-1;i++))
 				do
 					if [ ${1} = "tmux" ]; then
 						msg msg "compile tmux plugin"
-						if [ ! -e ${HOME}/${FILENAME} ]; then
+						if [ ! -e ${home}/${filename} ]; then
 							msg log "installing tmux-config..."
 							if ! type cmake >/dev/null 2>&1; then
 								msg error "Your computer 'cmake' is NOT installed.\nPlease execute something similar to the following command\nsudo apt install cmake build-essential"
 								msg input "skip."
 								continue
 							else
-								cd ${WORKDIR}/${DIRNAME}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
-								cd ${WORKDIR}
+								cd ${workdir}/${dirname}/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
+								cd ${workdir}
 								msg msg "done."
 							fi
 						else
@@ -196,17 +196,17 @@ setconf ()
 					fi
 
 					msg dbg "i = ${i}"
-					msg dbg "FILEPATH[${i}] = ${FILEPATH[${i}]}"
-					msg dbg "LINKPATH[${i}] = ${LINKPATH[${i}]}"
-					if [ ! -e ${LINKPATH[$i]} ]; then
-						ln -s ${FILEPATH[$i]} ${LINKPATH[$i]}
-						msg success "link ${FILEPATH[$i]} -> ${LINKPATH[$i]}"
+					msg dbg "filepath[${i}] = ${filepath[${i}]}"
+					msg dbg "linkpath[${i}] = ${linkpath[${i}]}"
+					if [ ! -e ${linkpath[$i]} ]; then
+						ln -s ${filepath[$i]} ${linkpath[$i]}
+						msg success "link ${filepath[$i]} -> ${linkpath[$i]}"
 					else
-						msg failed "${LINKPATH[$i]} is already exist. [symbolic link]"
+						msg failed "${linkpath[$i]} is already exist. [symbolic link]"
 					fi
 
 				done
-				unset FILEPATH LINKPATH
+				unset filepath linkpath
 			;;
 		esac
 	done
@@ -218,11 +218,11 @@ setconf ()
 
 msg em "scriptname: $0"
 
-case ${OSTYPE} in
+case ${ostype} in
 	linux*)
 		;;
 	*)
-		msg error "Your environment is ${OSTYPE}. This script can run only on linux."
+		msg error "Your environment is ${ostype}. This script can run only on linux."
 		msg input "exit."
 		return 2>&- || exit
 		;;
@@ -234,18 +234,18 @@ if ! type git >/dev/null 2>&1; then
 	return 2>&- || exit
 fi
 
-if [ ! -e ${HOME}/.gitconfig ]; then
+if [ ! -e ${home}/.gitconfig ]; then
 	msg error "Your computer '.gitconfig' is NOT found."
 	msg input "exit."
 	return 2>&- || exit
 fi
 
-if [ ! -e ${WORKDIR} ]; then
-	cp -r ${WORKDIR} ${DOTHOME}
-	${WORKDIR} = ${DOTHOME}
+if [ ! -e ${workdir} ]; then
+	cp -r ${workdir} ${dothome}
+	${workdir} = ${dothome}
 fi
 
-for f in ${FLAG[@]}
+for f in ${flag[@]}
 do
 	msg msg "start ${f}"
 	setconf ${f}
