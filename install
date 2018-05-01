@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#				* ver				: 3.81
+#				* ver				: 3.82
 
 set -u
 trap exit ERR
@@ -23,12 +23,12 @@ usage: $0 [options]
 EOF
 }
 
-if [ $# -le 0 ]; then
+if [ ${#} -le 0 ]; then
 	help
   exit 1
 fi
 
-for opt in "$@"; do
+for opt in ${@}; do
 	case $opt in
 		--help)
 			help
