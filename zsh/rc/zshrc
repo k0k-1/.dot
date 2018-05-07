@@ -115,10 +115,8 @@ if (( $+commands[go] )); then
 	fi
 fi
 
-if (( $+commands[cargo] )); then
- 	if [ -e $HOME/.cargo/bin ]; then
- 		export PATH="$HOME/.cargo/bin:$PATH"
- 	fi
+if [ -e $HOME/.cargo/bin ]; then
+	export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # ]]
