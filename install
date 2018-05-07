@@ -53,7 +53,7 @@ for opt in ${@}; do
 	esac
 done
 
-# usage: msg {input|error|success|failed|em|msg|log} "message body"
+# usage: msg {input|error|success|failed|em|msg} "message body"
 msg()
 {
 	local debug=0
@@ -61,51 +61,59 @@ msg()
 	if [ $1 = "input" ]; then
 		read -p "press [enter] to ${@:2}." KEY
 	else
-		local headertype1="|-- [$1] "
 		case $1 in
 			error)
-				local color=200 #RED
-				local header="\n!! ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
-				local footer="\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+				local fcolor=1 #RED
+				local bcolor=1 #RED
+				local header="  ERROR  "
+				local footer="         "
 				;;
 			success)
-				local color=47 # GREEN
-				local header=${headertype1}
+				local fcolor=47 # GREEN
+				local bcolor=47 # GREEN
+				local header=" success "
 				local footer=""
 				;;
 			failed)
-				local color=197 #RED
-				local header=${headertype1}
+				local fcolor=15  #dark gray
+				local bcolor=161 #red
+				local header=" failed  "
 				local footer=""
 				;;
 			em)
-				local color=110 #BLUE
-				local header="\n###############################################################\n"
-				local footer="\n###############################################################\n"
+				local fcolor=33 #BLUE
+				local bcolor=33 #BLUE
+				local header="         "
+				local footer=""
 				;;
 			msg)
-				local color=216 #ORANGE
-				local header="|-- [msg] "
+				local fcolor=15 #ORANGE
+				local bcolor=239 #ORANGE
+				local header="   msg   "
 				local footer=""
 				;;
 			dbg)
 				if [ ${debug} = 1 ];then
-					local color=83 #GREEN
-					local header=${headertype1}
+					local fcolor=233 #GREEN
+					local bcolor=220 #GREEN
+					local header="  debug  "
 					local footer=""
 				else
 					return
 				fi
 				;;
 			*)
-				local color=15 #WHITE
-				local header=${headertype1}
+				local fcolor=15 #WHITE
+				local bcolor=15 #WHITE
 				local footer=""
 				;;
 		esac
 
-		local header="\x1b[38;05;${color}m${header}"
-		local footer="${footer}\033[00m\n"
+		local f="\x1b[38;05;${fcolor}m"
+		local b="\x1b[48;05;${bcolor}m"
+		local reset="\033[00m"
+		local header="${f}${b}${header}${reset} "
+		local footer=" ${f}${b}${footer}${reset}\n"
 		printf "${header}${@:2}${footer}"
 	fi
 }
@@ -220,7 +228,7 @@ setconf ()
 
 ## MAIN ########################################################
 
-msg em "scriptname: $0"
+msg em "start script: $0"
 
 case ${OSTYPE} in
 	linux*)
@@ -251,9 +259,9 @@ fi
 
 for f in ${flag[@]}
 do
-	msg msg "start ${f}"
+	msg msg "start initial settings of ${f}"
 	setconf ${f}
-	msg msg "end ${f}\n"
+	msg msg "end initial settings of ${f}\n"
 done
 
 msg em "all done."
