@@ -109,8 +109,8 @@ msg()
 				;;
 		esac
 
-		local f="\x1b[38;05;${fcolor}m"
-		local b="\x1b[48;05;${bcolor}m"
+		local f="\x1b[38;05;${fcolor}m" # foreground color
+		local b="\x1b[48;05;${bcolor}m" # background color
 		local reset="\033[00m"
 		local header="${f}${b}${header}${reset} "
 		local footer=" ${f}${b}${footer}${reset}\n"
