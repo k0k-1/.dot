@@ -115,6 +115,12 @@ if (( $+commands[go] )); then
 	fi
 fi
 
+if (( $+commands[cargo] )); then
+ 	if [ -e $HOME/.cargo/bin ]; then
+ 		export PATH="$HOME/.cargo/bin:$PATH"
+ 	fi ;;
+fi
+
 # ]]
 # * «« -------------------------------------------------/
 
@@ -387,7 +393,7 @@ case ${OSTYPE} in #uname http://en.wikipedia.org/wiki/Uname
 		fi
 		if [ -e ${HOME}/.tmux.conf ]; then 
 			[[ -z "${TMUX}" && -z "${WINDOW}" && ! -z "${PS1}" ]] && tmux
-		fi ;;
+		fi
 	# mac os
 	darwin*)
 		alias ls='ls -G -F -L'
