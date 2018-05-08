@@ -63,14 +63,14 @@ msg()
 	else
 		case $1 in
 			error)
-				local fcolor=1 # red
-				local bcolor=1 # red
+				local fcolor=1   # red
+				local bcolor=239 # dark gray
 				local header="  ERROR  "
 				local footer="         "
 				;;
 			success)
-				local fcolor=47 # green
-				local bcolor=47 # green
+				local fcolor=240 # dark gray
+				local bcolor=40  # green
 				local header=" success "
 				local footer=""
 				;;
