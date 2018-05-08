@@ -63,39 +63,39 @@ msg()
 	else
 		case $1 in
 			error)
-				local fcolor=1 #RED
-				local bcolor=1 #RED
+				local fcolor=1 # red
+				local bcolor=1 # red
 				local header="  ERROR  "
 				local footer="         "
 				;;
 			success)
-				local fcolor=47 # GREEN
-				local bcolor=47 # GREEN
+				local fcolor=47 # green
+				local bcolor=47 # green
 				local header=" success "
 				local footer=""
 				;;
 			failed)
-				local fcolor=15  #dark gray
-				local bcolor=161 #red
+				local fcolor=15  # white
+				local bcolor=161 # magenta
 				local header=" failed  "
 				local footer=""
 				;;
 			em)
-				local fcolor=33 #BLUE
-				local bcolor=33 #BLUE
+				local fcolor=33 # cyan
+				local bcolor=33 # cyan
 				local header="         "
 				local footer=""
 				;;
 			msg)
-				local fcolor=15 #ORANGE
-				local bcolor=239 #ORANGE
+				local fcolor=15  # white
+				local bcolor=239 # dark gray
 				local header="   msg   "
 				local footer=""
 				;;
 			dbg)
 				if [ ${debug} = 1 ];then
-					local fcolor=233 #GREEN
-					local bcolor=220 #GREEN
+					local fcolor=233 # dark gray
+					local bcolor=220 # yellow
 					local header="  debug  "
 					local footer=""
 				else
@@ -103,8 +103,8 @@ msg()
 				fi
 				;;
 			*)
-				local fcolor=15 #WHITE
-				local bcolor=15 #WHITE
+				local fcolor=15 # white
+				local bcolor=15 # white
 				local footer=""
 				;;
 		esac
