@@ -25,7 +25,7 @@ EOF
 
 if [ ${#} -le 0 ]; then
 	help
-  exit 1
+	exit 1
 fi
 
 for opt in ${@}; do
@@ -114,6 +114,7 @@ msg()
 		local reset="\033[00m"
 		local header="${f}${b}${header}${reset} "
 		local footer=" ${f}${b}${footer}${reset}\n"
+
 		printf "${header}${@:2}${footer}"
 	fi
 }
@@ -265,4 +266,5 @@ do
 done
 
 msg em "all done."
+
 ################################################################
