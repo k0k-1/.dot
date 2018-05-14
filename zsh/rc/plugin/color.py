@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # Copyright (C) 2006 by Johannes Zellner, <johannes@zellner.org>
 # modified by mac@calmar.ws to fit my output needs
 # modified by crncosta@carloscosta.org to fit my output needs
