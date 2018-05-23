@@ -1,57 +1,120 @@
 #!/usr/bin/env bash
 
-#				* ver				: 3.91
-
 set -u
 trap exit ERR
 
 workdir=$(dirname $(readlink -f $0))
 dothome="${HOME}/.dot"
-flag=()
 
-help() {
+filename=$(basename $0)
+version="4.00"
+
+usage() {
 	cat << EOF
 usage: $0 [options]
 
-    --help (-h )         Show this message
-    --all  (-a )         Install dotfiles of ssh, submodule, tmux, vim and zsh
-    --ssh                Install only the configuration files of ssh
-    --submodule          Execute only settings related to submodules
-     -tmux               Install only the dotfiles of tmux
-    --vim                Install only the dotfiles of vim
-    --zsh                Install only the dotfiles of zsh
+    -h | --help | --usage  Show this message
+    -v | --version         Show version of this program
+    -a | --all             Install dotfiles of ssh, submodule, tmux, vim and zsh
+    --ssh                  Install only the configuration files of ssh
+    --submodule            Execute only settings related to submodules
+    --tmux                 Install only the dotfiles of tmux
+    --vim                  Install only the dotfiles of vim
+    --zsh                  Install only the dotfiles of zsh
 EOF
 }
 
 if [ ${#} -le 0 ]; then
-	help
+	usage
 	exit 1
 fi
 
-for opt in ${@}; do
-	case $opt in
-		-h)
-			help
+# ref. https://qiita.com/b4b4r07/items/dcd6be0bb9c9185475bb
+for opt in ${@}
+do
+	case ${opt} in
+		'-h'|'--help'|'--usage')
+			usage
 			exit 0
 			;;
-		--help)
-			help
+		'-v'|'--version')
+			echo ${version}
 			exit 0
 			;;
-		-a)          flag+=("ssh" "submodule" "tmux" "vim" "zsh");;
-		--all)       flag+=("ssh" "submodule" "tmux" "vim" "zsh");;
-		--ssh)       flag+=("ssh");;
-		--submodule) flag+=("submodule");;
-		--tmux)      flag+=("tmux");;
-		--vim)       flag+=("vim");;
-		--zsh)       flag+=("zsh");;
-		*)
-			echo "unknown option: $opt"
-			help
+		'-a'|'--all')
+			flag+=("ssh" "submodule" "tmux" "vim" "zsh")
+			shift 1
+			;;
+		'--ssh')
+			flag+=("ssh")
+			shift 1
+			;;
+		'--submodule')
+			flag+=("submodule")
+			shift 1
+			;;
+		'--tmux' )
+			flag+=("tmux")
+			shift 1
+			;;
+		'--vim' )
+			flag+=("vim")
+			shift 1
+			;;
+		'--zsh' )
+			flag+=("zsh")
+			shift 1
+			;;
+		'--'|'-' )
+			shift 1
+			param+=("$@")
+			break
+			;;
+		-*)
+			echo "$filename: illegal option -- '$(echo $1 | sed 's/^-*//')'" 1>&2
 			exit 1
+			;;
+		*)
+			if [[ ! -z "${1}" ]] && [[ ! "${1}" =~ ^-+ ]]; then
+				param+=("${1}")
+				shift 1
+			fi
 			;;
 	esac
 done
+
+param+=("")
+if [ ! -z ${param} ]; then
+ 	echo "${filename}: too few arguments" 1>&2
+ 	echo "Try '${filename} --help' for more information." 1>&2
+	exit 1
+fi
+
+#declare -i argc=0
+#declare -a argv=()
+#
+#while (( $# > 0 ))
+#do
+#	case "$1" in
+#		-*)
+#			if [[ "$1" =~ 'n' ]]; then
+#				nflag='-n'
+#			fi
+#			if [[ "$1" =~ 'l' ]]; then
+#				lflag='-l'
+#			fi
+#			if [[ "$1" =~ 'p' ]]; then
+#				pflag='-p'
+#			fi
+#			shift
+#			;;
+#		*)
+#			((++argc))
+#			argv=("${argv[@]}" "$1")
+#			shift
+#			;;
+#	esac
+#done
 
 # usage: msg {input|error|success|failed|em|msg} "message body"
 msg()
@@ -63,10 +126,10 @@ msg()
 	else
 		case $1 in
 			error)
-				local fcolor=1   # red
+				local fcolor=1	 # red
 				local bcolor=239 # dark gray
 				local header="  ERROR  "
-				local footer="         "
+				local footer=""
 				;;
 			success)
 				local fcolor=240 # dark gray
@@ -207,7 +270,6 @@ setconf ()
 							msg msg "skip."
 						fi
 					fi
-
 					msg dbg "i = ${i}"
 					msg dbg "filepath[${i}] = ${filepath[${i}]}"
 					msg dbg "linkpath[${i}] = ${linkpath[${i}]}"
