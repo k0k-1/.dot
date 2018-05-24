@@ -294,15 +294,11 @@ setconf ()
 
 msg em "start script: $0"
 
-case ${OSTYPE} in
-	linux*)
-		;;
-	*)
-		msg error "Your environment is ${OSTYPE}. This script can run only on linux."
-		msg input "exit."
-		return 2>&- || exit
-		;;
-esac
+if [ ${OSTYPE} =~ "linux" ]; then
+	msg error "Your environment is ${OSTYPE}. This script can run only on linux."
+	msg input "exit."
+	return 2>&- || exit
+fi
 
 if ! type git >/dev/null 2>&1; then
 	msg error "Your computer 'git' is NOT installed."
