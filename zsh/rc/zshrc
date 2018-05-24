@@ -17,7 +17,7 @@
 #																				 |___|
 
 #				* auther		: k0k1
-#				* ver				: 3.30
+#				* ver				: 3.40
 
 
 
@@ -63,6 +63,7 @@ function source_file {
 # * »»	complement -------------------------------------/
 # [[
 
+zmodload zsh/mapfile
 autoload -Uz compinit; compinit
 setopt auto_list 
 setopt auto_menu 
