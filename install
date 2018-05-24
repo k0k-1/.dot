@@ -13,14 +13,14 @@ usage() {
 	cat << EOF
 usage: $0 [options]
 
-    -h | --help | --usage  Show this message
-    -v | --version         Show version of this program
-    -a | --all             Install dotfiles of ssh, submodule, tmux, vim and zsh
-    --ssh                  Install only the configuration files of ssh
-    --submodule            Execute only settings related to submodules
-    --tmux                 Install only the dotfiles of tmux
-    --vim                  Install only the dotfiles of vim
-    --zsh                  Install only the dotfiles of zsh
+    --help -h --usage : Show this message
+    --version -v      : Show version of this program
+    --all -a          : Install dotfiles of ssh, submodule, tmux, vim and zsh
+    --ssh             : Install ssh's configuration files 
+    --submodule       : Execute only settings related to submodules
+    --tmux            : Install tmux's dotfiles
+    --vim             : Install vim's dotfiles
+    --zsh             : Install zsh's dotfiles
 EOF
 }
 
