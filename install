@@ -7,7 +7,7 @@ workdir=$(dirname $(readlink -f $0))
 dothome="${HOME}/.dot"
 
 filename=$(basename $0)
-version="4.00"
+version="4.03"
 
 usage() {
 	cat << EOF
