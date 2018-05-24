@@ -53,7 +53,7 @@ function source_file {
 	arg="$1"
 	shift
 	if [ -r "$arg" ]; then
-		source "$arg"
+		. "$arg"
 	fi
 }
 # end
@@ -155,6 +155,8 @@ if (( $+commands[fzf] )); then
 		ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9}
 	}
 fi
+
+source_file ${HOME}/.enhancd/init.sh
 
 # ]]
 # * «« -------------------------------------------------/
