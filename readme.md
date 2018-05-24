@@ -4,13 +4,13 @@ Usage
 -------------------
 
 ```bash
-$ ./install
+$ ./install -a
 ```
 
 or
 
 ```bash
-$ bash install
+$ bash install -a
 ```
 
 Supported types
