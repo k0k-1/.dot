@@ -294,11 +294,15 @@ setconf ()
 
 msg em "start script: $0"
 
-if [ ${OSTYPE} =~ "linux" ]; then
-	msg error "Your environment is ${OSTYPE}. This script can run only on linux."
-	msg input "exit."
-	return 2>&- || exit
-fi
+case ${OSTYPE} in
+	linux*)
+		;;
+	*)
+		msg error "Your environment is ${OSTYPE}. This script can run only on linux."
+		msg input "exit."
+		return 2>&- || exit
+		;;
+esac
 
 if ! type git >/dev/null 2>&1; then
 	msg error "Your computer 'git' is NOT installed."
@@ -321,7 +325,7 @@ for f in ${flag[@]}
 do
 	msg msg "start initial settings of ${f}"
 	setconf ${f}
-	msg msg "end initial settings of ${f}\n"
+	msg msg "end initial settings of ${f}"
 done
 
 msg em "all done."
