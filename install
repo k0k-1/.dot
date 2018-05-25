@@ -7,7 +7,7 @@ workdir=$(dirname $(readlink -f $0))
 dothome="${HOME}/.dot"
 
 filename=$(basename $0)
-version="4.03"
+version="4.04"
 
 usage() {
 	cat << EOF
@@ -80,7 +80,7 @@ done
 
 if [ -z ${flag} ]; then
  	echo "${filename}: too few arguments" 1>&2
- 	echo "Try '${filename} --help' for more information." 1>&2
+ 	echo "Try './${filename} --help' for more information." 1>&2
 	exit 1
 fi
 
@@ -286,17 +286,12 @@ setconf ()
 
 ## MAIN ########################################################
 
-msg em "start script: $0"
 
-case ${OSTYPE} in
-	linux*)
-		;;
-	*)
-		msg error "Your environment is ${OSTYPE}. This script can run only on linux."
-		msg input "exit."
-		return 2>&- || exit
-		;;
-esac
+if [[ ! "${OSTYPE}" =~ 'linux' ]]; then
+ 	msg error "Your environment is ${OSTYPE}. This script can run only on linux."
+ 	msg input "exit."
+	return 2>&- || exit
+fi
 
 if ! type git >/dev/null 2>&1; then
 	msg error "Your computer 'git' is NOT installed."
@@ -309,6 +304,8 @@ if [ ! -e ${HOME}/.gitconfig ]; then
 	msg input "exit."
 	return 2>&- || exit
 fi
+
+msg em "start script: $0"
 
 if [ ! -e ${workdir} ]; then
 	cp -r ${workdir} ${dothome}
