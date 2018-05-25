@@ -3,15 +3,18 @@
 set -eu
 trap exit ERR
 
-filename=$(basename ${0})
-version="4.06"
-workdir=$(dirname $(readlink -f ${filename}))
-dothome="${HOME}/.dot"
+declare filename=$(basename ${0})
+declare version="4.10"
+
+declare workdir=$(dirname $(readlink -f ${filename}))
+declare dothome="${HOME}/.dot"
+
+declare -a flag=()
+
+declare debug=0
 
 msg()
 {
-	local debug=0
-
 	if [ ${1} = "input" ]; then
 		read -p "press [enter] to ${@:2}." KEY
 	else
@@ -125,6 +128,10 @@ do
 			flag+=("zsh")
 			shift 1
 			;;
+		'--debug')
+			declare -i debug=1
+			shift 1
+			;;
 		'--'|'-')
 			shift 1
 			flag+=("$@")
@@ -212,6 +219,9 @@ setconf ()
 			cd ${workdir}/tmux && git submodule init && git submodule update
 			return
 			;;
+		*)
+			return 0
+			;;
 	esac
 
 	local filepath=()
@@ -275,19 +285,16 @@ setconf ()
 					else
 						msg failed "${linkpath[$i]} is already exist. [symbolic link]"
 					fi
-
 				done
 				unset filepath linkpath
 			;;
 		esac
 	done
-
 }
 
 
 
 ## MAIN ########################################################
-
 
 if [[ ! "${OSTYPE}" =~ 'linux' ]]; then
  	msg error "Your environment is ${OSTYPE}. This script can run only on linux."
