@@ -101,7 +101,7 @@ do
 			exit 0
 			;;
 		'-v'|'--version')
-			echo ${version}
+			msg version ${version}
 			exit 0
 			;;
 		'-a'|'--all')
