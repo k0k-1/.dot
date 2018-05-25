@@ -3,15 +3,15 @@
 #set -u
 trap exit ERR
 
-workdir=$(dirname $(readlink -f $0))
-dothome="${HOME}/.dot"
-
-filename=$(basename $0)
+filename=$(basename ${0})
 version="4.04"
+
+workdir=$(dirname $(readlink -f ${filename}))
+dothome="${HOME}/.dot"
 
 usage() {
 	cat << EOF
-usage: $0 [options]
+usage: ${filename} [options]
 
     --help -h --usage : Show this message
     --version -v      : Show version of this program
@@ -178,7 +178,7 @@ msg()
 
 setconf ()
 {
-	case $1 in
+	case ${1} in
 		vim)
 			local dirname="vim"
 			local makedir=".${dirname}"
@@ -217,7 +217,7 @@ setconf ()
 
 	for c in ${option[@]}
 	do
-		case $c in
+		case ${c} in
 			dir)
 				local dirpath="${HOME}/${makedir}"
 				msg dbg "dirpath = ${dirpath}"
@@ -305,7 +305,7 @@ if [ ! -e ${HOME}/.gitconfig ]; then
 	return 2>&- || exit
 fi
 
-msg em "start script: $0"
+msg em "start script: ${filename}"
 
 if [ ! -e ${workdir} ]; then
 	cp -r ${workdir} ${dothome}
