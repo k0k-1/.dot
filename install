@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -u
+#set -u
 trap exit ERR
 
 workdir=$(dirname $(readlink -f $0))
@@ -23,11 +23,6 @@ usage: $0 [options]
     --zsh             : Install zsh's dotfiles
 EOF
 }
-
-if [ ${#} -le 0 ]; then
-	usage
-	exit 1
-fi
 
 # ref. https://qiita.com/b4b4r07/items/dcd6be0bb9c9185475bb
 for opt in ${@}
@@ -67,7 +62,7 @@ do
 			;;
 		'--'|'-')
 			shift 1
-			param+=("$@")
+			flag+=("$@")
 			break
 			;;
 		-*)
@@ -76,15 +71,14 @@ do
 			;;
 		*)
 			if [[ ! -z "${1}" ]] && [[ ! "${1}" =~ ^-+ ]]; then
-				param+=("${1}")
+				flag+=("${1}")
 				shift 1
 			fi
 			;;
 	esac
 done
 
-param+=("")
-if [ ! -z ${param} ]; then
+if [ -z ${flag} ]; then
  	echo "${filename}: too few arguments" 1>&2
  	echo "Try '${filename} --help' for more information." 1>&2
 	exit 1
