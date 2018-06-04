@@ -4,7 +4,7 @@ set -eu
 trap exit ERR
 
 declare filename=$(basename ${0})
-declare version="4.13"
+declare version="4.14"
 
 declare workdir=$(dirname $(readlink -f ${filename}))
 declare dothome="${HOME}/.dot"
@@ -156,34 +156,6 @@ if [ -z ${flag} ]; then
 	usage
 	exit 1
 fi
-
-#declare -i argc=0
-#declare -a argv=()
-#
-#while (( $# > 0 ))
-#do
-#	case "$1" in
-#		-*)
-#			if [[ "$1" =~ 'n' ]]; then
-#				nflag='-n'
-#			fi
-#			if [[ "$1" =~ 'l' ]]; then
-#				lflag='-l'
-#			fi
-#			if [[ "$1" =~ 'p' ]]; then
-#				pflag='-p'
-#			fi
-#			shift
-#			;;
-#		*)
-#			((++argc))
-#			argv=("${argv[@]}" "$1")
-#			shift
-#			;;
-#	esac
-#done
-
-
 
 setconf ()
 {
