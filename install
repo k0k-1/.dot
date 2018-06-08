@@ -11,7 +11,7 @@ declare dothome="${HOME}/.dot"
 
 declare -a flag=()
 
-declare debug=0
+declare debug=0 # You can set to 1 by using the '--debug' option
 
 msg()
 {
