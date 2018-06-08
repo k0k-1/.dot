@@ -4,7 +4,7 @@ set -eu
 trap exit ERR
 
 declare filename=$(basename ${0})
-declare version="4.14"
+declare version="4.15"
 
 declare workdir=$(dirname $(readlink -f ${filename}))
 declare dothome="${HOME}/.dot"
@@ -134,11 +134,11 @@ do
 			;;
 		'--'|'-')
 			shift 1
-			flag+=("$@")
+			flag+=("${@}")
 			break
 			;;
 		-*)
-			echo "$filename: illegal option -- '$(echo $1 | sed 's/^-*//')'" 1>&2
+			echo "${filename}: illegal option -- '$(echo ${1} | sed 's/^-*//')'" 1>&2
 			exit 1
 			;;
 		*)
@@ -251,9 +251,9 @@ setconf ()
 					msg dbg "i = ${i}"
 					msg dbg "filepath[${i}] = ${filepath[${i}]}"
 					msg dbg "linkpath[${i}] = ${linkpath[${i}]}"
-					if [ ! -e ${linkpath[$i]} ]; then
-						ln -s ${filepath[$i]} ${linkpath[$i]}
-						msg success "link ${filepath[$i]} -> ${linkpath[$i]}"
+					if [ ! -e ${linkpath[${i}]} ]; then
+						ln -s ${filepath[${i}]} ${linkpath[$i]}
+						msg success "link ${filepath[${i}]} -> ${linkpath[${i}]}"
 					else
 						msg failed "${linkpath[$i]} is already exist. [symbolic link]"
 					fi
