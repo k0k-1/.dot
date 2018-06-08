@@ -11,7 +11,7 @@ declare dothome="${HOME}/.dot"
 
 declare -a flag=()
 
-declare debug=0 # You can set to 1 by using the '--debug' option
+declare -i debug=0 # You can set to 1 by using the '--debug' option
 
 msg()
 {
@@ -20,39 +20,39 @@ msg()
 	else
 		case ${1} in
 			error)
-				local fcolor=0 # black
-				local bcolor=1 # red
+				local -i fcolor=0 # black
+				local -i bcolor=1 # red
 				local header="  ERROR  "
 				local footer=""
 				;;
 			success)
-				local fcolor=240 # dark gray
-				local bcolor=40  # green
+				local -i fcolor=240 # dark gray
+				local -i bcolor=40  # green
 				local header=" success "
 				local footer=""
 				;;
 			failed)
-				local fcolor=15  # white
-				local bcolor=161 # magenta
+				local -i fcolor=15  # white
+				local -i bcolor=161 # magenta
 				local header=" failed  "
 				local footer=""
 				;;
 			em)
-				local fcolor=33 # cyan
-				local bcolor=33 # cyan
+				local -i fcolor=33 # cyan
+				local -i bcolor=33 # cyan
 				local header="         "
 				local footer=""
 				;;
 			msg)
-				local fcolor=15  # white
-				local bcolor=239 # dark gray
+				local -i fcolor=15  # white
+				local -i bcolor=239 # dark gray
 				local header="   msg   "
 				local footer=""
 				;;
 			dbg)
 				if [ ${debug} = 1 ];then
-					local fcolor=233 # dark gray
-					local bcolor=220 # yellow
+					local -i fcolor=233 # dark gray
+					local -i bcolor=220 # yellow
 					local header="  debug  "
 					local footer=""
 				else
@@ -60,8 +60,8 @@ msg()
 				fi
 				;;
 			*)
-				local fcolor=15  # white
-				local bcolor=239 # dark gray
+				local -i fcolor=15  # white
+				local -i bcolor=239 # dark gray
 				local header="  ${1}  "
 				local footer=""
 				;;
@@ -81,14 +81,14 @@ msg()
 usage() {
 	msg usage "${filename} [options]"
 	cat << EOF
-    --help -h --usage : Show this message
-    --version -v      : Show version of this program
-    --all -a          : Install dotfiles of ssh, submodule, tmux, vim and zsh
-    --ssh             : Install ssh's configuration files 
-    --submodule       : Execute only settings related to submodules
-    --tmux            : Install tmux's dotfiles
-    --vim             : Install vim's dotfiles
-    --zsh             : Install zsh's dotfiles
+    --help | -h | --usage : Show this message
+    --version | -v        : Show version of this program
+    --all | -a            : Install dotfiles of ssh, submodule, tmux, vim and zsh
+    --ssh                 : Install ssh's configuration files 
+    --submodule           : Execute only settings related to submodules
+    --tmux                : Install tmux's dotfiles
+    --vim                 : Install vim's dotfiles
+    --zsh                 : Install zsh's dotfiles
 EOF
 }
 
@@ -163,27 +163,27 @@ setconf ()
 		vim)
 			local dirname="vim"
 			local makedir=".${dirname}"
-			local filename=("vimrc" "rc")
-			local linkname=(".vimrc" "${makedir}/rc")
-			local option=("dir" "link")
+			local -a filename=("vimrc" "rc")
+			local -a linkname=(".vimrc" "${makedir}/rc")
+			local -a option=("dir" "link")
 			;;
 		zsh)
 			local dirname="zsh"
 			local makedir=".cache/${dirname}"
-			local filename=("zshenv" ".")
-			local linkname=(".zshenv" ".${dirname}")
-			local option=("dir" "link")
+			local -a filename=("zshenv" ".")
+			local -a linkname=(".zshenv" ".${dirname}")
+			local -a option=("dir" "link")
 			;;
 		ssh)
 			local dirname="ssh"
 			local makedir=".${dirname}/pub"
-			local option=("dir")
+			local -a option=("dir")
 			;;
 		tmux)
 			local dirname="tmux"
-			local filename=(".tmux.conf")
-			local linkname=(".tmux.conf")
-			local option=("link")
+			local -a filename=(".tmux.conf")
+			local -a linkname=(".tmux.conf")
+			local -a option=("link")
 			;;
 		submodule)
 			msg msg "init submodule"
@@ -196,8 +196,8 @@ setconf ()
 			;;
 	esac
 
-	local filepath=()
-	local linkpath=()
+	local -a filepath=()
+	local -a linkpath=()
 
 	for c in ${option[@]}
 	do
