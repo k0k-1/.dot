@@ -4,7 +4,7 @@ set -eu
 trap exit ERR
 
 declare -r filename=$(basename ${0})
-declare -r version="4.15"
+declare -r version="4.16"
 
 declare -r workdir=$(dirname $(readlink -f ${filename}))
 declare -r dothome="${HOME}/.dot"
@@ -287,7 +287,6 @@ if [ ! -e ${HOME}/.gitconfig ]; then
 fi
 
 msg em "start script: ${filename}"
-msg msg "start script: ${filename}"
 
 if [ ! -e ${workdir} ]; then
 	cp -r ${workdir} ${dothome}
