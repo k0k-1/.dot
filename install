@@ -4,14 +4,12 @@ set -eu
 trap exit ERR
 
 declare -r filename=$(basename ${0})
-declare -r version="4.16"
+declare -r version="4.17"
 
 declare -r workdir=$(dirname $(readlink -f ${filename}))
 declare -r dothome="${HOME}/.dot"
 
 declare -a flag=()
-
-declare -i debug=0 # You can set to 1 by using the '--debug' option
 
 msg()
 {
@@ -48,16 +46,6 @@ msg()
 				local -i bcolor=239 # dark gray
 				local header="   msg   "
 				local footer=""
-				;;
-			dbg)
-				if [ ${debug} = 1 ];then
-					local -i fcolor=233 # dark gray
-					local -i bcolor=220 # yellow
-					local header="  debug  "
-					local footer=""
-				else
-					return 0
-				fi
 				;;
 			*)
 				local -i fcolor=15  # white
@@ -126,10 +114,6 @@ do
 			;;
 		'--zsh')
 			flag+=("zsh")
-			shift 1
-			;;
-		'--debug')
-			declare -i debug=1
 			shift 1
 			;;
 		'--'|'-')
@@ -204,7 +188,6 @@ setconf ()
 		case ${c} in
 			dir)
 				local dirpath="${HOME}/${makedir}"
-				msg dbg "dirpath = ${dirpath}"
 				if [ ! -d ${dirpath} ]; then
 					mkdir -p ${dirpath}
 					msg success "mkdir ${dirpath}"
@@ -214,20 +197,14 @@ setconf ()
 			;;
 			link)
 				if [ ${#filename[@]} = ${#linkname[@]} ]; then
-					msg dbg "filename = ${#filename[@]}"
-					msg dbg "linkname = ${#linkname[@]}"
 					for n in ${filename[@]}
 					do
 						filepath+=("${workdir}/${dirname}/${n}")
-					msg dbg "filepath = ${n}"
 					done
-					msg dbg "filepath = ${#filepath[@]}"
 					for n in ${linkname[@]}
 					do
 						linkpath+=("${HOME}/${n}")
-					msg dbg "linkpath = ${n}"
 					done
-					msg dbg "linkpath = ${#linkpath[@]}"
 				fi
 				for ((i=0;${i}<=${#filepath[@]}-1;i++))
 				do
@@ -248,9 +225,6 @@ setconf ()
 							msg msg "skip."
 						fi
 					fi
-					msg dbg "i = ${i}"
-					msg dbg "filepath[${i}] = ${filepath[${i}]}"
-					msg dbg "linkpath[${i}] = ${linkpath[${i}]}"
 					if [ ! -e ${linkpath[${i}]} ]; then
 						ln -s ${filepath[${i}]} ${linkpath[$i]}
 						msg success "link ${filepath[${i}]} -> ${linkpath[${i}]}"
