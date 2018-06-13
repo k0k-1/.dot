@@ -7,12 +7,6 @@ Usage
 $ ./install -a
 ```
 
-or
-
-```bash
-$ bash install -a
-```
-
 Supported types
 -------------------
 * vim
