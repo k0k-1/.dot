@@ -58,8 +58,10 @@ msg()
 		local f="\x1b[38;05;${fcolor}m" # foreground color
 		local b="\x1b[48;05;${bcolor}m" # background color
 		local reset="\033[00m"
-		local header="${f}${b}${header}${reset} "
-		local footer=" ${f}${b}${footer}${reset}\n"
+		local header="${f}${b}${header}${reset}"
+		local footer="${f}${b}${footer}${reset}"
+		local header="${header} "
+		local footer=" ${footer}\n"
 
 		shift
 		printf "${header}${@}${footer}"
