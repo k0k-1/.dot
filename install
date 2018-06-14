@@ -4,7 +4,7 @@ set -eu
 trap exit ERR
 
 declare -r filename=$(basename ${0})
-declare -r version="4.17"
+declare -r version="4.18"
 
 declare -r workdir=$(dirname $(readlink -f ${filename}))
 declare -r dothome="${HOME}/.dot"
@@ -245,8 +245,8 @@ setconf ()
 ## MAIN ########################################################
 
 if [[ ! "${OSTYPE}" =~ 'linux' ]]; then
- 	msg error "Your environment is ${OSTYPE}. This script can run only on linux."
- 	msg input "exit."
+	msg error "Your environment is ${OSTYPE}. This script can run only on linux."
+	msg input "exit."
 	return 2>&- || exit
 fi
 
