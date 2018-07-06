@@ -69,7 +69,7 @@ msg()
 }
 
 usage() {
-	msg usage "${scriptname} [options]"
+	msg usage "./${scriptname} [options]"
 	cat << EOF
     --help | -h | --usage   : Show this message
     --version | -v          : Show version of this program
