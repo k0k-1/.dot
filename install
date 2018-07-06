@@ -3,10 +3,10 @@
 set -eu
 trap exit ERR
 
-declare -r filename=$(basename ${0})
+declare -r scriptname=$(basename ${0})
 declare -r version="4.18"
 
-declare -r workdir=$(dirname $(readlink -f ${filename}))
+declare -r workdir=$(dirname $(readlink -f ${scriptname}))
 declare -r dothome="${HOME}/.dot"
 
 declare -a flag=()
@@ -69,7 +69,7 @@ msg()
 }
 
 usage() {
-	msg usage "${filename} [options]"
+	msg usage "${scriptname} [options]"
 	cat << EOF
     --help | -h | --usage : Show this message
     --version | -v        : Show version of this program
@@ -124,7 +124,7 @@ do
 			break
 			;;
 		-*)
-			echo "${filename}: illegal option -- '$(echo ${1} | sed 's/^-*//')'" 1>&2
+			echo "${scriptname}: illegal option -- '$(echo ${1} | sed 's/^-*//')'" 1>&2
 			exit 1
 			;;
 		*)
@@ -138,7 +138,7 @@ done
 
 flag+=("")
 if [ -z ${flag} ]; then
- 	msg error "${filename}: too few arguments" 1>&2
+ 	msg error "${scriptname}: too few arguments" 1>&2
 	usage
 	exit 1
 fi
@@ -262,7 +262,7 @@ if [ ! -e ${HOME}/.gitconfig ]; then
 	return 2>&- || exit
 fi
 
-msg em "start script: ${filename}"
+msg em "start script: ${scriptname}"
 
 if [ ! -e ${workdir} ]; then
 	cp -r ${workdir} ${dothome}
