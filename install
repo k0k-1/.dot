@@ -71,14 +71,14 @@ msg()
 usage() {
 	msg usage "${scriptname} [options]"
 	cat << EOF
-    --help | -h | --usage : Show this message
-    --version | -v        : Show version of this program
-    --all | -a            : Install dotfiles of ssh, submodule, tmux, vim and zsh
-    --ssh                 : Install ssh's configuration files 
-    --submodule           : Execute only settings related to submodules
-    --tmux                : Install tmux's dotfiles
-    --vim                 : Install vim's dotfiles
-    --zsh                 : Install zsh's dotfiles
+    --help | -h | --usage   : Show this message
+    --version | -v          : Show version of this program
+    --all | -a              : Install dotfiles of ssh, submodule, tmux, vim and zsh
+    --ssh | ssh             : Install ssh's configuration files 
+    --submodule | submodule : Execute only settings related to submodules
+    --tmux | tmux           : Install tmux's dotfiles
+    --vim | vim             : Install vim's dotfiles
+    --zsh | zsh             : Install zsh's dotfiles
 EOF
 }
 
