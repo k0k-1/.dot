@@ -124,11 +124,13 @@ do
 			break
 			;;
 		-*)
-			printf "${scriptname}: illegal option -- '$(printf ${1} | sed 's/^-*//')'" 1>&2
+			msg error "${scriptname}: illegal option -- '$(printf ${1} | sed 's/^-*//')'" 1>&2
+			usage
 			exit 1
 			;;
 		*)
-			printf "${scriptname}: illegal option -- '${1}'" 1>&2
+			msg error "${scriptname}: illegal option -- '${1}'" 1>&2
+			usage
 			exit 1
 			;;
 	esac
