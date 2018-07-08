@@ -4,7 +4,7 @@ set -eu
 trap exit ERR
 
 declare -r scriptname=$(basename ${0})
-declare -r version="4.1.10"
+declare -r version="4.1.11"
 
 declare -r workdir=$(dirname $(readlink -f ${scriptname}))
 declare -r dothome="${HOME}/.dot"
@@ -124,14 +124,12 @@ do
 			break
 			;;
 		-*)
-			print "${scriptname}: illegal option -- '$(printf ${1} | sed 's/^-*//')'" 1>&2
+			printf "${scriptname}: illegal option -- '$(printf ${1} | sed 's/^-*//')'" 1>&2
 			exit 1
 			;;
 		*)
-			if [[ ! -z "${1}" ]] && [[ ! "${1}" =~ ^-+ ]]; then
-				flag+=("${1}")
-				shift 1
-			fi
+			printf "${scriptname}: illegal option -- '${1}'" 1>&2
+			exit 1
 			;;
 	esac
 done
