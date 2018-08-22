@@ -488,7 +488,6 @@ se cursorline
 se cursorcolumn
 se scrolloff=5
 se number
-se printoption=syntax:y,number:y
 
 se showcmd
 se cmdheight=1
