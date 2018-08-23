@@ -4,7 +4,7 @@ set -eu
 trap exit ERR
 
 declare -r scriptname=$(basename ${0})
-declare -r version="4.1.12"
+declare -r version="4.2.0"
 
 declare -r workdir=$(dirname $(readlink -f ${scriptname}))
 declare -r dothome="${HOME}/.dot"
