@@ -38,7 +38,7 @@
   wc = whatchanged
   ls = log --stat
   lp = log -p
-  la = log --pretty=\"format:%ad %h (%an): %s\" --date=short  # ざっくりログ出す
+  la = log --pretty=\"format:%ad %h (%an): %s\" --date=short
   lr = log origin
   oneline = log --pretty=oneline
   ranking = shortlog -s -n --no-merges
