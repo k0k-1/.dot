@@ -4,10 +4,10 @@ Installation
 -------------------
 
 ```bash
-$ ./install -a
+$ ./install
 ```
 ```bash
-$ ./install vim zsh
+$ ./install --vim --zsh --tmux
 ```
 
 Supported types
