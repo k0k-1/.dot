@@ -1,57 +1,57 @@
-"														..
-"							 __________ .:::::. __________
-"							l					 ]:::::::l					|
-"							 '|				|:::::::::'				./
-"								|				|:::::::'				./'
-"								|				|::;::'				.:.
-"							.:|				|:::'				 .::::.
-"						.:::|				|:'				 .:::::::::.
-"						':::|				'				__::::::::::''
-"							''|							 /__/::::::::'__
-"								|						 .['''/['''v''v'	\.
-"								|					.:::/  /:/	/\	/\	 /
-"								|				.::::/	/:/  / / / /' /
-"								|			./''::'__] /__]/___]/___]
-"								'----'		 '::::'
-"														 ''
-"								__					 _
-"								\ \			__ _(_)_ __
-"								 > >		\ V / | '  \
-"								/_/			 \_/|_|_|_|_|			___
-"																				 |___|
+"                           ..
+"              __________ .:::::. __________
+"             l          ]:::::::l          |
+"              '|       |:::::::::'       ./
+"               |       |:::::::'       ./'
+"               |       |::;::'       .:.
+"             .:|       |:::'        .::::.
+"           .:::|       |:'        .:::::::::.
+"           ':::|       '       __::::::::::''
+"             ''|              /__/::::::::'__
+"               |            .['''/['''v''v'  \.
+"               |         .:::/  /:/  /\  /\   /
+"               |       .::::/  /:/  / / / /' /
+"               |     ./''::'__] /__]/___]/___]
+"               '----'     '::::'
+"                            ''
+"               __           _
+"               \ \     __ _(_)_ __
+"                > >    \ V / | '  \
+"               /_/      \_/|_|_|_|_|     ___
+"                                        |___|
 
-"				* file name : .vimrc
-"				* auther		: k0k1
-"				* ver				: 4.3.2
-
-
+"       * file name : .vimrc
+"       * auther    : k0k1
+"       * ver       : 4.3.2
 
 
 
-" * >		[1] general
-" -------------------------------------------														 /
+
+
+" * >   [1] general
+" -------------------------------------------                            /
 " ----------------------------------------------------------------------/
 " [
 
 fu! s:source_rc(path, ...) abort
-	let use_global = get(a:000, 0, !has('vim_starting'))
-	let abspath = resolve(expand('~/.vim/rc/' .a:path))
-	if !use_global
-		exe 'source' fnameescape(abspath)
-		return
-	en
+  let use_global = get(a:000, 0, !has('vim_starting'))
+  let abspath = resolve(expand('~/.vim/rc/' .a:path))
+  if !use_global
+    exe 'source' fnameescape(abspath)
+    return
+  en
 
-	let content map(readfile(abspath),
-		\ 'substitute(v:val, "^\\W*\\zsset\\ze\\W", "setglobal", "")')
-	let tempfile = tempname()
-	try
-		cal writefile(content, tempfile)
-		exe 'source' fnameescape(tempfile)
-	finally
-		if filereadable(tempfile)
-			cal delete(tempfile)
-		en
-	endt
+  let content map(readfile(abspath),
+    \ 'substitute(v:val, "^\\W*\\zsset\\ze\\W", "setglobal", "")')
+  let tempfile = tempname()
+  try
+    cal writefile(content, tempfile)
+    exe 'source' fnameescape(tempfile)
+  finally
+    if filereadable(tempfile)
+      cal delete(tempfile)
+    en
+  endt
 endf
 
 se all&
@@ -59,13 +59,13 @@ se all&
 let s:im_windows = has('win32') || has('win64')
 
 fu! s:ruwindows() abort
-	return s:im_windows
+  return s:im_windows
 endf
 
 fu! s:rumac() abort
-	return !s:im_windows && !has('win32unix')
-		\ && (has('mac') || has('macunix') || has('gui_macvim')
-		\		|| (!executable('xdg-open') && system('uname') =~? '^darwin'))
+  return !s:im_windows && !has('win32unix')
+    \ && (has('mac') || has('macunix') || has('gui_macvim')
+    \   || (!executable('xdg-open') && system('uname') =~? '^darwin'))
 endf
 
 filetype off
@@ -77,12 +77,12 @@ se autoread
 se nocompatible
 
 aug fau
-	au!
+  au!
 aug end
 
 
 
-" * >>	var --------------------------------------------/
+" * >>  var --------------------------------------------/
 " [[
 
 let $home = expand('~')
@@ -99,14 +99,14 @@ let $vim_session = $vim_dir . '/tmp/session'
 
 
 
-" * >>	format -----------------------------------------/
+" * >>  format -----------------------------------------/
 " [[
 
 se enc=utf-8
 scriptencoding utf-8
-se fileformat=unix															" write
-se fileformats=unix,dos,mac											" read
-se fileencoding=utf-8														" write
+se fileformat=unix                              " write
+se fileformats=unix,dos,mac                     " read
+se fileencoding=utf-8                           " write
 se fileencodings=utf-8,iso-2022-jp,cp932,euc-jp " read
 se termencoding=utf-8
 se ambiwidth=double
@@ -116,7 +116,7 @@ se ambiwidth=double
 
 
 
-" * >>	indent -----------------------------------------/
+" * >>  indent -----------------------------------------/
 " [[
 
 se smartindent
@@ -125,8 +125,8 @@ se formatoptions=c
 se showmatch
 se smarttab
 
-se ts=2 sw=2 "hardtab
-"se ts=2 sw=2 et "space
+"se ts=2 sw=2 "hardtab
+se ts=2 sw=2 et "space
 se softtabstop=0
 
 " ]]
@@ -134,7 +134,7 @@ se softtabstop=0
 
 
 
-" * >>	buffer -----------------------------------------/
+" * >>  buffer -----------------------------------------/
 " [[
 
 se hidden
@@ -145,7 +145,7 @@ se switchbuf=useopen
 
 
 
-" * >>	cursor -----------------------------------------/
+" * >>  cursor -----------------------------------------/
 " [[
 
 se scrolloff=999
@@ -160,7 +160,7 @@ se virtualedit=block
 
 
 
-" * >>	option -----------------------------------------/
+" * >>  option -----------------------------------------/
 " [[
 
 se ttyfast
@@ -176,7 +176,7 @@ se updatetime=0
 
 
 
-" * >>	history ----------------------------------------/
+" * >>  history ----------------------------------------/
 " [[
 
 se history=100
@@ -185,16 +185,16 @@ se viminfo=
 se noswapfile
 
 if has('persistent_undo')
-	se undodir=$vim_undo
-	if ! isdirectory(&undodir)
-		cal mkdir(&undodir, 'p')
-	en
+  se undodir=$vim_undo
+  if ! isdirectory(&undodir)
+    cal mkdir(&undodir, 'p')
+  en
 se undofile
 en
 
 se backupdir=$vim_bak
 if ! isdirectory(&backupdir)
-	cal mkdir(&backupdir)
+  cal mkdir(&backupdir)
 en
 se backup
 se writebackup
@@ -204,7 +204,7 @@ se writebackup
 
 
 
-" * >>	search -----------------------------------------/
+" * >>  search -----------------------------------------/
 " [[
 
 se incsearch
@@ -224,13 +224,13 @@ se wildignorecase
 
 
 
-" * >		[2] plugin
-" -------------------------------------------														 /
+" * >   [2] plugin
+" -------------------------------------------                            /
 " ----------------------------------------------------------------------/
 " [
 
 if &compatible
-	set nocompatible
+  set nocompatible
 en
 
 let g:vimproc#download_windows_dll = 1
@@ -239,47 +239,47 @@ let s:dein_dir = $vim_dir . '/dein'
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 if !isdirectory(s:dein_repo_dir)
-	cal system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
+  cal system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
 en
 
 let &runtimepath = s:dein_repo_dir .",". &runtimepath
 
 
 
-" * >>	 load plugin -------------------------------------/
+" * >>   load plugin -------------------------------------/
 " [[
-	let g:rc_dir		= fnamemodify(expand('<sfile>'), ':h').('/.vim/rc/dein')
-	let s:toml			= g:rc_dir . '/dein.toml'
+  let g:rc_dir    = fnamemodify(expand('<sfile>'), ':h').('/.vim/rc/dein')
+  let s:toml      = g:rc_dir . '/dein.toml'
 
-	if dein#load_state(s:dein_dir)
-		cal dein#begin(s:dein_dir, [$myvimrc, s:toml])
-		cal dein#load_toml(s:toml)
-		cal dein#end()
-		cal dein#save_state()
-	en
+  if dein#load_state(s:dein_dir)
+    cal dein#begin(s:dein_dir, [$myvimrc, s:toml])
+    cal dein#load_toml(s:toml)
+    cal dein#end()
+    cal dein#save_state()
+  en
 
-	if has('vim_starting') && dein#check_install()
-	cal dein#install()
-	en
-
-
+  if has('vim_starting') && dein#check_install()
+  cal dein#install()
+  en
 
 
 
-" * >		[3] keybinds
-" -------------------------------------------														 /
+
+
+" * >   [3] keybinds
+" -------------------------------------------                            /
 " ----------------------------------------------------------------------/
 " [
 
-"		cheat-sheet
-"				 >		key									| >		 mode
-"				--------------------------+----------------
-"				 * map/noremap(no)				| nomal,visual
-"				 * nmap(nm)/nnoremap(nn)	| nomal
-"				 * imap(im)/inoremap(ino) | insert
-"				 * cmap(cm)/cnoremap(cno) | cmd
-"				 * vmap(vm)/vnoremap(vn)	| visual
-"				 * map!/noremap!(no!)			| insert,cmd
+"   cheat-sheet
+"        >    key                 | >    mode
+"       --------------------------+----------------
+"        * map/noremap(no)        | nomal,visual
+"        * nmap(nm)/nnoremap(nn)  | nomal
+"        * imap(im)/inoremap(ino) | insert
+"        * cmap(cm)/cnoremap(cno) | cmd
+"        * vmap(vm)/vnoremap(vn)  | visual
+"        * map!/noremap!(no!)     | insert,cmd
 
 " ------------------------------------------------------/
 
@@ -300,7 +300,7 @@ map <space> <leader>
 
 
 
-" * >>	space ------------------------------------------/
+" * >>  space ------------------------------------------/
 " [[
 
 map <leader>i gg=<s-g><c-o><c-o>zz
@@ -317,14 +317,14 @@ nn <leader>w :<c-u>write!<cr>
 
 com! -nargs=? -complete=dir -bang CD cal s:ChangeCurrentDir('<args>', '<bang>')
 fu! s:ChangeCurrentDir(directory, bang) abort
-	if a:directory == ''
-		lcd %:p:h
-	el
-		exe 'lcd' . a:directory
-	en
-	if a:bang == ''
-		pwd
-	en
+  if a:directory == ''
+    lcd %:p:h
+  el
+    exe 'lcd' . a:directory
+  en
+  if a:bang == ''
+    pwd
+  en
 endf
 
 nn <silent> <leader>cd :<c-u>CD<cr>
@@ -334,7 +334,7 @@ nn <silent> <leader>cd :<c-u>CD<cr>
 
 
 
-" * >>	cursor -----------------------------------------/
+" * >>  cursor -----------------------------------------/
 " [[
 
 nn <right> <nop>
@@ -359,7 +359,7 @@ vm j gj
 
 
 
-" * >>	window -----------------------------------------/
+" * >>  window -----------------------------------------/
 " [[
 
 nn <c-w>s :sp<cr>
@@ -417,7 +417,7 @@ nn <c-b>l :buffers<cr>
 
 
 
-" * >>	shortcut ---------------------------------------/
+" * >>  shortcut ---------------------------------------/
 " [[
 
 se pastetoggle=<c-e>
@@ -454,7 +454,7 @@ nn <c-f>v :e $myvimrc<cr>
 
 
 
-" * >>	fuck -------------------------------------------/
+" * >>  fuck -------------------------------------------/
 " [[
 
 no gu <nop>
@@ -471,8 +471,8 @@ no <leader>gU gu
 
 
 
-" * >		[4] look
-" -------------------------------------------														 /
+" * >   [4] look
+" -------------------------------------------                            /
 " ----------------------------------------------------------------------/
 " [
 
@@ -520,19 +520,19 @@ se statusline& statusline+=[%p%%]
 
 
 
-" * >		[5] source
-" -------------------------------------------														 /
+" * >   [5] source
+" -------------------------------------------                            /
 " ----------------------------------------------------------------------/
 " [
 
 if has('gui_running')
-	cal s:source_rc('gui.rc.vim')
+  cal s:source_rc('gui.rc.vim')
 en
 
 if s:ruwindows()
-	cal s:source_rc('windows.rc.vim')
+  cal s:source_rc('windows.rc.vim')
 else
-	cal s:source_rc('unix.rc.vim')
+  cal s:source_rc('unix.rc.vim')
 en
 
 if s:rumac()
