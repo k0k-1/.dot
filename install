@@ -44,7 +44,7 @@ msg()
       em)
         local -i fcolor=33 # cyan
         local -i bcolor=33 # cyan
-        local header="         "
+        local header="   msg   "
         local footer=""
         ;;
       msg)
