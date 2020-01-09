@@ -342,7 +342,7 @@ if [[ $TERM = xterm* ]];then
   PROMPT=${PROMPTBODY}
   RPROMPT="%F{${FOREGROUND}}%K{${UCOLOR}} %n %F{${GREEN}}%K{${BACKGROUND}} %m ${COLOR}|${COLOR} %w ${COLOR}|${COLOR} %* %f%k"
 
-  if (( $+commands[python] )); then
+  if (( $+commands[python] || $+commands[python3] )); then
     if [ -e $ZDOTDIR/rc/plugin/prompt.py ]; then
       function u_prompt() {
         local RETURN=$?
