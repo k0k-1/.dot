@@ -16,7 +16,7 @@
 #               /_/     /__|___/_||_|     ___
 #                                        |___|
 
-#       * auther    : k0k1
+#       * auther    : 0ctpus
 #       * ver       : 3.40
 
 
@@ -444,7 +444,7 @@ esac
 
 export H_FLUG=0
 
-source_file ${HOME}/.cache/zsh/zsh_local
+source_file ${HOME}/.cache/zsh/*
 
 if [ ${H_FLUG} = 1 ]; then
   source_file $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh
