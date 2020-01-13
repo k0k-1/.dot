@@ -5,7 +5,7 @@ if has('gui_running')
 "								/_/			 \_/|_|_|_|_|			___
 "																				 |___|
 
-"				* auther		: k0k1
+"				* author		: 0ctpus
 "				* ver				: 3.33
 
 fu! s:source_rc(path, ...) abort

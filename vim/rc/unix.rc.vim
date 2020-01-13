@@ -5,7 +5,7 @@
 "								/_/			 \_/|_|_|_|_|			___
 "																				 |___|
 
-"				* auther		: k0k1s
+"				* author		: 0ctpus
 "				* ver				: 0.04
 
 se shell=sh
