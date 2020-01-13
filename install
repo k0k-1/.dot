@@ -263,9 +263,13 @@ if ! type git >/dev/null 2>&1; then
 fi
 
 if [ ! -e ${HOME}/.gitconfig ]; then
-  msg error "'.gitconfig' is NOT found on your computer."
-  msg input "exit."
-  return 2>&- || exit
+  result=0
+  cp ${workdir}/.gitconfig ${HOME}/.gitconfig 2>&1 > /dev/null || result=$?
+  if [[ ! ${result} -eq 0 ]]; then
+    msg error "'.gitconfig' is NOT found on your computer."
+    msg input "exit."
+    return 2>&- || exit
+  fi
 fi
 
 msg em "start script: ${scriptname}"
