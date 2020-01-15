@@ -444,7 +444,7 @@ esac
 
 export H_FLUG=0
 
-if [ $(ls ${HOME}/.cache/zsh/* | wc -l) >= 1 ];then
+if [ ! $(ls ${HOME}/.cache/zsh | wc -l) -eq 0 ];then
   source_file ${HOME}/.cache/zsh/*
 fi
 
