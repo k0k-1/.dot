@@ -444,7 +444,9 @@ esac
 
 export H_FLUG=0
 
-source_file ${HOME}/.cache/zsh/*
+if [ $(ls ${HOME}/.cache/zsh/* | wc -l) >= 1 ];then
+  source_file ${HOME}/.cache/zsh/*
+fi
 
 if [ ${H_FLUG} = 1 ]; then
   source_file $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh
