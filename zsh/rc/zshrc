@@ -444,6 +444,8 @@ esac
 
 export H_FLUG=0
 
+source_file $ZDOTDIR/rc/function.zsh
+
 if [ ! $(ls ${HOME}/.cache/zsh | wc -l) -eq 0 ];then
   source_file ${HOME}/.cache/zsh/*
 fi

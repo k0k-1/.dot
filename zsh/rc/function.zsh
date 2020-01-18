@@ -1,11 +1,13 @@
 # sshfs - mount
-function sshumount() {
+function sshmount() {
   hostname=$1
   username=$2
   server_type=$3
-  local_dir=$4
+  mount_dir=$4
+  local_dir=$5
 
-  if [[ -z ${local_dir} ]]; then
+  if [[ -z ${mount_dir} || -z ${local_dir} ]]; then
+    mount_dir=/home/${username}
     local_dir=~/.mnt/${hostname}
   fi
 
@@ -17,11 +19,11 @@ function sshumount() {
 
   if [[ -d ${local_dir} ]]; then
     mntchk=$( df | grep -c ${local_dir} )
-    if [[ ${mntchk} > 0 ]]; then
+    if [[ ${mntchk} -eq 0 ]]; then
       result=0
       output=$(ping -i 0.2 -c 1 ${destination} 2>&1 > /dev/null) || result=$?
-      if [[ ${result} -eq 0 ]]; then
-          umount ${local_dir}
+      if [[ ${result} -eq 0  || (( $+commands[sshfs] )) ]]; then
+          sshfs -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${username}@${destination}:${mount_dir} ${local_dir}
       fi
     fi
   fi
