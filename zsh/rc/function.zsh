@@ -71,5 +71,3 @@ function sshumount() {
 #do
 #  sshumount ${h} username server_type &
 #done
-
-wait
