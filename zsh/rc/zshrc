@@ -451,7 +451,7 @@ if [ ! $(ls ${HOME}/.cache/zsh | wc -l) -eq 0 ];then
 fi
 
 if [ ${H_FLUG} = 1 ]; then
-  source_file $ZDOTDIR/rc/plugin/syntax/zsh-syntax-highlighting.zsh
+  source_file ${HOME}/.syntax/zsh-syntax-highlighting.zsh
 fi
 
 # ]
