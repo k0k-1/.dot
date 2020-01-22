@@ -396,13 +396,8 @@ case ${OSTYPE} in #uname http://en.wikipedia.org/wiki/Uname
       export PATH=${HOME}/.bin:${PATH}
     fi
     if [ -e ${HOME}/.tmux.conf ] && (( $+commands[tmux] )); then
-<<<<<<< HEAD
-      if [[ ! -n $TMUX && $- != *l* ]]; then
-=======
-      if [[ -z $TMUX && $- != *l* ]]; then # l option = login shell
-        # get the IDs
->>>>>>> c881c97a267c756cdbddee1b4f91eecbee0572d0
-        ID="`tmux list-sessions`"
+      if [[ -z $TMUX ]] && [[ $- != *l* || -n $WSL_DISTRO_NAME ]]; then # l option = login shell
+        ID="`tmux list-sessions 2>/dev/null`"
         if [[ -z "$ID" ]]; then
           tmux new-session
         fi
@@ -410,9 +405,10 @@ case ${OSTYPE} in #uname http://en.wikipedia.org/wiki/Uname
           create_new_session="Create New Session"
           ID="$ID\n${create_new_session}:"
           ID="`echo $ID | fzf | cut -d: -f1`"
-          if [[ "$ID" = "${create_new_session}" ]]; then
+          if [[ "$ID" == "${create_new_session}" ]]; then
             tmux new-session
           elif [[ -n "$ID" ]]; then
+            echo $ID
             tmux attach-session -t "$ID"
           else
             :
