@@ -386,15 +386,17 @@ TRAPALRM() { redraw_tmout }
 case ${OSTYPE} in #uname http://en.wikipedia.org/wiki/Uname
   # linux
   linux*)
-    if [ -d ${HOME}/bin ]; then
-      export PATH=${HOME}/bin:${PATH}
-    fi
     if [ -d ${HOME}/usr/bin ]; then
       export PATH=${HOME}/usr/bin:${PATH}
     fi
+    if [ -d ${HOME}/bin ]; then
+      export PATH=${HOME}/bin:${PATH}
+    fi
+    if [ -d ${HOME}/.bin ]; then
+      export PATH=${HOME}/.bin:${PATH}
+    fi
     if [ -e ${HOME}/.tmux.conf ] && (( $+commands[tmux] )); then
       if [[ ! -n $TMUX && $- != *l* ]]; then
-        # get the IDs
         ID="`tmux list-sessions`"
         if [[ -z "$ID" ]]; then
           tmux new-session
@@ -408,7 +410,7 @@ case ${OSTYPE} in #uname http://en.wikipedia.org/wiki/Uname
           elif [[ -n "$ID" ]]; then
             tmux attach-session -t "$ID"
           else
-            :  # Start terminal normally
+            :
           fi
         fi
       fi
