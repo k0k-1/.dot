@@ -216,9 +216,6 @@ setconf ()
         fi
         for ((i=0;${i}<=${#filepath[@]}-1;i++))
         do
-          if [ ${1} = "zsh" ]; then
-            git clone https://github.com/zsh-users/zsh-syntax-highlighting ${HOME}/.syntax
-          fi
           if [ ${1} = "tmux" ]; then
             msg msg "compile tmux plugin"
             if [ ! -e ${HOME}/${filename} ]; then
@@ -247,6 +244,10 @@ setconf ()
       ;;
     esac
   done
+  if [ ${1} = "zsh" ]; then
+    rm -rf ${HOME}/.syntax
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting ${HOME}/.syntax
+  fi
 }
 
 
