@@ -396,7 +396,7 @@ case ${OSTYPE} in #uname http://en.wikipedia.org/wiki/Uname
       export PATH=${HOME}/.bin:${PATH}
     fi
     if [ -e ${HOME}/.tmux.conf ] && (( $+commands[tmux] )); then
-      if [[ -z $TMUX ]] && [[ $- == *l* || -n $WSL_DISTRO_NAME ]]; then # l option = login shell
+      if [[ -z $TMUX ]] && [[ $- != *l* || -n $WSL_DISTRO_NAME ]]; then # l option = login shell
         ID="`tmux list-sessions 2>/dev/null`"
         if [[ -z "$ID" ]]; then
           tmux new-session
