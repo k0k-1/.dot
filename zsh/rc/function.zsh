@@ -73,3 +73,9 @@ function sshumount() {
 #do
 #  sshumount ${h} username server_type &
 #done
+
+weather() {
+  if (( $+commands[curl] )); then
+    curl wttr.in/$1
+  fi
+}
